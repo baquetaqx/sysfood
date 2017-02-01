@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<ui:composition template="WEB-INF/templates/layoutPrincipal.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">SysFood - Inicio</ui:define>
+	<ui:define name="page-header">
+		<h1 class="page-header">
+			Painel de controle <small>Rápido e prático</small>
+		</h1>
+	</ui:define>
+	<ui:define name="page-header-title">
+		<ol class="breadcrumb">
+			<li class="active"><i class="fa fa-dashboard"></i> Dashboard</li>
+		</ol>
+	</ui:define>
+	<ui:define name="active">
+		<li class="active"><p:link href="index.xhtml">
+				<i class="fa fa-fw fa-dashboard"></i>Dashboard</p:link></li>
+	</ui:define>
+	<ui:define name="conteudo">
+		<div class="row">
+			<div class="col-lg-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<i class="fa fa-long-arrow-right fa-fw"></i> Realizar Pedido
+						</h3>
+					</div>
+					<div class="panel-body">
+						<div class="centralizar">
+							<a href="#"><h:graphicImage library="imagens"
+									name="restaurante-maior.png" styleClass="animated bounceIn" /></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<i class="fa fa-clock-o fa-fw"></i> Atualizar estoque
+						</h3>
+					</div>
+					<div class="panel-body">
+						<div class="centralizar">
+							<a href="#"><h:graphicImage library="imagens"
+									name="estoque.png" styleClass="animated bounceIn" /></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<i class="fa fa-money fa-fw"></i> Financeiro
+						</h3>
+					</div>
+					<div class="panel-body">
+
+						<div class="centralizar">
+							<a href="#"><h:graphicImage library="imagens"
+									name="financeiro-maior.png" styleClass="animated bounceIn" /></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /.row -->
+	</ui:define>
+</ui:composition>

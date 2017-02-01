@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<ui:composition template="WEB-INF/templates/layoutPrincipal.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">SysFood - Inicio</ui:define>
+	<ui:define name="page-header">
+		<h1 class="page-header">Cadastre o Produto</h1>
+	</ui:define>
+	<ui:define name="page-header-title">
+		<ol class="breadcrumb">
+			<li class="active"><i class="fa fa-th-list"></i> Produtos</li>
+		</ol>
+	</ui:define>
+	<ui:define name="conteudo">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<i class="fa fa-product-hunt"></i> Novo Produto
+						</h3>
+					</div>
+					<div class="panel-body">
+						<h5>
+							Os campos com (<label class="obrigatorio">*</label>) são
+							obrigatórios!
+						</h5>
+						<h:form>
+							<h:panelGrid columns="3">
+								<h:panelGroup>
+									<h:outputLabel value="Nome do produto"/>
+									<h:outputLabel value=" *" styleClass="obrigatorio" />
+									<h:outputLabel value=":" />
+								</h:panelGroup>
+								<h:inputText styleClass="text-field" required="true" />
+								<h:panelGroup>
+									<br />
+									<br />
+								</h:panelGroup>
+								<h:panelGroup>
+									<h:outputLabel value="Preço" />
+									<h:outputLabel value=" *" styleClass="obrigatorio" />
+									<h:outputLabel value=":" />
+								</h:panelGroup>
+								<h:inputText id="preco" required="true">
+								</h:inputText>
+
+								<h:panelGroup>
+									<br />
+									<br />
+								</h:panelGroup>
+								<h:panelGroup>
+									<h:outputLabel value="Quantidade" />
+									<h:outputLabel value=":" />
+								</h:panelGroup>
+								<h:inputText styleClass="" />
+							</h:panelGrid>
+							<br />
+							<br />
+							<p:commandButton value="Cadastrar" styleClass="btn btn-success btn-lg btn-salvar"></p:commandButton>
+							<p:commandButton value="Cancelar" styleClass="btn btn-danger btn-lg btn-salvar"></p:commandButton>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /.row -->
+	</ui:define>
+</ui:composition>
