@@ -15,9 +15,21 @@
 	color: red !important;
 }
 .text-field{
-	width: 150% !important;
+	width: 170% !important;
+	height: 35px;
+	border-radius:5px;
+	border:1px solid #000000;
+	box-shadow:none;
+}
+.text-field-valor{
+	width: 80% !important;
+	height: 35px;
+	border-radius:5px;
+	border:1px solid #000000;
+	box-shadow:none;	
 }
 .btn-salvar{
+	height:50px;
 	text-shadow: none;
 	color: white;
 	text-decoration: none;

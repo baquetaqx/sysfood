@@ -32,11 +32,11 @@
 						<h:form>
 							<h:panelGrid columns="3">
 								<h:panelGroup>
-									<h:outputLabel value="Nome do produto"/>
+									<h:outputLabel value="Nome do produto" />
 									<h:outputLabel value=" *" styleClass="obrigatorio" />
 									<h:outputLabel value=":" />
 								</h:panelGroup>
-								<h:inputText styleClass="text-field" required="true" />
+								<p:inputText styleClass="text-field" required="true" />
 								<h:panelGroup>
 									<br />
 									<br />
@@ -46,8 +46,9 @@
 									<h:outputLabel value=" *" styleClass="obrigatorio" />
 									<h:outputLabel value=":" />
 								</h:panelGroup>
-								<h:inputText id="preco" required="true">
-								</h:inputText>
+								<p:inputText id="preco" required="true" styleClass="text-field-valor moeda">
+									<f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+								</p:inputText>
 
 								<h:panelGroup>
 									<br />
@@ -57,12 +58,14 @@
 									<h:outputLabel value="Quantidade" />
 									<h:outputLabel value=":" />
 								</h:panelGroup>
-								<h:inputText styleClass="" />
+								<p:inputText styleClass="text-field-valor" />
 							</h:panelGrid>
 							<br />
 							<br />
-							<p:commandButton value="Cadastrar" styleClass="btn btn-success btn-lg btn-salvar"></p:commandButton>
-							<p:commandButton value="Cancelar" styleClass="btn btn-danger btn-lg btn-salvar"></p:commandButton>
+							<p:commandButton value="Cadastrar"
+								styleClass="btn btn-success btn-lg btn-salvar" />
+							<p:commandButton value="Cancelar"
+								styleClass="btn btn-danger btn-lg btn-salvar" />
 						</h:form>
 					</div>
 				</div>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
@@ -16,14 +17,20 @@
 	<h:outputScript library="script" name="jquery.js" />
 	<h:outputScript library="script" name="bootstrap.min.js" />
 	<h:outputScript library="script" name="morris.min.js" />
-	<h:outputScript library="script" name="menu.js" />
-	<h:outputScript library="script" name="morris-data.js" />
 	<h:outputScript library="script" name="raphael.min.js" />
 	<h:outputScript library="script" name="jquery.maskMoney.js" />
 
 </h:head>
 <h:body>
-	<header> </header>
+
+	<p:ajaxStatus styleClass="ajax-status" onsuccess="configurarMoeda()">
+		<f:facet name="start">
+			<h:graphicImage library="imagens" name="loading.GIF" />
+		</f:facet>
+		<f:facet name="complete">
+			<h:outputText value="" />
+		</f:facet>
+	</p:ajaxStatus>
 
 	<div id="wrapper">
 
@@ -56,8 +63,6 @@
 						href="bootstrap-elements.html"><i class="fa fa-fw fa-money"></i>
 							Controle Financeiro</a></li>
 					<p:separator></p:separator>
-					<li class="divider"></li>
-
 					<li class="#{view.viewId eq '/cad-produto.xhtml' ? 'active' : ''}"><a
 						href="javascript:;" data-toggle="collapse" data-target="#demo"><i
 							class="fa fa-fw fa-arrows-v"></i> Pre-Cadastro<i
@@ -67,7 +72,12 @@
 							Produtos</p:link></li>
 							<li><a href="#">Usuarios</a></li>
 							<li><a href="#">Fornecedores</a></li>
+
 						</ul></li>
+					<p:separator></p:separator>
+					<li class="#{view.viewId eq '/financeiro.xhtml' ? 'active' : ''}"><a
+						href="empresa.xhtml"><i class="fa fa-fw fa-cog"></i>
+							Dados Empresa</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -89,6 +99,17 @@
 			</div>
 		</div>
 	</div>
-	<footer> </footer>
+	<script>
+		function configurarMoeda() {
+			$(".moeda").maskMoney({
+				decimal : ",",
+				thousands : ".",
+				allowZero : true
+			});
+		}
+		$(document).ready(function() {
+			configurarMoeda();
+		});
+	</script>
 </h:body>
 </html>
