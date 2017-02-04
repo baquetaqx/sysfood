@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.hibernate.annotations.Type;
-
+//Teste
 @Entity
 public class Produto implements Serializable {
 
