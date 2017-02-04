@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<ui:composition template="WEB-INF/templates/layoutPrincipal.xhtml"
+<ui:composition template="/WEB-INF/templates/layoutPrincipal.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -36,7 +36,8 @@
 									<h:outputLabel value=" *" styleClass="obrigatorio" />
 									<h:outputLabel value=":" />
 								</h:panelGroup>
-								<p:inputText styleClass="text-field" required="true" />
+								<p:inputText styleClass="text-field" required="true"
+									value="#{cadastroProdutoBean.produto.nome}" />
 								<h:panelGroup>
 									<br />
 									<br />
@@ -46,7 +47,9 @@
 									<h:outputLabel value=" *" styleClass="obrigatorio" />
 									<h:outputLabel value=":" />
 								</h:panelGroup>
-								<p:inputText id="preco" required="true" styleClass="text-field-valor moeda">
+								<p:inputText id="preco" required="true"
+									value="#{cadastroProdutoBean.produto.preco}"
+									styleClass="text-field-valor moeda">
 									<f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
 								</p:inputText>
 
@@ -58,14 +61,18 @@
 									<h:outputLabel value="Quantidade" />
 									<h:outputLabel value=":" />
 								</h:panelGroup>
-								<p:inputText styleClass="text-field-valor" />
+								<p:inputText styleClass="text-field-valor"
+									value="#{cadastroProdutoBean.produto.quantidade}" />
 							</h:panelGrid>
 							<br />
 							<br />
 							<p:commandButton value="Cadastrar"
-								styleClass="btn btn-success btn-lg btn-salvar" />
-							<p:commandButton value="Cancelar"
-								styleClass="btn btn-danger btn-lg btn-salvar" />
+								action="#{cadastroProdutoBean.salvar}"
+								styleClass="btn btn-success btn-lg btn-salvar" update="@form" />
+							<p:button value="Cancelar"
+								styleClass="btn btn-danger btn-lg btn-salvar" outcome="/produtos/cad-produto" />
+<!-- 							<p:commandButton value="Cancelar" -->
+<!-- 								styleClass="btn btn-danger btn-lg btn-salvar" /> -->
 						</h:form>
 					</div>
 				</div>
