@@ -8,8 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class Produto implements Serializable {
@@ -32,6 +37,9 @@ public class Produto implements Serializable {
 		this.id = id;
 	}
 
+	@NotBlank
+	@Size(max = 80)
+	@Column(nullable = false, length = 80)
 	public String getNome() {
 		return nome;
 	}
@@ -40,6 +48,7 @@ public class Produto implements Serializable {
 		this.nome = nome;
 	}
 
+	@NotNull(message = "Preço é obrigatório")
 	@Column(nullable = false, precision = 10, scale = 2)
 	public BigDecimal getPreco() {
 		return preco;
@@ -49,6 +58,10 @@ public class Produto implements Serializable {
 		this.preco = preco;
 	}
 
+	@NotNull
+	@Min(0)
+	@Max(value = 9999, message = "tem um valor muito alto")
+	@Column(nullable = false, length = 5)
 	public Integer getQuantidade() {
 		return quantidade;
 	}

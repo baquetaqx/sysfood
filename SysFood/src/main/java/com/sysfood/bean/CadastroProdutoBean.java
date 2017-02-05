@@ -3,9 +3,13 @@ package com.sysfood.bean;
 import java.io.Serializable;
 
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.sysfood.bo.ProdutoBo;
+import com.sysfood.exception.NegocioException;
 import com.sysfood.model.Produto;
+import com.sysfood.util.jsf.FacesUtil;
 
 @Named
 @ViewScoped
@@ -15,16 +19,26 @@ public class CadastroProdutoBean implements Serializable {
 
 	private Produto produto;
 
+	@Inject
+	private ProdutoBo produtoBo;
+
 	public CadastroProdutoBean() {
 		produto = new Produto();
 	}
-	
-	public void salvar(){
-		
+
+	public void salvar() {
+		try {
+			this.produto = produtoBo.salvar(this.produto);
+			produto = new Produto();
+
+			FacesUtil.addInfoMessage("Produto salvo com sucesso!");
+		} catch (NegocioException e) {
+			FacesUtil.addErrorMessage(e.getMessage());
+		}
 	}
 
 	public Produto getProduto() {
-		return produto;
+		return produto == null ? new Produto() : produto;
 	}
 
 	public void setProduto(Produto produto) {

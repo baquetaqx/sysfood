@@ -63,11 +63,19 @@
 			<scope>compile</scope>
 		</dependency>
 
+		<!-- Pool de conexoes com C3P0. Não usar em produção -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-c3p0</artifactId>
+			<version>5.2.6.Final</version>
+			<scope>compile</scope>
+		</dependency>
+
 		<!-- Driver JDBC do MySQL -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>6.0.5</version>
+			<version>5.1.40</version>
 			<scope>compile</scope>
 		</dependency>
 
