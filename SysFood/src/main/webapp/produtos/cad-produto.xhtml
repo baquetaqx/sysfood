@@ -30,6 +30,8 @@
 							obrigatórios!
 						</h5>
 						<h:form>
+						<p:messages />
+						
 							<h:panelGrid columns="3">
 								<h:panelGroup>
 									<h:outputLabel value="Nome do produto" />
@@ -50,7 +52,7 @@
 								<p:inputText id="preco" required="true"
 									value="#{cadastroProdutoBean.produto.preco}"
 									styleClass="text-field-valor moeda">
-									<f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+									<f:convertNumber minFractionDigits="2" maxFractionDigits="2" locale="pt-BR"/>
 								</p:inputText>
 
 								<h:panelGroup>

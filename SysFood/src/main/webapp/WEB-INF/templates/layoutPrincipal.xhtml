@@ -10,14 +10,10 @@
 	<h:outputStylesheet library="estilo" name="bootstrap.min.css" />
 	<h:outputStylesheet library="estilo" name="sb-admin.css" />
 	<h:outputStylesheet library="estilo" name="components.css" />
-	<h:outputStylesheet library="estilo" name="morris.css" />
 	<h:outputStylesheet library="estilo" name="font-awesome.min.css" />
 	<h:outputStylesheet library="estilo" name="animate.css" />
 	<h:outputStylesheet library="iconfont" name="material-icons.css" />
-	<h:outputScript library="script" name="jquery.js" />
 	<h:outputScript library="script" name="bootstrap.min.js" />
-	<h:outputScript library="script" name="morris.min.js" />
-	<h:outputScript library="script" name="raphael.min.js" />
 	<h:outputScript library="script" name="jquery.maskMoney.js" />
 
 </h:head>
@@ -55,7 +51,7 @@
 				id="cssmenu">
 				<ul class="nav navbar-nav side-nav">
 					<li class="#{view.viewId eq '/index.xhtml' ? 'active' : ''}"><p:link
-							href="index.xhtml">
+							href="/index.xhtml">
 							<i class="fa fa-fw fa-dashboard"></i>Dashboard</p:link></li>
 					<li class="#{view.viewId eq '/cad-pedido.xhtml' ? 'active' : ''}"><a
 						href="#"><i class="fa fa-fw fa-cutlery"></i> Fazer pedidos</a></li>
@@ -68,7 +64,7 @@
 							class="fa fa-fw fa-arrows-v"></i> Pre-Cadastro<i
 							class="fa fa-fw fa-caret-down"></i></a>
 						<ul id="demo" class="collapse">
-							<li><p:link href="produtos/cad-produto.xhtml">
+							<li><p:link href="cad-produto.xhtml">
 							Produtos</p:link></li>
 							<li><a href="#">Usuarios</a></li>
 							<li><a href="#">Fornecedores</a></li>
