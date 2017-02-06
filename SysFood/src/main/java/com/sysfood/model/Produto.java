@@ -25,7 +25,7 @@ public class Produto implements Serializable {
 	private String nome;
 	private BigDecimal preco;
 	private Integer quantidade;
-	private Boolean status;
+	private Boolean status = true;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

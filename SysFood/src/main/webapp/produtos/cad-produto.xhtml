@@ -6,9 +6,10 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-	<ui:define name="title">SysFood - Inicio</ui:define>
+	<ui:define name="title">SysFood - Produto</ui:define>
 	<ui:define name="page-header">
-		<h1 class="page-header">Cadastre o Produto</h1>
+		<h1 class="page-header">#{cadastroProdutoBean.editando ? 'Edição
+			de Produto' : 'Cadastre o Produto'}</h1>
 	</ui:define>
 	<ui:define name="page-header-title">
 		<ol class="breadcrumb">
@@ -21,7 +22,8 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							<i class="fa fa-product-hunt"></i> Novo Produto
+							<i class="fa fa-product-hunt"></i> #{cadastroProdutoBean.editando
+							? 'Edição de Produto' : 'Novo Produto'}
 						</h3>
 					</div>
 					<div class="panel-body">
@@ -30,8 +32,8 @@
 							obrigatórios!
 						</h5>
 						<h:form>
-						<p:messages />
-						
+							<p:messages />
+
 							<h:panelGrid columns="3">
 								<h:panelGroup>
 									<h:outputLabel value="Nome do produto" />
@@ -52,7 +54,8 @@
 								<p:inputText id="preco" required="true"
 									value="#{cadastroProdutoBean.produto.preco}"
 									styleClass="text-field-valor moeda">
-									<f:convertNumber minFractionDigits="2" maxFractionDigits="2" locale="pt-BR"/>
+									<f:convertNumber minFractionDigits="2" maxFractionDigits="2"
+										locale="pt-BR" />
 								</p:inputText>
 
 								<h:panelGroup>

@@ -37,6 +37,10 @@ public class CadastroProdutoBean implements Serializable {
 		}
 	}
 
+	public boolean isEditando() {
+		return this.getProduto().getId() != null;
+	}
+
 	public Produto getProduto() {
 		return produto == null ? new Produto() : produto;
 	}
