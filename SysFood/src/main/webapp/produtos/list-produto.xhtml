@@ -30,26 +30,47 @@
 					<div class="panel-body">
 
 						<h:form prependId="false">
+							<p:commandButton value="Pesquisar"
+								action="#{pesquisaProdutosBean.pesquisar}" update="@form" />
 							<p:dataTable paginator="true" rows="10"
-								paginatorPosition="bottom"
+								emptyMessage="Nenhum produto encontrado"
+								paginatorPosition="bottom" id="tabelaProduto"
+								value="#{pesquisaProdutosBean.produtosFiltrados}" var="produto"
 								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 								rowsPerPageTemplate="5,10,15">
 								<p:column headerText="Status" width="100">
-
+									<p:commandLink id="lnkAlterarStatus"
+										action="#{pesquisaProdutosBean.updateAtivo}" ajax="false"
+										update="tabelaProduto"
+										title="#{produto.status ? 'Desativar' : 'Ativar'}">
+										<h:panelGroup rendered="#{!produto.status}">
+											<div class="icones_desativar icon"></div>
+										</h:panelGroup>
+										<h:panelGroup rendered="#{produto.status}">
+											<div class="icones_ativar icon"></div>
+										</h:panelGroup>
+										<f:setPropertyActionListener
+											target="#{pesquisaProdutosBean.produto}" value="#{produto}" />
+										<f:setPropertyActionListener
+											target="#{pesquisaProdutosBean.produto.status}"
+											value="#{!produto.status}" />
+									</p:commandLink>
 								</p:column>
 								<p:column headerText="Nome do produto">
-
+									<h:outputText value="#{produto.nome}" />
 								</p:column>
 								<p:column headerText="Valor do produto" width="160">
-
+									<h:outputText value="#{produto.preco}" />
 								</p:column>
 								<p:column headerText="Quantidade" width="100">
-
+									<h:outputText value="#{produto.quantidade}" />
 								</p:column>
 								<p:column headerText="Editar" width="120">
-
+									<p:button icon="ui-icon-pencil" title="Editar"
+										outcome="/produtos/cad-produto">
+										<f:param name="produto" value="#{produto.id}" />
+									</p:button>
 								</p:column>
-
 							</p:dataTable>
 						</h:form>
 					</div>
