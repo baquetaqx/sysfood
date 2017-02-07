@@ -53,27 +53,30 @@
 					<li class="#{view.viewId eq '/index.xhtml' ? 'active' : ''}"><p:link
 							href="/index.xhtml">
 							<i class="fa fa-fw fa-dashboard"></i>Dashboard</p:link></li>
-					<li class="#{view.viewId eq '/cad-pedido.xhtml' ? 'active' : ''}"><a
-						href="#"><i class="fa fa-fw fa-cutlery"></i> Fazer pedidos</a></li>
+					<li class="#{view.viewId eq '/pedido/pedido.xhtml' ? 'active' : ''}"><p:link
+						href="http://localhost:8080/SysFood/pedido/pedido.xhtml"><i
+							class="fa fa-fw fa-cutlery"></i> Fazer pedidos</p:link></li>
 					<li class="#{view.viewId eq '/financeiro.xhtml' ? 'active' : ''}"><a
-						href="bootstrap-elements.html"><i class="fa fa-fw fa-money"></i>
-							Controle Financeiro</a></li>
+						href="#"><i class="fa fa-fw fa-money"></i> Controle Financeiro</a></li>
 					<p:separator></p:separator>
-					<li class="#{view.viewId eq '/produtos/cad-produto.xhtml' ? 'active' : ''}"><a
+					<li
+						class="#{view.viewId eq '/produtos/cad-produto.xhtml' ? 'active' : ''}"><a
 						href="javascript:;" data-toggle="collapse" data-target="#demo"><i
 							class="fa fa-fw fa-arrows-v"></i> Pre-Cadastro<i
 							class="fa fa-fw fa-caret-down"></i></a>
 						<ul id="demo" class="collapse">
-							<li><p:link href="http://localhost:8080/SysFood/produtos/cad-produto.xhtml">
+							<li><p:link
+									href="http://localhost:8080/SysFood/produtos/cad-produto.xhtml">
 							Produtos</p:link></li>
 							<li><a href="#">Usuarios</a></li>
 							<li><a href="#">Fornecedores</a></li>
 
 						</ul></li>
 					<p:separator></p:separator>
-					<li class="#{view.viewId eq '/empresa/empresa.xhtml' ? 'active' : ''}"><a
-						href="/SysFood/empresa/empresa.xhtml"><i class="fa fa-fw fa-cog"></i>
-							Dados Empresa</a></li>
+					<li
+						class="#{view.viewId eq '/empresa/empresa.xhtml' ? 'active' : ''}"><a
+						href="/SysFood/empresa/empresa.xhtml"><i
+							class="fa fa-fw fa-cog"></i> Dados Empresa</a></li>
 				</ul>
 			</div>
 		</nav>

@@ -79,6 +79,7 @@
 .text-field-uf{
 	width: 20% !important;
 	height: 35px;
+	margin-right:50px !important;
 	border-radius: 5px;
 	border: 1px solid #000000;
 	box-shadow: none;
