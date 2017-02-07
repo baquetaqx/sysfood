@@ -17,9 +17,56 @@
 	color: red !important;
 }
 
+.text-field-pesquisa {
+	width: 60% !important;
+	margin-right: 6px !important;
+	height: 35px;
+	border-radius: 5px;
+	border: 1px solid #000000;
+	box-shadow: none;
+	height: 35px;
+}
+
+hr {
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	font-family: "Open Sans", sans-serif !important;
+	color: #fff !important;
+}
+
+hr.zig, hr.zag {
+	border: none;
+	height: 30px;
+	margin: 0 50px;
+}
+
+hr.zig {
+	background: linear-gradient(-135deg, #FFF 20px, rgba(0, 0, 0, 0) 0) 0
+		5px, linear-gradient(135deg, #FFF 20px, rgba(0, 0, 0, 0) 0) 0 5px;
+	background-color: rgba(0, 0, 0, 0) !important;
+	background-position: center bottom !important;
+	background-repeat: repeat-x !important;
+	background-size: 20px 40px !important;
+	z-index: 100 !important;
+	position: relative !important;
+}
+
+hr.zag {
+	background: linear-gradient(-135deg, #333 20px, rgba(0, 0, 0, 0) 0) 0
+		5px, linear-gradient(135deg, #333 20px, #FFF 0) 0 5px;
+	background-color: rgba(0, 0, 0, 0);
+	background-position: center bottom;
+	background-repeat: repeat-x;
+	background-size: 20px 40px;
+	z-index: 50;
+	margin-top: -28px;
+}
+
 .text-field-fantasia {
 	width: 80% !important;
-	height: 35px; margin-right : 150px !important;
+	height: 35px;
+	margin-right: 150px !important;
 	border-radius: 5px;
 	border: 1px solid #000000;
 	box-shadow: none;
@@ -69,21 +116,25 @@
 	border: 1px solid #000000;
 	box-shadow: none;
 }
-.text-field-cidade{
+
+.text-field-cidade {
 	width: 80% !important;
 	height: 35px;
 	border-radius: 5px;
 	border: 1px solid #000000;
 	box-shadow: none;
 }
-.text-field-uf{
+
+.text-field-uf {
 	width: 20% !important;
 	height: 35px;
-	margin-right:50px !important;
+	margin-right: 50px !important;
 	border-radius: 5px;
 	border: 1px solid #000000;
 	box-shadow: none;
+	border-radius: 5px;
 }
+
 .btn-salvar {
 	height: 50px;
 	text-shadow: none;
@@ -91,4 +142,26 @@
 	text-decoration: none;
 	line-height: none;
 	border: none !important;
+}
+
+.icones_ativar {
+	background-image: url("../imagens/icones_27874c_p.png");
+	background-position: -340px -116px;
+	height: 22px;
+	margin: 0 auto 7px;
+	width: 22px;
+}
+
+.icones_desativar {
+	background-image: url("../imagens/icones_db0b0b_p.png");
+	background-position: -413px -116px;
+	height: 22px;
+	margin: 0 auto 7px;
+	width: 22px;
+}
+
+.icon {
+	-webkit-transition: 0.5s all ease;
+	-moz-transition: 0.5s all ease;
+	-o-transition: 0.5s all ease;
 }
