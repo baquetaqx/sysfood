@@ -19,7 +19,8 @@
 
 .text-field-fantasia {
 	width: 80% !important;
-	height: 35px; margin-right : 150px !important;
+	height: 35px;
+	margin-right: 150px !important;
 	border-radius: 5px;
 	border: 1px solid #000000;
 	box-shadow: none;
@@ -69,21 +70,24 @@
 	border: 1px solid #000000;
 	box-shadow: none;
 }
-.text-field-cidade{
+
+.text-field-cidade {
 	width: 80% !important;
 	height: 35px;
 	border-radius: 5px;
 	border: 1px solid #000000;
 	box-shadow: none;
 }
-.text-field-uf{
+
+.text-field-uf {
 	width: 20% !important;
 	height: 35px;
-	margin-right:50px !important;
+	margin-right: 50px !important;
 	border-radius: 5px;
 	border: 1px solid #000000;
 	box-shadow: none;
 }
+
 .btn-salvar {
 	height: 50px;
 	text-shadow: none;
@@ -91,4 +95,26 @@
 	text-decoration: none;
 	line-height: none;
 	border: none !important;
+}
+
+.icones_ativar {
+	background-image: url("../imagens/icones_27874c_p.png");
+	background-position: -340px -116px;
+	height: 22px;
+	margin: 0 auto 7px;
+	width: 22px;
+}
+
+.icones_desativar {
+	background-image: url("../imagens/icones_db0b0b_p.png");
+	background-position: -413px -116px;
+	height: 22px;
+	margin: 0 auto 7px;
+	width: 22px;
+}
+
+.icon {
+	-webkit-transition: 0.5s all ease;
+	-moz-transition: 0.5s all ease;
+	-o-transition: 0.5s all ease;
 }

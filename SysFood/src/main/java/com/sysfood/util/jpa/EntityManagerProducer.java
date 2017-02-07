@@ -11,7 +11,6 @@ import javax.persistence.Persistence;
 @ApplicationScoped
 public class EntityManagerProducer {
 
-//	@PersistenceUnit
 	private EntityManagerFactory factory;
 
 	public EntityManagerProducer() {
