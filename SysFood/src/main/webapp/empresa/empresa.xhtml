@@ -38,14 +38,21 @@
 						<h:form>
 							<p:messages />
 
-							<h:panelGrid columns="4">
+							<h:panelGrid columns="2" style="width:100%" >
 								<h:panelGroup>
 									<h:outputLabel value="Razão Social" />
 									<h:outputLabel value=" *" styleClass="obrigatorio" />
 									<h:outputLabel value=":" />
 								</h:panelGroup>
-								<p:inputText styleClass="text-field-empresa"
+								<p:inputText styleClass="form-control"
 									value="#{empresaBean.empresa.razaoSocial}" />
+								<h:panelGroup>
+									<br />
+								</h:panelGroup>
+								<h:panelGroup>
+									<br />
+								</h:panelGroup>
+
 								<h:panelGroup>
 									<h:outputLabel value="Nome Fantasia" />
 									<h:outputLabel value=" *" styleClass="obrigatorio" />
@@ -53,71 +60,75 @@
 								</h:panelGroup>
 								<p:inputText id="fantasia"
 									value="#{empresaBean.empresa.nomefantasia}"
-									styleClass="text-field-fantasia" />
-
+									styleClass="form-control" />
 								<h:panelGroup>
 									<br />
+								</h:panelGroup>
+								<h:panelGroup>
+									<br />
+								</h:panelGroup>
+								<h:panelGroup>
 									<h:outputLabel value="CNPJ" />
 									<h:outputLabel value=" *" styleClass="obrigatorio" />
 									<h:outputLabel value=":" />
 								</h:panelGroup>
+								<p:inputMask mask="99.999.999/9999-99"
+									styleClass="mask-text-field"
+									value="#{empresaBean.empresa.cnpj}" />
 								<h:panelGroup>
 									<br />
-									<p:inputMask mask="99.999.999/9999-99"
-										styleClass="mask-text-field"
-										value="#{empresaBean.empresa.cnpj}" />
+								</h:panelGroup>
+								<h:panelGroup>
+									<br />
+								</h:panelGroup>
+								<h:panelGroup>
 									<h:outputLabel value="Inscrição Estadual" />
 									<h:outputLabel value=" *" styleClass="obrigatorio" />
 									<h:outputLabel value=":" />
+								</h:panelGroup>
+								<p:inputMask mask="999999999" styleClass="mask-text-field"
+									value="#{empresaBean.empresa.inscricaoEstadual}" />
+								<h:panelGroup>
 									<br />
-
 								</h:panelGroup>
 								<h:panelGroup>
 									<br />
-									<p:inputMask mask="999999999" styleClass="mask-ie"
-										value="#{empresaBean.empresa.inscricaoEstadual}" />
 								</h:panelGroup>
 								<h:panelGroup>
-								</h:panelGroup>
-								<h:panelGroup>
-									<br />
 									<h:outputLabel value="Endereço" />
 									<h:outputLabel value=" *" styleClass="obrigatorio" />
 									<h:outputLabel value=":" />
 								</h:panelGroup>
+								<p:inputText styleClass="form-control"
+									value="#{empresaBean.empresa.endereco}" />
+
 								<h:panelGroup>
 									<br />
-									<p:inputText styleClass="text-field-empresa"
-										value="#{empresaBean.empresa.endereco}" />
+								</h:panelGroup>
+								<h:panelGroup>
+									<br />
 								</h:panelGroup>
 
-								<h:panelGroup></h:panelGroup>
-								<h:panelGroup></h:panelGroup>
 								<h:panelGroup>
-									<br />
 									<h:outputLabel value="UF" />
 									<h:outputLabel value=" *" styleClass="obrigatorio" />
 									<h:outputLabel value=":" />
 								</h:panelGroup>
+								<p:inputText styleClass="text-field-uf"
+									value="#{empresaBean.empresa.uf}" size="2" maxlength="2"/>
 								<h:panelGroup>
 									<br />
-									<p:inputText styleClass="text-field-uf"
-										value="#{empresaBean.empresa.uf}" />
-
-
 								</h:panelGroup>
 								<h:panelGroup>
 									<br />
-
 								</h:panelGroup>
 								<h:panelGroup>
-									<br />
 									<h:outputLabel value="Cidade" />
 									<h:outputLabel value=" *" styleClass="obrigatorio" />
 									<h:outputLabel value=":" />
-									<p:inputText styleClass="text-field-cidade"
-										value="#{empresaBean.empresa.cidade}" />
 								</h:panelGroup>
+								<p:inputText styleClass="form-control"
+									value="#{empresaBean.empresa.cidade}" />
 
 							</h:panelGrid>
 

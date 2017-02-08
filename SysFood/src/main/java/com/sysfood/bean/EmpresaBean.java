@@ -28,7 +28,7 @@ public class EmpresaBean implements Serializable {
 	public void salvar() {
 		empresa = empresaBo.salvar(empresa);
 
-		FacesUtil.addInfoMessage("Empresa salva com sucesso!");
+		FacesUtil.addInfoMessage("Dados da Empresa salva com sucesso!");
 	}
 
 	public void pesquisar() {
