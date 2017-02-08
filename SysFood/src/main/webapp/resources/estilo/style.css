@@ -17,6 +17,52 @@
 	color: red !important;
 }
 
+.text-field-pesquisa {
+	width: 60% !important;
+	margin-right: 6px !important;
+	height: 35px;
+	border-radius: 5px;
+	border: 1px solid #000000;
+	box-shadow: none;
+	height: 35px;
+}
+
+hr {
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	font-family: "Open Sans", sans-serif !important;
+	color: #fff !important;
+}
+
+hr.zig, hr.zag {
+	border: none;
+	height: 30px;
+	margin: 0 50px;
+}
+
+hr.zig {
+	background: linear-gradient(-135deg, #FFF 20px, rgba(0, 0, 0, 0) 0) 0
+		5px, linear-gradient(135deg, #FFF 20px, rgba(0, 0, 0, 0) 0) 0 5px;
+	background-color: rgba(0, 0, 0, 0) !important;
+	background-position: center bottom !important;
+	background-repeat: repeat-x !important;
+	background-size: 20px 40px !important;
+	z-index: 100 !important;
+	position: relative !important;
+}
+
+hr.zag {
+	background: linear-gradient(-135deg, #333 20px, rgba(0, 0, 0, 0) 0) 0
+		5px, linear-gradient(135deg, #333 20px, #FFF 0) 0 5px;
+	background-color: rgba(0, 0, 0, 0);
+	background-position: center bottom;
+	background-repeat: repeat-x;
+	background-size: 20px 40px;
+	z-index: 50;
+	margin-top: -28px;
+}
+
 .text-field-fantasia {
 	width: 80% !important;
 	height: 35px;
@@ -86,6 +132,7 @@
 	border-radius: 5px;
 	border: 1px solid #000000;
 	box-shadow: none;
+	border-radius: 5px;
 }
 
 .btn-salvar {
