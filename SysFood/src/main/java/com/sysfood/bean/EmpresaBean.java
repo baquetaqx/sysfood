@@ -36,7 +36,7 @@ public class EmpresaBean implements Serializable {
 	}
 
 	public boolean isEditando() {
-		return empresa.getNomefantasia() != null;
+		return getEmpresa().getNomefantasia() != null;
 	}
 
 	public Empresa getEmpresa() {
