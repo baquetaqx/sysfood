@@ -48,7 +48,7 @@
 									<h:outputLabel value=" *" styleClass="obrigatorio" />
 									<h:outputLabel value=":" />
 								</h:panelGroup>
-								<p:inputText styleClass="text-field" required="true"
+								<p:inputText styleClass="text-field" 
 									value="#{cadastroProdutoBean.produto.nome}" />
 								<h:panelGroup>
 									<br />
@@ -59,7 +59,7 @@
 									<h:outputLabel value=" *" styleClass="obrigatorio" />
 									<h:outputLabel value=":" />
 								</h:panelGroup>
-								<p:inputText id="preco" required="true"
+								<p:inputText id="preco" 
 									value="#{cadastroProdutoBean.produto.preco}"
 									styleClass="text-field-valor moeda">
 									<f:convertNumber minFractionDigits="2" maxFractionDigits="2"
@@ -74,7 +74,7 @@
 									<h:outputLabel value="Quantidade" />
 									<h:outputLabel value=":" />
 								</h:panelGroup>
-								<p:inputText styleClass="text-field-valor"
+								<p:inputText styleClass="text-field-valor" converterMessage="Quantidade inválida"
 									value="#{cadastroProdutoBean.produto.quantidade}" />
 							</h:panelGrid>
 							<br />

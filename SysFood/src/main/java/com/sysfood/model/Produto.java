@@ -24,7 +24,7 @@ public class Produto implements Serializable {
 	private Long id;
 	private String nome;
 	private BigDecimal preco;
-	private Integer quantidade;
+	private Integer quantidade = 0;
 	private Boolean status = true;
 
 	@Id
@@ -37,7 +37,7 @@ public class Produto implements Serializable {
 		this.id = id;
 	}
 
-	@NotBlank
+	@NotBlank(message = "Nome do produto é obrigatório")
 	@Size(max = 80)
 	@Column(nullable = false, length = 80)
 	public String getNome() {
@@ -58,10 +58,9 @@ public class Produto implements Serializable {
 		this.preco = preco;
 	}
 
-	@NotNull
-	@Min(0)
-	@Max(value = 9999, message = "tem um valor muito alto")
-	@Column(nullable = false, length = 5)
+	@Min(value = 0, message = "Quantidade não pode ser negativa")
+	@Max(value = 9999, message = "Quantidade tem um valor muito alto")
+	@Column(length = 5, nullable = false)
 	public Integer getQuantidade() {
 		return quantidade;
 	}
