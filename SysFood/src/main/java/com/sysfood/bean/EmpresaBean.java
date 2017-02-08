@@ -2,7 +2,7 @@ package com.sysfood.bean;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -11,7 +11,7 @@ import com.sysfood.model.Empresa;
 import com.sysfood.util.jsf.FacesUtil;
 
 @Named
-@ApplicationScoped
+@ViewScoped
 public class EmpresaBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -31,8 +31,12 @@ public class EmpresaBean implements Serializable {
 		FacesUtil.addInfoMessage("Empresa salva com sucesso!");
 	}
 
+	public void pesquisar() {
+		empresa = empresaBo.pesquisar((byte) 1);
+	}
+
 	public boolean isEditando() {
-		return empresa.getId() != null;
+		return empresa.getNomefantasia() != null;
 	}
 
 	public Empresa getEmpresa() {

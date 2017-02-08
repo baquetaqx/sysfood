@@ -18,4 +18,8 @@ public class EmpresaDao implements Serializable {
 		return manager.merge(empresa);
 	}
 
+	public Empresa porId(byte id) {
+		return manager.find(Empresa.class, id);
+	}
+
 }

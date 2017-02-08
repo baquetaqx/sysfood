@@ -20,4 +20,8 @@ public class EmpresaBo implements Serializable {
 		return empresaDao.guardar(empresa);
 	}
 
+	public Empresa pesquisar(byte i) {
+		return empresaDao.porId(i);
+	}
+
 }
