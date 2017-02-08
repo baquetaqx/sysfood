@@ -33,6 +33,7 @@ public class EmpresaBean implements Serializable {
 
 	public void pesquisar() {
 		empresa = empresaBo.pesquisar((byte) 1);
+		setEmpresa(getEmpresa());
 	}
 
 	public boolean isEditando() {
