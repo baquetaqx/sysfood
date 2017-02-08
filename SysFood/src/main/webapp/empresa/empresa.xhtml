@@ -8,8 +8,8 @@
 
 	<ui:define name="title">SysFood - Dados da empresa</ui:define>
 	<ui:define name="page-header">
-		<h1 class="page-header">#{cadastroProdutoBean.editando ? 'Edição
-			de Dados da Empresa' : 'Cadastre os Dados da Empresa'}</h1>
+		<h1 class="page-header">#{empresaBean.editando ? 'Edição de Dados
+			da Empresa' : 'Cadastre os Dados da Empresa'}</h1>
 	</ui:define>
 	<ui:define name="page-header-title">
 		<ol class="breadcrumb">
@@ -22,8 +22,8 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							<i class="fa fa-product-hunt"></i> #{cadastroProdutoBean.editando
-							? 'Edição de Dados da Empresa' : 'Vizualização dos dados da
+							<i class="fa fa-product-hunt"></i> #{empresaBean.editando ?
+							'Edição de Dados da Empresa' : 'Vizualização dos dados da
 							empresa'}
 						</h3>
 					</div>
@@ -41,14 +41,15 @@
 									<h:outputLabel value=" *" styleClass="obrigatorio" />
 									<h:outputLabel value=":" />
 								</h:panelGroup>
-								<p:inputText styleClass="text-field-empresa" required="true"
-									value="" />
+								<p:inputText styleClass="text-field-empresa"
+									value="#{empresaBean.empresa.razaoSocial}" />
 								<h:panelGroup>
 									<h:outputLabel value="Nome Fantasia" />
 									<h:outputLabel value=" *" styleClass="obrigatorio" />
 									<h:outputLabel value=":" />
 								</h:panelGroup>
-								<p:inputText id="fantasia" required="true" value=""
+								<p:inputText id="fantasia"
+									value="#{empresaBean.empresa.nomefantasia}"
 									styleClass="text-field-fantasia" />
 
 								<h:panelGroup>
@@ -59,8 +60,9 @@
 								</h:panelGroup>
 								<h:panelGroup>
 									<br />
-									<p:inputMask mask="99.999.999/9999.99"
-										styleClass="mask-text-field" required="true" />
+									<p:inputMask mask="99.999.999/9999-99"
+										styleClass="mask-text-field"
+										value="#{empresaBean.empresa.cnpj}" />
 									<h:outputLabel value="Inscrição Estadual" />
 									<h:outputLabel value=" *" styleClass="obrigatorio" />
 									<h:outputLabel value=":" />
@@ -69,7 +71,8 @@
 								</h:panelGroup>
 								<h:panelGroup>
 									<br />
-									<p:inputMask mask="999999999" styleClass="mask-ie" />
+									<p:inputMask mask="999999999" styleClass="mask-ie"
+										value="#{empresaBean.empresa.inscricaoEstadual}" />
 								</h:panelGroup>
 								<h:panelGroup>
 								</h:panelGroup>
@@ -81,8 +84,8 @@
 								</h:panelGroup>
 								<h:panelGroup>
 									<br />
-									<p:inputText styleClass="text-field-empresa" required="true"
-										value="" />
+									<p:inputText styleClass="text-field-empresa"
+										value="#{empresaBean.empresa.endereco}" />
 								</h:panelGroup>
 
 								<h:panelGroup></h:panelGroup>
@@ -95,8 +98,8 @@
 								</h:panelGroup>
 								<h:panelGroup>
 									<br />
-									<p:inputText styleClass="text-field-uf" required="true"
-										value="" />
+									<p:inputText styleClass="text-field-uf"
+										value="#{empresaBean.empresa.uf}" />
 
 
 								</h:panelGroup>
@@ -109,21 +112,18 @@
 									<h:outputLabel value="Cidade" />
 									<h:outputLabel value=" *" styleClass="obrigatorio" />
 									<h:outputLabel value=":" />
-									<p:inputText styleClass="text-field-cidade" required="true"
-										value="" />
+									<p:inputText styleClass="text-field-cidade"
+										value="#{empresaBean.empresa.cidade}" />
 								</h:panelGroup>
 
 							</h:panelGrid>
 
 							<br />
-							<p:commandButton value="Cadastrar"
-								action="#{cadastroProdutoBean.salvar}"
+							<p:commandButton value="Cadastrar" action="#{empresaBean.salvar}"
 								styleClass="btn btn-success btn-lg btn-salvar" update="@form" />
 							<p:button value="Cancelar"
 								styleClass="btn btn-danger btn-lg btn-salvar"
 								outcome="/produtos/list-produto" />
-							<!-- 							<p:commandButton value="Cancelar" -->
-							<!-- 								styleClass="btn btn-danger btn-lg btn-salvar" /> -->
 						</h:form>
 					</div>
 				</div>

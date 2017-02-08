@@ -8,7 +8,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.sysfood.bo.ProdutoBo;
-import com.sysfood.dao.ProdutoDao;
 import com.sysfood.dao.filter.ProdutoFilter;
 import com.sysfood.exception.NegocioException;
 import com.sysfood.model.Produto;
@@ -23,9 +22,6 @@ public class PesquisaProdutosBean implements Serializable {
 	private List<Produto> produtosFiltrados;
 
 	@Inject
-	private ProdutoDao produtoDao;
-
-	@Inject
 	private ProdutoBo produtoBo;
 
 	private ProdutoFilter filtro;
@@ -37,7 +33,7 @@ public class PesquisaProdutosBean implements Serializable {
 	}
 
 	public void pesquisar() {
-		produtosFiltrados = produtoDao.filtrados(filtro);
+		produtosFiltrados = produtoBo.filtrados(filtro);
 	}
 
 	public void updateAtivo() {

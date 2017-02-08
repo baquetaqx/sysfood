@@ -1,10 +1,12 @@
 package com.sysfood.bo;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.inject.Inject;
 
 import com.sysfood.dao.ProdutoDao;
+import com.sysfood.dao.filter.ProdutoFilter;
 import com.sysfood.exception.NegocioException;
 import com.sysfood.model.Produto;
 import com.sysfood.util.jpa.Transactional;
@@ -24,6 +26,10 @@ public class ProdutoBo implements Serializable {
 			throw new NegocioException("Já existe um produto com o nome informado.");
 		}
 		return produtoDao.guardar(produto);
+	}
+
+	public List<Produto> filtrados(ProdutoFilter filtro) {
+		return produtoDao.filtrados(filtro);
 	}
 
 }
