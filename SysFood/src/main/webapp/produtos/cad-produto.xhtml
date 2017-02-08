@@ -8,8 +8,10 @@
 
 	<ui:define name="title">SysFood - Produto</ui:define>
 	<ui:define name="page-header">
-		<h1 class="page-header">#{cadastroProdutoBean.editando ? 'Edição
-			de Produto' : 'Cadastre o Produto'}</h1>
+		<h:form id="page-header-id">
+			<h1 class="page-header">#{cadastroProdutoBean.editando ? 'Edição
+				de Produto' : 'Cadastre o Produto'}</h1>
+		</h:form>
 	</ui:define>
 	<ui:define name="page-header-title">
 		<ol class="breadcrumb">
@@ -24,10 +26,13 @@
 			<div class="col-lg-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title">
-							<i class="fa fa-product-hunt"></i> #{cadastroProdutoBean.editando
-							? 'Edição de Produto' : 'Novo Produto'}
-						</h3>
+						<h:form id="panel-title-id">
+							<h3 class="panel-title">
+								<i class="fa fa-product-hunt"></i>
+								#{cadastroProdutoBean.editando ? 'Edição de Produto' : 'Novo
+								Produto'}
+							</h3>
+						</h:form>
 					</div>
 					<div class="panel-body">
 						<h5>
@@ -76,7 +81,8 @@
 							<br />
 							<p:commandButton value="Cadastrar"
 								action="#{cadastroProdutoBean.salvar}"
-								styleClass="btn btn-success btn-lg btn-salvar" update="@all" />
+								styleClass="btn btn-success btn-lg btn-salvar"
+								update="@form :page-header-id :panel-title-id" />
 							<p:button value="Cancelar"
 								styleClass="btn btn-danger btn-lg btn-salvar"
 								outcome="/produtos/list-produto" />
