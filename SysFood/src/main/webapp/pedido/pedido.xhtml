@@ -22,26 +22,43 @@
 						</div>
 						<div class="panel-body">
 							<p:messages />
-							<h5>
-								Nome do produto:
-								<p:inputText styleClass="text-field-pesquisa" />
-								<p:commandButton icon="fa fa-plus" />
-							</h5>
+							<h:panelGrid columns="2" style="width:100%">
+							Nome do Cliente:
+							<h:panelGroup>
+									<p:inputText styleClass="form-control"
+										style="display:inline-table;width:70%; margin-right:5px" />
+									<p:commandButton icon="fa fa-plus" />
+								</h:panelGroup>
+								<h:panelGroup>
+									<br />
+								Nome do Produto:
+								</h:panelGroup>
+
+								<h:panelGroup>
+									<br />
+									<p:inputText styleClass="form-control"
+										style="display:inline-table;width:70%; margin-right:5px" />
+									<p:commandButton icon="fa fa-search" />
+								</h:panelGroup>
+							</h:panelGrid>
+							<br />
 							<p:dataTable paginator="true" rows="10"
 								paginatorPosition="bottom"
 								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-								rowsPerPageTemplate="5,10,15">
+								rowsPerPageTemplate="5,10,15"
+								emptyMessage="Nenhum produto encontrado">
 								<p:column headerText="Nome do produto">
-
+									<h:outputLabel value="Coca-Cola" />
 								</p:column>
-								<p:column headerText="Valor Unitário" width="160">
-
+								<p:column headerText="Valor Unitário" width="120">
+									<h:outputLabel value="R$3,00" />
 								</p:column>
 								<p:column headerText="Qtd" width="50">
-
+									<h:outputLabel value="2" />
 								</p:column>
 								<p:column headerText="Add" width="50">
-
+									<p:commandLink styleClass="ui-icon ui-icon-search" />
+									<p:commandButton icon="fa fa-plus" />
 								</p:column>
 
 							</p:dataTable>
@@ -57,15 +74,27 @@
 						</div>
 						<div class="panel-body">
 							<p:messages />
+							<p:outputLabel styleClass="" value="Data: 09/02/2017" />
+							<br />
+							<p:outputLabel styleClass="" value="Hora: 15:49" />
+							<br />
+							<p:outputLabel value="Nome do Cliente: " />
+							<p:outputLabel value="" />
 							<p:dataTable
-								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
-								<p:column headerText="Nome do produto">
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								emptyMessage="Nenhum produto selecionado">
+								<p:column headerText="Nome do produto" width="">
+									<p:outputLabel />
+								</p:column>
+								<p:column headerText="Qtd" width="50">
+									<p:inputText size="8" value="">
+										<p:ajax event="change" process="@this" />
+									</p:inputText>
+								</p:column>
+								<p:column headerText="Preco" width="60">
 
 								</p:column>
-								<p:column headerText="Qtd" width="60">
-
-								</p:column>
-								<p:column headerText="Valor Unitário" width="120">
+								<p:column headerText="Pco Total" width="90">
 
 								</p:column>
 							</p:dataTable>
@@ -73,10 +102,18 @@
 
 							<hr class="zig" />
 							<hr class="zag" />
-							<h:panelGrid  style="width:100%">
-								<p:outputLabel value="Valor Total R$:" style="float:right"/>
+							<h:panelGrid style="width:100%">
+								<p:outputLabel value="Valor Total R$:" style="float:right" />
 							</h:panelGrid>
 
+						</div>
+						<br />
+						<div class="centralizar">
+							<p:commandButton value="Finalizar Pedido"
+								styleClass="btn btn-success btn-lg btn-salvar" />
+							<p:button value="Cancelar Pedido"
+								styleClass="btn btn-danger btn-lg btn-salvar"
+								outcome="/pedido/pedido.xhtml" />
 						</div>
 					</div>
 				</div>
