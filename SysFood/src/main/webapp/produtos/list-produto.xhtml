@@ -54,11 +54,11 @@
 										update="tabelaProduto"
 										title="#{produto.status ? 'Desativar' : 'Ativar'}">
 										<h:panelGroup rendered="#{!produto.status}">
-											<h:graphicImage library="imagens" name="check_F.png"
+											<h:graphicImage library="imagens" name="check_False.png"
 												width="20" />
 										</h:panelGroup>
 										<h:panelGroup rendered="#{produto.status}">
-											<h:graphicImage library="imagens" name="check_T.png"
+											<h:graphicImage library="imagens" name="check_True.png"
 												width="20" />
 										</h:panelGroup>
 										<f:setPropertyActionListener
