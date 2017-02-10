@@ -12,6 +12,7 @@ import com.sysfood.dao.filter.ProdutoFilter;
 import com.sysfood.model.ItemPedido;
 import com.sysfood.model.Pedido;
 import com.sysfood.model.Produto;
+import com.sysfood.util.jsf.FacesUtil;
 
 @Named
 @ViewScoped
@@ -39,19 +40,39 @@ public class CadastroPedidoBean implements Serializable {
 	}
 
 	public void pesquisarProduto() {
+		produtoFilter.setStatus(true);
 		produtosFiltrados = produtoBo.filtrados(produtoFilter);
 	}
 
 	public void adicionarItem() {
-		ItemPedido item = new ItemPedido();
-		item.setPedido(pedido);
-		item.setProduto(produto);
-		item.setValorUnitario(produto.getPreco());
-		pedido.getItens().add(item);
+		if (existeItemComProduto(produto)) {
+			FacesUtil.addErrorMessage("Já existe um item no pedido com o produto informado.");
+		} else {
+			ItemPedido item = new ItemPedido();
+			item.setPedido(pedido);
+			item.setProduto(produto);
+			item.setValorUnitario(produto.getPreco());
+			pedido.getItens().add(item);
+			recalcularPedido();
+		}
+	}
+
+	private boolean existeItemComProduto(Produto produto) {
+		boolean existeItem = false;
+
+		for (ItemPedido item : this.getPedido().getItens()) {
+			if (produto.equals(item.getProduto())) {
+				existeItem = true;
+				break;
+			}
+		}
+
+		return existeItem;
 	}
 
 	public void removerItem(ItemPedido itemPedido) {
 		pedido.getItens().remove(itemPedido);
+		recalcularPedido();
 	}
 
 	public void recalcularPedido() {

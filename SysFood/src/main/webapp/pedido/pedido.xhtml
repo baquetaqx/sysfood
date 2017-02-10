@@ -24,7 +24,7 @@
 							</h3>
 						</div>
 						<div class="panel-body">
-							<p:messages />
+							<p:messages id="mensagens" />
 							<h:panelGrid columns="2" style="width:100%">
 							Nome do Cliente:
 							<h:panelGroup>
@@ -71,7 +71,7 @@
 								<p:column headerText="Add" width="50">
 									<p:commandButton icon="fa fa-plus"
 										action="#{cadastroPedidoBean.adicionarItem}"
-										update=":formPedido:tabelaItens">
+										update=":formPedido:tabelaItens :formPedido:valorTotalPedido ">
 										<f:setPropertyActionListener
 											target="#{cadastroPedidoBean.produto}" value="#{produto}" />
 									</p:commandButton>
@@ -105,7 +105,8 @@
 									<p:inputText value="#{item.quantidade}"
 										styleClass="form-control" maxlength="2">
 										<p:ajax event="change" process="@this"
-											update=":formPedido:tabelaItens" />
+											listener="#{cadastroPedidoBean.recalcularPedido}"
+											update=":formPedido:tabelaItens :formPedido:valorTotalPedido" />
 									</p:inputText>
 								</p:column>
 								<p:column headerText="Preco" width="80">
@@ -123,10 +124,7 @@
 								<p:column headerText="Rmv" width="50" style="text-align: center">
 									<p:commandLink styleClass="fa fa-remove"
 										action="#{cadastroPedidoBean.removerItem(item)}"
-										update=":formPedido:tabelaItens">
-										<f:setPropertyActionListener
-											target="#{cadastroPedidoBean.produto}" value="#{produto}" />
-									</p:commandLink>
+										update=":formPedido:tabelaItens :formPedido:valorTotalPedido" />
 								</p:column>
 							</p:dataTable>
 
@@ -134,7 +132,9 @@
 							<hr class="zig" />
 							<hr class="zag" />
 							<h:panelGrid style="width:100%">
-								<p:outputLabel value="Valor Total R$:" style="float:right" />
+								<p:outputLabel id="valorTotalPedido"
+									value="Valor Total R$: #{cadastroPedidoBean.pedido.valorTotal}"
+									style="float:right" />
 							</h:panelGrid>
 
 						</div>

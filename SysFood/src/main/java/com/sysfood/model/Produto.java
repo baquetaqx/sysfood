@@ -26,6 +26,7 @@ public class Produto implements Serializable {
 	private BigDecimal preco;
 	private Integer quantidade = 0;
 	private Boolean status = true;
+	private Boolean controlarEstoque = false;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -76,6 +77,16 @@ public class Produto implements Serializable {
 
 	public void setStatus(Boolean status) {
 		this.status = status;
+	}
+
+	@Type(type = "true_false")
+	@Column(name = "controlar_estoque")
+	public Boolean getControlarEstoque() {
+		return controlarEstoque;
+	}
+
+	public void setControlarEstoque(Boolean controlarEstoque) {
+		this.controlarEstoque = controlarEstoque;
 	}
 
 	@Override

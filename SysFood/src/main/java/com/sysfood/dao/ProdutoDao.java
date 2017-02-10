@@ -50,6 +50,10 @@ public class ProdutoDao implements Serializable {
 			criteriaQuery.where(builder.like(produto.get("nome"), filtro.getNome() + "%"));
 		}
 
+		if (filtro.getStatus() != null) {
+			criteriaQuery.where(builder.equal(produto.get("status"), filtro.getStatus()));
+		}
+
 		criteriaQuery.orderBy(order);
 
 		TypedQuery<Produto> query = manager.createQuery(criteriaQuery);

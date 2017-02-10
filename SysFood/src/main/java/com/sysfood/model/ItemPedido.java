@@ -73,6 +73,11 @@ public class ItemPedido implements Serializable {
 		this.pedido = pedido;
 	}
 
+	@Transient
+	public BigDecimal getValorTotal() {
+		return getValorUnitario().multiply(new BigDecimal(quantidade));
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -96,10 +101,6 @@ public class ItemPedido implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-	@Transient
-	public BigDecimal getValorTotal() {
-		return getValorUnitario().multiply(new BigDecimal(quantidade));
 	}
 
 }
