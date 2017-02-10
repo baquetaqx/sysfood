@@ -16,6 +16,8 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.sysfood.exception.NegocioException;
+
 @Entity
 public class Produto implements Serializable {
 
@@ -24,7 +26,7 @@ public class Produto implements Serializable {
 	private Long id;
 	private String nome;
 	private BigDecimal preco;
-	private Integer quantidade = 0;
+	private Integer quantidadeEstoque = 0;
 	private Boolean status = true;
 	private Boolean controlarEstoque = false;
 
@@ -62,12 +64,12 @@ public class Produto implements Serializable {
 	@Min(value = 0, message = "Quantidade não pode ser negativa")
 	@Max(value = 9999, message = "Quantidade tem um valor muito alto")
 	@Column(length = 5, nullable = false)
-	public Integer getQuantidade() {
-		return quantidade;
+	public Integer getQuantidadeEstoque() {
+		return quantidadeEstoque;
 	}
 
-	public void setQuantidade(Integer quantidade) {
-		this.quantidade = quantidade;
+	public void setQuantidadeEstoque(Integer quantidadeEstoque) {
+		this.quantidadeEstoque = quantidadeEstoque;
 	}
 
 	@Type(type = "true_false")
@@ -87,6 +89,17 @@ public class Produto implements Serializable {
 
 	public void setControlarEstoque(Boolean controlarEstoque) {
 		this.controlarEstoque = controlarEstoque;
+	}
+
+	public void baixarEstoque(Integer quantidade) throws NegocioException {
+		int novaQuantidade = this.getQuantidadeEstoque() - quantidade;
+
+		if (novaQuantidade < 0) {
+			throw new NegocioException(
+					"Não há disponibilidade no estoque de " + quantidade + " itens do produto " + this.getNome() + ".");
+		}
+
+		this.setQuantidadeEstoque(novaQuantidade);
 	}
 
 	@Override

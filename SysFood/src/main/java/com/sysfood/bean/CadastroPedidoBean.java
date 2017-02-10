@@ -41,6 +41,8 @@ public class CadastroPedidoBean implements Serializable {
 
 	public void pesquisarProduto() {
 		produtoFilter.setStatus(true);
+		produtoFilter.setQuantidadeEstoque(1);
+		produtoFilter.setControlarEstoque(true);
 		produtosFiltrados = produtoBo.filtrados(produtoFilter);
 	}
 

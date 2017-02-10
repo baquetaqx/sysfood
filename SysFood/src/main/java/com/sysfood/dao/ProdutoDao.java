@@ -1,6 +1,7 @@
 package com.sysfood.dao;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,6 +11,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Order;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.apache.commons.lang3.StringUtils;
@@ -46,14 +48,25 @@ public class ProdutoDao implements Serializable {
 
 		criteriaQuery.select(produto);
 
+		List<Predicate> predicates = new ArrayList<>();
+
 		if (StringUtils.isNotBlank(filtro.getNome())) {
-			criteriaQuery.where(builder.like(produto.get("nome"), filtro.getNome() + "%"));
+			predicates.add(builder.like(produto.get("nome"), filtro.getNome() + "%"));
 		}
 
 		if (filtro.getStatus() != null) {
-			criteriaQuery.where(builder.equal(produto.get("status"), filtro.getStatus()));
+			predicates.add(builder.equal(produto.get("status"), filtro.getStatus()));
 		}
 
+		if (filtro.getControlarEstoque() != null) {
+			predicates.add(builder.equal(produto.get("controlarEstoque"), filtro.getControlarEstoque()));
+		}
+
+		if (filtro.getQuantidadeEstoque() != null) {
+			predicates.add(builder.ge(produto.get("quantidadeEstoque"), filtro.getQuantidadeEstoque()));
+		}
+
+		criteriaQuery.where(predicates.toArray(new Predicate[0]));
 		criteriaQuery.orderBy(order);
 
 		TypedQuery<Produto> query = manager.createQuery(criteriaQuery);
