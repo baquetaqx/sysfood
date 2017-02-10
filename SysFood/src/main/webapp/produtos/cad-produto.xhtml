@@ -20,6 +20,7 @@
 	</ui:define>
 	<ui:define name="conteudo">
 		<f:metadata>
+			<o:viewParam name="produto" value="#{cadastroProdutoBean.produto}" />
 		</f:metadata>
 		<div class="row">
 			<div class="col-lg-12">
@@ -86,7 +87,7 @@
 								<h:panelGroup>
 									<p:selectBooleanCheckbox
 										style="text-align: center; padding-left:15px;padding-top:5px" />
-										<label>Sim</label>
+									<label>Sim</label>
 								</h:panelGroup>
 							</h:panelGrid>
 							<br />

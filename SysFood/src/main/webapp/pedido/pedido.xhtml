@@ -61,7 +61,9 @@
 									<h:outputLabel value="#{produto.nome}" />
 								</p:column>
 								<p:column headerText="Valor Unitário" width="120">
-									<h:outputLabel value="#{produto.preco}" />
+									<h:outputLabel value="#{produto.preco}">
+										<f:convertNumber type="currency" locale="pt-BR" />
+									</h:outputLabel>
 								</p:column>
 								<p:column headerText="Qtd" width="50">
 									<h:outputLabel value="#{produto.quantidade}" />

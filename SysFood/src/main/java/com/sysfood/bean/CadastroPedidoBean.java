@@ -50,8 +50,8 @@ public class CadastroPedidoBean implements Serializable {
 		pedido.getItens().add(item);
 	}
 
-	public void removerItem(ItemPedido item) {
-		pedido.getItens().remove(item);
+	public void removerItem(ItemPedido itemPedido) {
+		pedido.getItens().remove(itemPedido);
 	}
 
 	public void recalcularPedido() {
