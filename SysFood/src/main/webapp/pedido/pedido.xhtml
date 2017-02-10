@@ -12,7 +12,7 @@
 	</ui:define>
 	<ui:define name="conteudo">
 		<div class="row">
-			<h:form>
+			<h:form id="formPedido">
 				<div class="col-lg-6">
 					<div class="panel panel-default">
 						<div class="panel-heading">
@@ -26,8 +26,11 @@
 							Nome do Cliente:
 							<h:panelGroup>
 									<p:inputText styleClass="form-control"
+										value="#{cadastroPedidoBean.nomeCliente}"
 										style="display:inline-table;width:70%; margin-right:5px" />
-									<p:commandButton icon="fa fa-plus" />
+									<p:commandButton icon="fa fa-plus"
+										action="#{cadastroPedidoBean.adicionarCliente}"
+										update=":formPedido:nomeCliente" />
 								</h:panelGroup>
 								<h:panelGroup>
 									<br />
@@ -37,28 +40,36 @@
 								<h:panelGroup>
 									<br />
 									<p:inputText styleClass="form-control"
+										value="#{cadastroPedidoBean.produtoFilter.nome}"
 										style="display:inline-table;width:70%; margin-right:5px" />
-									<p:commandButton icon="fa fa-search" />
+									<p:commandButton icon="fa fa-search"
+										update=":formPedido:tabelaProduto"
+										action="#{cadastroPedidoBean.pesquisarProduto}" />
 								</h:panelGroup>
 							</h:panelGrid>
 							<br />
 							<p:dataTable paginator="true" rows="10"
-								paginatorPosition="bottom"
+								paginatorPosition="bottom" id="tabelaProduto"
 								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 								rowsPerPageTemplate="5,10,15"
+								value="#{cadastroPedidoBean.produtosFiltrados}" var="produto"
 								emptyMessage="Nenhum produto encontrado">
 								<p:column headerText="Nome do produto">
-									<h:outputLabel value="Coca-Cola" />
+									<h:outputLabel value="#{produto.nome}" />
 								</p:column>
 								<p:column headerText="Valor Unitário" width="120">
-									<h:outputLabel value="R$3,00" />
+									<h:outputLabel value="#{produto.preco}" />
 								</p:column>
 								<p:column headerText="Qtd" width="50">
-									<h:outputLabel value="2" />
+									<h:outputLabel value="#{produto.quantidade}" />
 								</p:column>
 								<p:column headerText="Add" width="50">
-									<p:commandLink styleClass="ui-icon ui-icon-search" />
-									<p:commandButton icon="fa fa-plus" />
+									<p:commandButton icon="fa fa-plus"
+										action="#{cadastroPedidoBean.adicionarItem}"
+										update=":formPedido:tabelaItens">
+										<f:setPropertyActionListener
+											target="#{cadastroPedidoBean.produto}" value="#{produto}" />
+									</p:commandButton>
 								</p:column>
 
 							</p:dataTable>
@@ -75,15 +86,17 @@
 						<div class="panel-body">
 							<p:messages />
 							<p:outputLabel value="Nome do Cliente: " />
-							<p:outputLabel value="" />
-							<p:dataTable
+							<p:outputLabel value="#{cadastroPedidoBean.pedido.cliente}"
+								id="nomeCliente" />
+							<p:dataTable value="#{cadastroPedidoBean.pedido.itens}"
+								var="item" id="tabelaItens"
 								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 								emptyMessage="Nenhum produto selecionado">
-								<p:column headerText="Nome do produto" width="">
-									<p:outputLabel />
+								<p:column headerText="Nome do produto">
+									<p:outputLabel value="#{item.produto.nome}" />
 								</p:column>
 								<p:column headerText="Qtd" width="50">
-									<p:inputText size="8" value="">
+									<p:inputText size="8" value="#{item.quantidade}">
 										<p:ajax event="change" process="@this" />
 									</p:inputText>
 								</p:column>

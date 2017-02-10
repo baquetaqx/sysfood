@@ -19,14 +19,14 @@
 </h:head>
 <h:body>
 
-<!-- 	<p:ajaxStatus styleClass="ajax-status" onsuccess="configurarMoeda()"> -->
-<!-- 		<f:facet name="start"> -->
-<!-- 			<h:graphicImage library="imagens" name="loading.GIF" /> -->
-<!-- 		</f:facet> -->
-<!-- 		<f:facet name="complete"> -->
-<!-- 			<h:outputText value="" /> -->
-<!-- 		</f:facet> -->
-<!-- 	</p:ajaxStatus> -->
+	<!-- 	<p:ajaxStatus styleClass="ajax-status" onsuccess="configurarMoeda()"> -->
+	<!-- 		<f:facet name="start"> -->
+	<!-- 			<h:graphicImage library="imagens" name="loading.GIF" /> -->
+	<!-- 		</f:facet> -->
+	<!-- 		<f:facet name="complete"> -->
+	<!-- 			<h:outputText value="" /> -->
+	<!-- 		</f:facet> -->
+	<!-- 	</p:ajaxStatus> -->
 
 	<div id="wrapper">
 
@@ -53,9 +53,10 @@
 					<li class="#{view.viewId eq '/index.xhtml' ? 'active' : ''}"><p:link
 							href="/index.xhtml">
 							<i class="fa fa-fw fa-dashboard"></i>Dashboard</p:link></li>
-					<li class="#{view.viewId eq '/pedido/pedido.xhtml' ? 'active' : ''}"><p:link
-						href="http://localhost:8080/SysFood/pedido/pedido.xhtml"><i
-							class="fa fa-fw fa-cutlery"></i> Fazer pedidos</p:link></li>
+					<li
+						class="#{view.viewId eq '/pedido/pedido.xhtml' ? 'active' : ''}"><p:link
+							href="/pedido/pedido.xhtml">
+							<i class="fa fa-fw fa-cutlery"></i> Fazer pedidos</p:link></li>
 					<li class="#{view.viewId eq '/financeiro.xhtml' ? 'active' : ''}"><a
 						href="#"><i class="fa fa-fw fa-money"></i> Controle Financeiro</a></li>
 					<p:separator></p:separator>
@@ -65,8 +66,7 @@
 							class="fa fa-fw fa-arrows-v"></i> Pre-Cadastro<i
 							class="fa fa-fw fa-caret-down"></i></a>
 						<ul id="demo" class="collapse">
-							<li><p:link
-									href="http://localhost:8080/SysFood/produtos/cad-produto.xhtml">
+							<li><p:link href="/produtos/cad-produto.xhtml">
 							Produtos</p:link></li>
 							<li><a href="#">Usuarios</a></li>
 							<li><a href="#">Fornecedores</a></li>

@@ -47,7 +47,7 @@ public class ProdutoDao implements Serializable {
 		criteriaQuery.select(produto);
 
 		if (StringUtils.isNotBlank(filtro.getNome())) {
-			criteriaQuery.where(builder.like(produto.get("nome"), "%" + filtro.getNome()));
+			criteriaQuery.where(builder.like(produto.get("nome"), filtro.getNome() + "%"));
 		}
 
 		criteriaQuery.orderBy(order);
