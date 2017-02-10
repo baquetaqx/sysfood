@@ -16,6 +16,11 @@
 	width: 100%;
 	margin-top: 100%;
 }
+.btnSearch{
+	background-color: #80ff00 !important;
+	text-shadow:none;
+	height: 34px;
+}
 
 .obrigatorio {
 	color: red !important;
