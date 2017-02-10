@@ -92,19 +92,32 @@
 								var="item" id="tabelaItens"
 								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 								emptyMessage="Nenhum produto selecionado">
-								<p:column headerText="Nome do produto">
-									<p:outputLabel value="#{item.produto.nome}" />
+								<p:column headerText="Nome do produto" width="200">
+									<p:outputLabel value="#{item.produto.nome}" styleClass="text-money"/>
 								</p:column>
 								<p:column headerText="Qtd" width="50">
-									<p:inputText size="8" value="#{item.quantidade}">
-										<p:ajax event="change" process="@this" />
+									<p:inputText value="#{item.quantidade}"
+										styleClass="form-control" maxlength="2">
+										<p:ajax event="change" process="@this"
+											update=":formPedido:tabelaItens" />
 									</p:inputText>
 								</p:column>
-								<p:column headerText="Preco" width="60">
-
+								<p:column headerText="Preco" width="80">
+									<p:outputLabel value="#{item.produto.preco}" styleClass="text-money">
+										<f:convertNumber type="currency" locale="pt-BR" />
+									</p:outputLabel>
 								</p:column>
 								<p:column headerText="Pco Total" width="90">
-
+									<p:outputLabel value="#{item.valorTotal}" id="pcoTotal" styleClass="text-money">
+										<f:convertNumber type="currency" locale="pt-BR" />
+									</p:outputLabel>
+								</p:column>
+								<p:column headerText="Rmv" width="50" style="text-align: center">
+									<p:commandLink styleClass="fa fa-remove"
+										update=":formPedido:tabelaItens">
+										<f:setPropertyActionListener
+											target="#{cadastroPedidoBean.produto}" value="#{produto}" />
+									</p:commandLink>
 								</p:column>
 							</p:dataTable>
 

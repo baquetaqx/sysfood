@@ -4,7 +4,10 @@
 	text-align: center;
 	margin-bottom: 4px;
 }
-
+.text-money{
+	font-size: 13px !important;
+	text-decoration: none;
+}
 .menu-texto {
 	color: #c0c0c0;
 	padding-bottom: 3px;

@@ -49,6 +49,11 @@ public class CadastroPedidoBean implements Serializable {
 		item.setValorUnitario(produto.getPreco());
 		pedido.getItens().add(item);
 	}
+	public void recalcularPedido(){
+		if (pedido!=null) {
+			pedido.recalcularValorTotal();
+		}
+	}
 
 	public Pedido getPedido() {
 		return pedido;

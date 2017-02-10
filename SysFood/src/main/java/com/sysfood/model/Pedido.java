@@ -87,6 +87,16 @@ public class Pedido implements Serializable {
 	public void setDataPedido(Date dataPedido) {
 		this.dataPedido = dataPedido;
 	}
+	
+	public void recalcularValorTotal() {
+		BigDecimal total = BigDecimal.ZERO;
+		for (ItemPedido item : getItens()) {
+			if (item.getProduto()!=null &&item.getProduto().getId()!=null) {
+				total = total.add(item.getValorTotal());
+			}
+		}
+		setValorTotal(total);
+	}
 
 	@Override
 	public boolean equals(Object obj) {
