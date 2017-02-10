@@ -11,6 +11,9 @@
 		<h1 class="page-header">Realize o pedido</h1>
 	</ui:define>
 	<ui:define name="conteudo">
+		<f:metadata>
+			<f:viewAction action="#{cadastroPedidoBean.pesquisarProduto}" />
+		</f:metadata>
 		<div class="row">
 			<h:form id="formPedido">
 				<div class="col-lg-6">
@@ -93,7 +96,8 @@
 								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 								emptyMessage="Nenhum produto selecionado">
 								<p:column headerText="Nome do produto" width="200">
-									<p:outputLabel value="#{item.produto.nome}" styleClass="text-money"/>
+									<p:outputLabel value="#{item.produto.nome}"
+										styleClass="text-money" />
 								</p:column>
 								<p:column headerText="Qtd" width="50">
 									<p:inputText value="#{item.quantidade}"
@@ -103,17 +107,20 @@
 									</p:inputText>
 								</p:column>
 								<p:column headerText="Preco" width="80">
-									<p:outputLabel value="#{item.produto.preco}" styleClass="text-money">
+									<p:outputLabel value="#{item.produto.preco}"
+										styleClass="text-money">
 										<f:convertNumber type="currency" locale="pt-BR" />
 									</p:outputLabel>
 								</p:column>
 								<p:column headerText="Pco Total" width="90">
-									<p:outputLabel value="#{item.valorTotal}" id="pcoTotal" styleClass="text-money">
+									<p:outputLabel value="#{item.valorTotal}" id="pcoTotal"
+										styleClass="text-money">
 										<f:convertNumber type="currency" locale="pt-BR" />
 									</p:outputLabel>
 								</p:column>
 								<p:column headerText="Rmv" width="50" style="text-align: center">
 									<p:commandLink styleClass="fa fa-remove"
+										action="#{cadastroPedidoBean.removerItem(item)}"
 										update=":formPedido:tabelaItens">
 										<f:setPropertyActionListener
 											target="#{cadastroPedidoBean.produto}" value="#{produto}" />
