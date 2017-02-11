@@ -58,14 +58,6 @@ public class ProdutoDao implements Serializable {
 			predicates.add(builder.equal(produto.get("status"), filtro.getStatus()));
 		}
 
-		if (filtro.getControlarEstoque() != null) {
-			predicates.add(builder.equal(produto.get("controlarEstoque"), filtro.getControlarEstoque()));
-		}
-
-		if (filtro.getQuantidadeEstoque() != null) {
-			predicates.add(builder.ge(produto.get("quantidadeEstoque"), filtro.getQuantidadeEstoque()));
-		}
-
 		criteriaQuery.where(predicates.toArray(new Predicate[0]));
 		criteriaQuery.orderBy(order);
 
