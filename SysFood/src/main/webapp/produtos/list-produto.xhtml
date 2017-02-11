@@ -72,14 +72,16 @@
 									<h:outputText value="#{produto.nome}" />
 								</p:column>
 								<p:column headerText="Valor do produto" width="160">
-									<h:outputText value="#{produto.preco}" />
+									<h:outputText value="#{produto.preco}">
+										<f:convertNumber type="currency" locale="pt-BR" />
+									</h:outputText>
 								</p:column>
-								<p:column headerText="Quantidade" width="100">
+								<p:column headerText="Quantidade" width="100" styleClass="centralizar">
 									<h:outputText value="#{produto.quantidadeEstoque}" />
 								</p:column>
-								<p:column headerText="Editar" width="120">
-									<p:button icon="ui-icon-pencil" title="Editar"
-										outcome="/produtos/cad-produto">
+								<p:column headerText="Editar" width="120" styleClass="centralizar">
+									<p:button icon="fa fa-pencil-square-o" title="Editar"
+										outcome="/produtos/cad-produto" disabled="#{!produto.status}" styleClass="">
 										<f:param name="produto" value="#{produto.id}" />
 									</p:button>
 								</p:column>
