@@ -1,6 +1,7 @@
 package com.sysfood.bean;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.faces.view.ViewScoped;
@@ -25,6 +26,8 @@ public class CadastroPedidoBean implements Serializable {
 	private ProdutoFilter produtoFilter;
 	private List<Produto> produtosFiltrados;
 	private Produto produto;
+	private BigDecimal valorPago;
+	private BigDecimal troco;
 
 	@Inject
 	private ProdutoBo produtoBo;
@@ -81,6 +84,10 @@ public class CadastroPedidoBean implements Serializable {
 		}
 	}
 
+	public void calcularTroco() {
+		
+	}
+
 	public Pedido getPedido() {
 		return pedido;
 	}
@@ -111,6 +118,22 @@ public class CadastroPedidoBean implements Serializable {
 
 	public void setProduto(Produto produto) {
 		this.produto = produto;
+	}
+
+	public BigDecimal getValorPago() {
+		return valorPago;
+	}
+
+	public void setValorPago(BigDecimal valorPago) {
+		this.valorPago = valorPago;
+	}
+
+	public BigDecimal getTroco() {
+		return troco;
+	}
+
+	public void setTroco(BigDecimal troco) {
+		this.troco = troco;
 	}
 
 }
