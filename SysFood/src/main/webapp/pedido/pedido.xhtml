@@ -65,7 +65,7 @@
 										<f:convertNumber type="currency" locale="pt-BR" />
 									</h:outputLabel>
 								</p:column>
-								<p:column headerText="Qtd" width="50">
+								<p:column headerText="Etq" width="50">
 									<h:outputLabel value="#{produto.quantidadeEstoque}" />
 								</p:column>
 								<p:column headerText="Add" width="50">
@@ -151,43 +151,48 @@
 				</div>
 				<p:dialog header="Relizando o pagamento da venda" widgetVar="dlg"
 					focus="money" modal="true" closable="true" resizable="false">
-					<div class="col-lg-6 bg-primary">
-						<h:outputLabel value="Troco:" styleClass="centralizar" />
-						<h:outputLabel value=" #{cadastroPedidoBean.troco}"
-							id="valorTroco">
+					<div class="col-lg-6 bg-primary centralizar">
+						<p:outputLabel value="Troco:" styleClass="centralizar" />
+						<br />
+						<h:outputLabel value="R$ #{cadastroPedidoBean.troco}"
+							id="valorTroco" styleClass="texto-span">
 							<f:convertNumber type="currency" locale="pt-BR" />
 						</h:outputLabel>
+
 					</div>
+
 					<div class="col-lg-6 bg-info centralizar">
 						<p:outputLabel value="Valor total: " styleClass="centralizar">
 						</p:outputLabel>
-
+						<br />
 						<p:outputLabel value="#{cadastroPedidoBean.pedido.valorTotal}"
 							styleClass="texto-span" id="valorTotalPedidoDlg">
 							<f:convertNumber type="currency" locale="pt-BR" />
 						</p:outputLabel>
 					</div>
-					<br />
-					<hr class="zig" />
-					<hr class="zag" />
-					<br />
+
 					<div class="col-lg-12">
-						<h:panelGrid columns="2" cellpadding="5">
+						<hr class="zig" />
+						<hr class="zag" />
+						<h:panelGrid columns="2" cellpadding="5" style="width:100%">
+
 							<h:outputLabel for="money" value="Dinheiro:" />
 							<p:inputText id="money" label="money" styleClass="moeda"
 								value="#{cadastroPedidoBean.valorPago}">
 								<f:convertNumber minFractionDigits="2" maxFractionDigits="2"
 									locale="pt-BR" />
-								<p:ajax event="change" process="@this"
+								<p:ajax event="keyup" process="@this"
 									listener="#{cadastroPedidoBean.calcularTroco}"
 									update="formPedido:valorTroco" />
 							</p:inputText>
 
 							<br />
+							<br />
 							<f:facet name="footer">
-								<p:commandButton value="Concluir Venda"
-									styleClass="btn btn-success btn-lg btn-salvar" />
-
+								<center>
+									<p:commandButton value="Concluir Venda"
+										styleClass="btn btn-success btn-lg btn-salvar" />
+								</center>
 							</f:facet>
 						</h:panelGrid>
 					</div>
