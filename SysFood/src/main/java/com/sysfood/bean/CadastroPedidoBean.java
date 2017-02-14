@@ -24,7 +24,6 @@ public class CadastroPedidoBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Pedido pedido;
-	private String nomeCliente;
 	private ProdutoFilter produtoFilter;
 	private List<Produto> produtosFiltrados;
 	private Produto produto;
@@ -38,24 +37,27 @@ public class CadastroPedidoBean implements Serializable {
 	private PedidoBo pedidoBo;
 
 	public CadastroPedidoBean() {
+		limpar();
+	}
+
+	private void limpar() {
 		setPedido(new Pedido());
 		produtoFilter = new ProdutoFilter();
 		produto = new Produto();
+		valorPago = null;
+		troco = null;
 	}
 
 	public void salvar() {
 		try {
 			this.pedido = pedidoBo.salvar(this.pedido);
+			limpar();
 
 			FacesUtil.addInfoMessage("Pedido efetuado com sucesso!");
 		} catch (NegocioException e) {
 			FacesUtil.addErrorMessage(e.getMessage());
 		}
 
-	}
-
-	public void adicionarCliente() {
-		pedido.setCliente(nomeCliente);
 	}
 
 	public void pesquisarProduto() {
@@ -111,14 +113,6 @@ public class CadastroPedidoBean implements Serializable {
 
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
-	}
-
-	public String getNomeCliente() {
-		return nomeCliente;
-	}
-
-	public void setNomeCliente(String nomeCliente) {
-		this.nomeCliente = nomeCliente;
 	}
 
 	public ProdutoFilter getProdutoFilter() {

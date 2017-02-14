@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -91,7 +92,8 @@ public class Produto implements Serializable {
 		this.controlarEstoque = controlarEstoque;
 	}
 
-	public void baixarEstoque(Integer quantidade) throws NegocioException {
+	@Transient
+	public Produto baixarEstoque(Integer quantidade) throws NegocioException {
 		if (controlarEstoque) {
 			int novaQuantidade = this.getQuantidadeEstoque() - quantidade;
 
@@ -101,7 +103,9 @@ public class Produto implements Serializable {
 			}
 
 			this.setQuantidadeEstoque(novaQuantidade);
+			return this;
 		}
+		return null;
 	}
 
 	@Override

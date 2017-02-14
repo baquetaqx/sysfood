@@ -30,11 +30,10 @@
 							Nome do Cliente:
 							<h:panelGroup>
 									<p:inputText styleClass="form-control"
-										value="#{cadastroPedidoBean.nomeCliente}"
+										value="#{cadastroPedidoBean.pedido.cliente}"
 										style="display:inline-table;width:70%; margin-right:5px"
 										required="true" requiredMessage="Coloque o nome do cliente" />
 									<p:commandButton icon="fa fa-plus"
-										action="#{cadastroPedidoBean.adicionarCliente}"
 										update=":formPedido:nomeCliente :formPedido:mensagens" />
 								</h:panelGroup>
 								<h:panelGroup>
@@ -201,8 +200,7 @@
 								<center>
 									<p:commandButton value="Concluir Venda"
 										onclick="PF('dlg').hide()"
-										action="#{cadastroPedidoBean.salvar}"
-										update="formPedido:mensagens"
+										action="#{cadastroPedidoBean.salvar}" update="@all"
 										styleClass="btn btn-success btn-lg btn-salvar" />
 								</center>
 							</f:facet>
