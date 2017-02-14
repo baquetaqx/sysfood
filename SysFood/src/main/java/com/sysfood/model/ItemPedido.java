@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Min;
 
 @Entity
 @Table(name = "item_pedido")
@@ -22,6 +23,7 @@ public class ItemPedido implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Min(1)
 	@Column(nullable = false, length = 3)
 	private Integer quantidade = 1;
 	@Column(name = "valor_unitario", nullable = false, precision = 10, scale = 2)

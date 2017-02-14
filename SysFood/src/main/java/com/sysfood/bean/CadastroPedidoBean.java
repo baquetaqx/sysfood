@@ -85,7 +85,7 @@ public class CadastroPedidoBean implements Serializable {
 	}
 
 	public void calcularTroco() {
-		
+		troco = valorPago.subtract(pedido.getValorTotal());
 	}
 
 	public Pedido getPedido() {
