@@ -47,7 +47,7 @@ public class CadastroPedidoBean implements Serializable {
 		try {
 			this.pedido = pedidoBo.salvar(this.pedido);
 
-			FacesUtil.addInfoMessage("Pedido salvo com sucesso!");
+			FacesUtil.addInfoMessage("Pedido efetuado com sucesso!");
 		} catch (NegocioException e) {
 			FacesUtil.addErrorMessage(e.getMessage());
 		}
@@ -92,6 +92,7 @@ public class CadastroPedidoBean implements Serializable {
 	public void removerItem(ItemPedido itemPedido) {
 		pedido.getItens().remove(itemPedido);
 		recalcularPedido();
+		FacesUtil.addInfoMessage(itemPedido.getProduto().getNome() + " Removido");
 	}
 
 	public void recalcularPedido() {
