@@ -106,7 +106,7 @@
 										styleClass="form-control" maxlength="2">
 										<p:ajax event="change" process="@this"
 											listener="#{cadastroPedidoBean.recalcularPedido}"
-											update=":formPedido:tabelaItens :formPedido:valorTotalPedido" />
+											update=":formPedido:tabelaItens :formPedido:valorTotalPedido :formPedido:valorTotalPedidoDlg" />
 									</p:inputText>
 								</p:column>
 								<p:column headerText="Preco" width="80">
@@ -150,7 +150,8 @@
 					</div>
 				</div>
 				<p:dialog header="Relizando o pagamento da venda" widgetVar="dlg"
-					focus="money" modal="true" closable="true" resizable="false">
+					focus="money" modal="true" closable="true" resizable="false"
+					id="dialogFinalizandoPedido">
 					<div class="col-lg-6 bg-primary centralizar">
 						<p:outputLabel value="Troco:" styleClass="centralizar" />
 						<br />
@@ -181,7 +182,7 @@
 								value="#{cadastroPedidoBean.valorPago}">
 								<f:convertNumber minFractionDigits="2" maxFractionDigits="2"
 									locale="pt-BR" />
-								<p:ajax event="keyup" process="@this"
+								<p:ajax event="change" process="@this"
 									listener="#{cadastroPedidoBean.calcularTroco}"
 									update="formPedido:valorTroco" />
 							</p:inputText>
@@ -191,6 +192,7 @@
 							<f:facet name="footer">
 								<center>
 									<p:commandButton value="Concluir Venda"
+										action="#{cadastroPedidoBean.salvar}"
 										styleClass="btn btn-success btn-lg btn-salvar" />
 								</center>
 							</f:facet>

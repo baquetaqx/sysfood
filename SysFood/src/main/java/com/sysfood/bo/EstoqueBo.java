@@ -19,11 +19,10 @@ public class EstoqueBo implements Serializable {
 
 	@Transactional
 	public void baixarItensEstoque(Pedido pedido) throws NegocioException {
-		pedido = this.pedidoDao.porId(pedido.getId());
+		// pedido = this.pedidoDao.porId(pedido.getId());
 
 		for (ItemPedido item : pedido.getItens()) {
 			item.getProduto().baixarEstoque(item.getQuantidade());
 		}
 	}
-
 }

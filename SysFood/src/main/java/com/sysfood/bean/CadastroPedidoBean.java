@@ -8,8 +8,10 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.sysfood.bo.PedidoBo;
 import com.sysfood.bo.ProdutoBo;
 import com.sysfood.dao.filter.ProdutoFilter;
+import com.sysfood.exception.NegocioException;
 import com.sysfood.model.ItemPedido;
 import com.sysfood.model.Pedido;
 import com.sysfood.model.Produto;
@@ -32,10 +34,24 @@ public class CadastroPedidoBean implements Serializable {
 	@Inject
 	private ProdutoBo produtoBo;
 
+	@Inject
+	private PedidoBo pedidoBo;
+
 	public CadastroPedidoBean() {
 		setPedido(new Pedido());
 		produtoFilter = new ProdutoFilter();
 		produto = new Produto();
+	}
+
+	public void salvar() {
+		try {
+			this.pedido = pedidoBo.salvar(this.pedido);
+
+			FacesUtil.addInfoMessage("Pedido salvo com sucesso!");
+		} catch (NegocioException e) {
+			FacesUtil.addErrorMessage(e.getMessage());
+		}
+
 	}
 
 	public void adicionarCliente() {
