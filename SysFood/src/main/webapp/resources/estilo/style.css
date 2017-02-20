@@ -11,6 +11,10 @@
 .texto-span{
 	font-size: 25px !important;
 }
+.texto-info{
+	font-weight: normal !important;
+	margin-right: 30px;
+}
 .menu-texto {
 	color: #c0c0c0;
 	padding-bottom: 3px;
