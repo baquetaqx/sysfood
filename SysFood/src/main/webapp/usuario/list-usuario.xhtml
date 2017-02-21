@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/templates/layoutPrincipal.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">SysFood - Lista de Usuários</ui:define>
+	<ui:define name="page-header">
+		<h1 class="page-header">Lista dos Usuários Cadastrados</h1>
+	</ui:define>
+	<ui:define name="page-header-title">
+		<ol class="breadcrumb">
+			<li class="active"><i class="fa fa-th-list"></i> Cadastre um
+				Usuário</li>
+			<a href="/SysFood/usuario/cad-usuario.xhtml"> <i
+				class="fa fa-arrow-circle-right"></i> Clique Aqui <i
+				class="fa fa-arrow-circle-left"></i></a>
+		</ol>
+	</ui:define>
+	<ui:define name="conteudo">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<i class="fa fa-user"></i> Usuario
+						</h3>
+					</div>
+					<div class="panel-body">
+
+						<h:form prependId="false">
+							Nome do Usuário:
+							<p:inputText styleClass="form-control"
+								value="#{pesquisaProdutosBean.filtro.nome}"
+								style="display:inline-table;width:70%; margin-right:5px" />
+							<p:commandButton value="Pesquisar"
+								action="#{pesquisaProdutosBean.pesquisar}"
+								update="tabelaProduto" icon="fa fa-search"
+								styleClass="btnSearch" />
+							<br />
+							<br />
+							<p:messages />
+							<p:dataTable paginator="true" rows="10"
+								emptyMessage="Nenhum produto encontrado"
+								paginatorPosition="bottom" id="tabelaProduto"
+								value="#{pesquisaProdutosBean.produtosFiltrados}" var="produto"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="5,10,15">
+								<p:column headerText="Status" width="100"
+									style="text-align:center">
+									<p:commandLink id="lnkAlterarStatus"
+										action="#{pesquisaProdutosBean.updateAtivo}" ajax="false"
+										update="tabelaProduto"
+										title="#{produto.status ? 'Desativar' : 'Ativar'}">
+										<h:panelGroup rendered="#{!produto.status}">
+											<h:graphicImage library="imagens" name="check_False.png"
+												width="20" />
+										</h:panelGroup>
+										<h:panelGroup rendered="#{produto.status}">
+											<h:graphicImage library="imagens" name="check_True.png"
+												width="20" />
+										</h:panelGroup>
+										<f:setPropertyActionListener
+											target="#{pesquisaProdutosBean.produto}" value="#{produto}" />
+										<f:setPropertyActionListener
+											target="#{pesquisaProdutosBean.produto.status}"
+											value="#{!produto.status}" />
+									</p:commandLink>
+								</p:column>
+								<p:column headerText="Nome do Usuário" width="300">
+									<h:outputText value="#{produto.nome}" />
+								</p:column>
+								<p:column headerText="Telefone" width="140">
+									<h:outputText value="#{produto.preco}">
+										<f:convertNumber type="currency" locale="pt-BR" />
+									</h:outputText>
+								</p:column>
+								<p:column headerText="CPF" width="120" styleClass="centralizar">
+									<h:outputText value="#{produto.quantidadeEstoque}" />
+								</p:column>
+								<p:column headerText="Editar" width="120"
+									styleClass="centralizar">
+									<p:button icon="fa fa-pencil-square-o" title="Editar"
+										outcome="/produtos/cad-produto" disabled="#{!produto.status}"
+										styleClass="">
+										<f:param name="produto" value="#{produto.id}" />
+									</p:button>
+								</p:column>
+							</p:dataTable>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /.row -->
+	</ui:define>
+</ui:composition>
