@@ -9,6 +9,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,6 +31,7 @@ public class Pedido implements Serializable {
 	private BigDecimal valorTotal;
 	private String cliente;
 	private List<ItemPedido> itens = new ArrayList<>();
+	private TipoPagamento tipoPagamento;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,6 +70,17 @@ public class Pedido implements Serializable {
 
 	public void setCliente(String cliente) {
 		this.cliente = cliente;
+	}
+	
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(name="tipo_pagamento")
+	public TipoPagamento getTipoPagamento() {
+		return tipoPagamento;
+	}
+
+	public void setTipoPagamento(TipoPagamento tipoPagamento) {
+		this.tipoPagamento = tipoPagamento;
 	}
 
 	@Override

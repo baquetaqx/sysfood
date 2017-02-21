@@ -158,54 +158,65 @@
 				<p:dialog header="Relizando o pagamento da venda" widgetVar="dlg"
 					focus="money" modal="true" closable="true" resizable="false"
 					id="dialogFinalizandoPedido">
-					<div class="col-lg-6 bg-primary centralizar">
-						<p:outputLabel value="Troco:" styleClass="centralizar" />
-						<br />
-						<h:outputLabel value="R$ #{cadastroPedidoBean.troco}"
-							id="valorTroco" styleClass="texto-span moeda">
-							<!-- <f:convertNumber type="currency" locale="pt-BR" /> -->
-							<f:convertNumber pattern="#,##0.00"></f:convertNumber>
-						</h:outputLabel>
 
-					</div>
-
-					<div class="col-lg-6 bg-info centralizar">
-						<p:outputLabel value="Valor total: " styleClass="centralizar">
-						</p:outputLabel>
-						<br />
-						<p:outputLabel value="#{cadastroPedidoBean.pedido.valorTotal}"
-							styleClass="texto-span" id="valorTotalPedidoDlg">
-							<f:convertNumber type="currency" locale="pt-BR" />
-						</p:outputLabel>
-					</div>
+					<center>
+						<h:selectOneRadio styleClass="oneRadioPagamento"
+							value="#{cadastroPedidoBean.pedido.tipoPagamento}">
+							<f:selectItems value="#{cadastroPedidoBean.tipoPagament}"
+								var="pagamento" itemLabel="#{pagamento.desc}"
+								itemValue="#{pagamento}" />
+						</h:selectOneRadio>
+					</center>
 
 					<div class="col-lg-12">
-						<hr class="zig" />
-						<hr class="zag" />
-						<h:panelGrid columns="2" cellpadding="5" style="width:100%">
-
-							<h:outputLabel for="money" value="Dinheiro:" />
-							<p:inputText id="money" label="money" styleClass="moeda"
-								value="#{cadastroPedidoBean.valorPago}">
-								<f:convertNumber minFractionDigits="2" maxFractionDigits="2"
-									locale="pt-BR" />
-								<p:ajax event="keyup" process="@this"
-									listener="#{cadastroPedidoBean.calcularTroco}"
-									update="formPedido:valorTroco" />
-							</p:inputText>
-
+						<div class="col-lg-6 bg-primary centralizar">
+							<p:outputLabel value="Troco:" styleClass="centralizar" />
 							<br />
+							<h:outputLabel value="R$ #{cadastroPedidoBean.troco}"
+								id="valorTroco" styleClass="texto-span moeda">
+								<!-- <f:convertNumber type="currency" locale="pt-BR" /> -->
+								<f:convertNumber pattern="#,##0.00"></f:convertNumber>
+							</h:outputLabel>
+
+						</div>
+
+						<div class="col-lg-6 bg-info centralizar">
+							<p:outputLabel value="Valor total: " styleClass="centralizar">
+							</p:outputLabel>
 							<br />
-							<f:facet name="footer">
-								<center>
-									<p:commandButton value="Concluir Venda"
-										onclick="PF('dlg').hide()"
-										action="#{cadastroPedidoBean.salvar}" update="@form"
-										styleClass="btn btn-success btn-lg btn-salvar" />
-								</center>
-							</f:facet>
-						</h:panelGrid>
+							<p:outputLabel value="#{cadastroPedidoBean.pedido.valorTotal}"
+								styleClass="texto-span" id="valorTotalPedidoDlg">
+								<f:convertNumber type="currency" locale="pt-BR" />
+							</p:outputLabel>
+						</div>
+
+						<div class="col-lg-12">
+							<hr class="zig" />
+							<hr class="zag" />
+							<h:panelGrid columns="2" cellpadding="5" style="width:100%"
+								id="inputs">
+
+								<h:outputLabel for="money" value="Dinheiro:" />
+								<p:inputText id="money" label="money" styleClass="moeda"
+									value="#{cadastroPedidoBean.valorPago}">
+									<f:convertNumber minFractionDigits="2" maxFractionDigits="2"
+										locale="pt-BR" />
+									<p:ajax event="keyup" process="@this"
+										listener="#{cadastroPedidoBean.calcularTroco}"
+										update="formPedido:valorTroco" />
+								</p:inputText>
+
+								<br />
+								<br />
+
+							</h:panelGrid>
+						</div>
 					</div>
+					<center>
+						<p:commandButton value="Concluir Venda" onclick="PF('dlg').hide()"
+							action="#{cadastroPedidoBean.salvar}" update="@form"
+							styleClass="btn btn-success btn-lg btn-salvar" />
+					</center>
 				</p:dialog>
 			</h:form>
 		</div>

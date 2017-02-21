@@ -1,7 +1,7 @@
 @CHARSET "ISO-8859-1";
 
 .centralizar {
-	text-align: center;
+	text-align: center !important;
 	margin-bottom: 4px;
 }
 .text-money{
@@ -27,6 +27,15 @@
 	background-color: #80ff00 !important;
 	text-shadow:none;
 	height: 34px;
+}
+
+.oneRadioPagamento{
+	margin: 10px !important;
+}
+
+.oneRadioPagamento label{
+	padding-left: 3px;
+	padding-right: 15px;
 }
 
 .obrigatorio {

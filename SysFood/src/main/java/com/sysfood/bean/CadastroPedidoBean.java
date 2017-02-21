@@ -15,6 +15,7 @@ import com.sysfood.exception.NegocioException;
 import com.sysfood.model.ItemPedido;
 import com.sysfood.model.Pedido;
 import com.sysfood.model.Produto;
+import com.sysfood.model.TipoPagamento;
 import com.sysfood.util.jsf.FacesUtil;
 
 @Named
@@ -29,7 +30,7 @@ public class CadastroPedidoBean implements Serializable {
 	private Produto produto;
 	private BigDecimal valorPago;
 	private BigDecimal troco;
-
+	
 	@Inject
 	private ProdutoBo produtoBo;
 
@@ -90,6 +91,10 @@ public class CadastroPedidoBean implements Serializable {
 
 		return existeItem;
 	}
+	
+	public TipoPagamento[] getTipoPagament(){
+		return TipoPagamento.values();
+	}
 
 	public void removerItem(ItemPedido itemPedido) {
 		pedido.getItens().remove(itemPedido);
@@ -147,4 +152,5 @@ public class CadastroPedidoBean implements Serializable {
 		this.troco = troco;
 	}
 
+	
 }
