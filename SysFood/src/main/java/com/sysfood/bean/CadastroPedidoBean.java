@@ -30,7 +30,7 @@ public class CadastroPedidoBean implements Serializable {
 	private Produto produto;
 	private BigDecimal valorPago;
 	private BigDecimal troco;
-	
+
 	@Inject
 	private ProdutoBo produtoBo;
 
@@ -91,8 +91,8 @@ public class CadastroPedidoBean implements Serializable {
 
 		return existeItem;
 	}
-	
-	public TipoPagamento[] getTipoPagament(){
+
+	public TipoPagamento[] getTipoPagament() {
 		return TipoPagamento.values();
 	}
 
@@ -152,5 +152,4 @@ public class CadastroPedidoBean implements Serializable {
 		this.troco = troco;
 	}
 
-	
 }
