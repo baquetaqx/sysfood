@@ -9,8 +9,6 @@
 	<ui:define name="title">SysFood - Usuário</ui:define>
 	<ui:define name="page-header">
 		<h:form id="page-header-id">
-			<h1 class="page-header">#{cadastroProdutoBean.editando ? 'Edição
-				de Usuário' : 'Cadastre o Usuário'}</h1>
 		</h:form>
 	</ui:define>
 	<ui:define name="page-header-title">
@@ -20,17 +18,14 @@
 	</ui:define>
 	<ui:define name="conteudo">
 		<f:metadata>
-			<o:viewParam name="produto" value="#{cadastroProdutoBean.produto}" />
+			<o:viewParam name="usuario" value="#{usuarioBean.usuario}" />
 		</f:metadata>
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h:form id="panel-title-id">
-							<h3 class="panel-title">
-								<i class="fa fa-user-plus"></i> #{cadastroProdutoBean.editando ?
-								'Edição de Usuário' : 'Novo Usuário'}
-							</h3>
+							<h3 class="panel-title"></h3>
 						</h:form>
 					</div>
 					<div class="panel-body">
@@ -39,10 +34,33 @@
 							obrigatórios!
 						</h5>
 						<h:form>
-							<p:messages />
+							<p:messages id="mensagens" />
 
 							<h:panelGrid columns="2" style="width:100%">
+
 								<h:panelGroup>
+
+									<h:outputLabel value="Tipo de Usuário" for="tipoUsuario" />
+									<h:outputLabel value=" *" styleClass="obrigatorio"
+										for="tipoUsuario" />
+									<h:outputLabel value=":" for="tipoUsuario" />
+								</h:panelGroup>
+								<h:selectOneMenu id="tipoUsuario"
+									value="#{usuarioBean.usuario.perfilUsuario}">
+									<f:selectItem itemLabel="Selecione o tipo de Usuário" />
+									<f:selectItems value="#{usuarioBean.perfil}" var="perfil"
+										itemLabel="#{perfil.descricao}" itemValue="#{perfil}" />
+								</h:selectOneMenu>
+								<h:panelGroup>
+									<br />
+								</h:panelGroup>
+								<h:panelGroup>
+									<br />
+								</h:panelGroup>
+
+
+								<h:panelGroup>
+
 									<h:outputLabel value="Nome do Funcionário"
 										for="nomeFuncionario" />
 									<h:outputLabel value=" *" styleClass="obrigatorio"
@@ -50,7 +68,7 @@
 									<h:outputLabel value=":" for="nomeFuncionario" />
 								</h:panelGroup>
 								<p:inputText styleClass="form-control" id="nomeFuncionario"
-									value="#{empresaBean.empresa.razaoSocial}" />
+									value="#{usuarioBean.usuario.nome}" />
 								<h:panelGroup>
 									<br />
 								</h:panelGroup>
@@ -64,8 +82,7 @@
 									<h:outputLabel value=":" for="cpf" />
 								</h:panelGroup>
 								<p:inputMask id="cpf" mask="999.999.999-99"
-									value="#{empresaBean.empresa.nomefantasia}"
-									styleClass="mask-text-field" />
+									value="#{usuarioBean.usuario.cpf}" styleClass="mask-text-field" />
 								<h:panelGroup>
 									<br />
 								</h:panelGroup>
@@ -79,7 +96,7 @@
 									<h:outputLabel value=":" for="telefone" />
 								</h:panelGroup>
 								<p:inputMask mask="(99)9 9999-9999" styleClass="mask-text-field"
-									value="#{empresaBean.empresa.cnpj}" id="telefone" />
+									value="#{usuarioBean.usuario.telefone}" id="telefone" />
 								<h:panelGroup>
 									<br />
 								</h:panelGroup>
@@ -90,7 +107,7 @@
 									<h:outputLabel value="Email:" />
 								</h:panelGroup>
 								<p:inputText styleClass="form-control" type="email"
-									value="#{empresaBean.empresa.inscricaoEstadual}" />
+									value="#{usuarioBean.usuario.email}" />
 								<h:panelGroup>
 									<br />
 								</h:panelGroup>
@@ -101,7 +118,7 @@
 									<h:outputLabel value="Endereço:" for="endereco" />
 								</h:panelGroup>
 								<p:inputText styleClass="form-control" id="endereco"
-									value="#{empresaBean.empresa.endereco}" />
+									value="#{usuarioBean.usuario.endereco}" />
 
 								<h:panelGroup>
 									<br />
@@ -139,11 +156,11 @@
 							</h:panelGrid>
 
 							<br />
-							<p:commandButton value="Cadastrar" action="#{empresaBean.salvar}"
+							<p:commandButton value="Cadastrar" action="#{usuarioBean.salvar}"
 								styleClass="btn btn-success btn-lg btn-salvar" update="@form" />
 							<p:button value="Cancelar"
 								styleClass="btn btn-danger btn-lg btn-salvar"
-								outcome="/produtos/list-produto" />
+								outcome="/usuario/list-usuario" />
 						</h:form>
 					</div>
 				</div>
