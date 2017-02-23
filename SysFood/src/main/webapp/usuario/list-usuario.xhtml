@@ -33,22 +33,21 @@
 						<h:form prependId="false">
 							Nome do Usuário:
 							<p:inputText styleClass="form-control"
-								value="#{pesquisaProdutosBean.filtro.nome}"
+								value="#{pesquisaUsuarioBean.filtro.nome}"
 								style="display:inline-table;width:70%; margin-right:5px" />
 							<p:commandButton value="Pesquisar"
-								action="#{pesquisaProdutosBean.pesquisar}"
-								update="tabelaProduto" icon="fa fa-search"
-								styleClass="btnSearch" />
+								action="#{pesquisaUsuarioBean.pesquisar}" update="tabelaProduto"
+								icon="fa fa-search" styleClass="btnSearch" />
 							<br />
 							<br />
 							<p:messages />
 							<p:dataTable paginator="true" rows="10"
 								emptyMessage="Nenhum produto encontrado"
 								paginatorPosition="bottom" id="tabelaProduto"
-								value="#{pesquisaProdutosBean.produtosFiltrados}" var="produto"
+								value="#{pesquisaUsuarioBean.usuariosFiltrados}" var="usuario"
 								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 								rowsPerPageTemplate="5,10,15">
-								<p:column headerText="Status" width="100"
+								<!-- <p:column headerText="Status" width="100"
 									style="text-align:center">
 									<p:commandLink id="lnkAlterarStatus"
 										action="#{pesquisaProdutosBean.updateAtivo}" ajax="false"
@@ -68,24 +67,23 @@
 											target="#{pesquisaProdutosBean.produto.status}"
 											value="#{!produto.status}" />
 									</p:commandLink>
-								</p:column>
+								</p:column> -->
 								<p:column headerText="Nome do Usuário" width="300">
-									<h:outputText value="#{produto.nome}" />
+									<h:outputText value="#{usuario.nome}" />
 								</p:column>
 								<p:column headerText="Telefone" width="140">
-									<h:outputText value="#{produto.preco}">
+									<h:outputText value="#{usuario.telefone}">
 										<f:convertNumber type="currency" locale="pt-BR" />
 									</h:outputText>
 								</p:column>
 								<p:column headerText="CPF" width="120" styleClass="centralizar">
-									<h:outputText value="#{produto.quantidadeEstoque}" />
+									<h:outputText value="#{usuario.cpf}" />
 								</p:column>
 								<p:column headerText="Editar" width="120"
 									styleClass="centralizar">
 									<p:button icon="fa fa-pencil-square-o" title="Editar"
-										outcome="/produtos/cad-produto" disabled="#{!produto.status}"
-										styleClass="">
-										<f:param name="produto" value="#{produto.id}" />
+										outcome="/usuario/cad-usuario" styleClass="">
+										<f:param name="usuario" value="#{usuario.id}" />
 									</p:button>
 								</p:column>
 							</p:dataTable>
