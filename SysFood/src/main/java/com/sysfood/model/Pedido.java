@@ -31,7 +31,7 @@ public class Pedido implements Serializable {
 	private BigDecimal valorTotal;
 	private String cliente;
 	private List<ItemPedido> itens = new ArrayList<>();
-	private TipoPagamento tipoPagamento;
+	private TipoPagamento tipoPagamento = TipoPagamento.DINHEIRO;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -71,10 +71,10 @@ public class Pedido implements Serializable {
 	public void setCliente(String cliente) {
 		this.cliente = cliente;
 	}
-	
+
 	@NotNull
 	@Enumerated(EnumType.STRING)
-	@Column(name="tipo_pagamento")
+	@Column(name = "tipo_pagamento")
 	public TipoPagamento getTipoPagamento() {
 		return tipoPagamento;
 	}

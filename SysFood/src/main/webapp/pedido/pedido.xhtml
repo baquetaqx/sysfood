@@ -155,7 +155,7 @@
 						</div>
 					</div>
 				</div>
-				<p:dialog header="Relizando o pagamento da venda" widgetVar="dlg"
+				<p:dialog header="Realizando o pagamento da venda" widgetVar="dlg"
 					focus="money" modal="true" closable="true" resizable="false"
 					id="dialogFinalizandoPedido">
 
@@ -163,7 +163,7 @@
 						<h:selectOneRadio styleClass="oneRadioPagamento"
 							value="#{cadastroPedidoBean.pedido.tipoPagamento}">
 							<f:selectItems value="#{cadastroPedidoBean.tipoPagament}"
-								var="pagamento" itemLabel="#{pagamento.desc}"
+								var="pagamento" itemLabel="#{pagamento.descricao}"
 								itemValue="#{pagamento}" />
 						</h:selectOneRadio>
 					</center>
@@ -174,7 +174,6 @@
 							<br />
 							<h:outputLabel value="R$ #{cadastroPedidoBean.troco}"
 								id="valorTroco" styleClass="texto-span moeda">
-								<!-- <f:convertNumber type="currency" locale="pt-BR" /> -->
 								<f:convertNumber pattern="#,##0.00"></f:convertNumber>
 							</h:outputLabel>
 

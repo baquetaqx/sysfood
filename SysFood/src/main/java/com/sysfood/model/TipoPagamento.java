@@ -1,16 +1,16 @@
 package com.sysfood.model;
 
 public enum TipoPagamento {
-	DINHEIRO("Dinheiro"), CREDITO("Credito"), DEBITO("Debito");
-	
-	private String desc;
+	DINHEIRO("Dinheiro"), CARTAO_CREDITO("Cartão de crédito"), CARTAO_DEBITO("Cartão de débito");
 
-	private TipoPagamento(String desc) {
-		this.desc = desc;
+	private String descricao;
+
+	TipoPagamento(String descricao) {
+		this.descricao = descricao;
 	}
-	
-	public String getDesc() {
-		return desc;
+
+	public String getDescricao() {
+		return descricao;
 	}
 
 }
