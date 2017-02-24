@@ -19,9 +19,17 @@ public class CaixaBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Caixa caixa;
-
+	
 	@Inject
 	private CaixaBo caixaBo;
+	
+	public CaixaBean() {
+		limpar();
+	}
+
+	private void limpar() {
+		caixa = new Caixa();
+	}
 
 	public void abrirCaixa() {
 		try {

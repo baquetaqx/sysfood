@@ -1,5 +1,6 @@
 package com.sysfood.dao;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -13,8 +14,10 @@ import javax.persistence.criteria.Root;
 import com.sysfood.model.Caixa;
 import com.sysfood.model.Pedido;
 
-public class CaixaDao {
+public class CaixaDao implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	@Inject
 	private EntityManager manager;
 

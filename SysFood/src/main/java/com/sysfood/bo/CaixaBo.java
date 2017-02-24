@@ -1,5 +1,6 @@
 package com.sysfood.bo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -10,8 +11,10 @@ import com.sysfood.exception.NegocioException;
 import com.sysfood.model.Caixa;
 import com.sysfood.util.jpa.Transactional;
 
-public class CaixaBo {
+public class CaixaBo implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	@Inject
 	private CaixaDao caixaDao;
 
