@@ -26,42 +26,41 @@
 							<h4 class="page-header">
 								Faça abertura do caixa
 								<p:commandButton value="Abrir caixa" style="float:right"
-									styleClass="btn btn-primary" onclick="PF('dlg').show();"></p:commandButton>
+									action="#{caixaBean.abrirCaixa}" styleClass="btn btn-primary"
+									onclick="PF('dlg').show();"
+									disabled="#{!caixaBean.caixa.caixaAberto}" />
 							</h4>
 							<p:messages id="mensagens" closable="true" />
 							<br />
 							<h:panelGrid columns="2">
 								<p:outputLabel value="Data de abertura: "
 									styleClass="texto-info" />
-								<p:outputLabel value="" />
-								<p:outputLabel value="Fundo de Caixa: "
-									styleClass="texto-info" />
-								<p:outputLabel value="" />
-								
-								
-								<p:outputLabel value="Débito: "
-									styleClass="texto-info" />
-								<p:outputLabel value="" />
-								
-								<p:outputLabel value="Crédito: "
-									styleClass="texto-info" />
-								<p:outputLabel value="" />
-								
-								<p:outputLabel value="Dinheiro: "
-									styleClass="texto-info" />
-								<p:outputLabel value="" />
-								
+								<p:outputLabel value="#{caixaBean.caixa.dataDeAbertura}" />
+								<p:outputLabel value="Fundo de Caixa: " styleClass="texto-info" />
+								<p:outputLabel value="#{caixaBean.caixa.fundoDeCaixa}" />
+
+
+								<p:outputLabel value="Débito: " styleClass="texto-info" />
+								<p:outputLabel value="#{caixaBean.caixa.debito}" />
+
+								<p:outputLabel value="Crédito: " styleClass="texto-info" />
+								<p:outputLabel value="#{caixaBean.caixa.credito}" />
+
+								<p:outputLabel value="Dinheiro: " styleClass="texto-info" />
+								<p:outputLabel value="#{caixaBean.caixa.dinheiro}" />
+
 								<p:outputLabel value="Número de pedidos: "
 									styleClass="texto-info" />
-								<p:outputLabel value="" />
-								
+								<p:outputLabel value="#{caixaBean.caixa.numeroDePedidos}" />
+
 								<p:outputLabel value="Total: " styleClass="texto-info" />
-								<p:outputLabel value="" />
+								<p:outputLabel value="#{caixaBean.caixa.total}" />
 							</h:panelGrid>
 							<h4 class="page-header">
 								Faça o fechamento do caixa
-								<p:button value="Fechar caixa" style="float:right"
-									styleClass="btn btn-danger"></p:button>
+								<p:commandButton value="Fechar caixa" style="float:right"
+									styleClass="btn btn-danger" action="#{caixaBean.fecharCaixa}"
+									disabled="#{caixaBean.caixa.caixaAberto}" />
 							</h4>
 
 
@@ -78,15 +77,10 @@
 					<div class="col-lg-12 bg-primary centralizar">
 						<p:outputLabel value="Fundo de caixa:" styleClass="centralizar" />
 						<br />
-						<h:outputLabel value="R$ #{cadastroPedidoBean.troco}"
-							id="valorTroco" styleClass="texto-span moeda">
-							<!-- <f:convertNumber type="currency" locale="pt-BR" /> -->
-
-						</h:outputLabel>
-						<p:inputText id="money" label="money" styleClass="moeda">
+						<p:inputText id="money" label="money" styleClass="moeda"
+							value="#{caixaBean.caixa.fundoDeCaixa}">
 							<f:convertNumber minFractionDigits="2" maxFractionDigits="2"
 								locale="pt-BR" />
-
 						</p:inputText>
 
 					</div>
