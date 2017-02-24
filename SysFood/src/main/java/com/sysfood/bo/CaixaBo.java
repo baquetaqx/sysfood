@@ -1,6 +1,7 @@
 package com.sysfood.bo;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.inject.Inject;
 
@@ -41,6 +42,10 @@ public class CaixaBo {
 
 		return caixaDao.guardar(caixa);
 
+	}
+
+	public Caixa recuperarCaixa(Date date) {
+		return caixaDao.porData(date);
 	}
 
 }

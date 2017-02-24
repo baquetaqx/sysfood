@@ -23,13 +23,9 @@ public class CaixaBean implements Serializable {
 	@Inject
 	private CaixaBo caixaBo;
 
-	public CaixaBean() {
-		caixa = new Caixa();
-	}
-
 	public void abrirCaixa() {
 		try {
-			caixa.setDataDeAbertura(new Date());
+			getCaixa().setDataDeAbertura(new Date());
 			caixa.setCaixaAberto(true);
 			caixa = caixaBo.salvar(caixa);
 
@@ -42,10 +38,15 @@ public class CaixaBean implements Serializable {
 
 	public void fecharCaixa() {
 		caixa = caixaBo.fecharCaixa(caixa);
+		FacesUtil.addInfoMessage("Caixa fechado com sucesso!");
+	}
+
+	public void recuperarCaixa() {
+		caixa = caixaBo.recuperarCaixa(new Date());
 	}
 
 	public Caixa getCaixa() {
-		return caixa;
+		return caixa == null ? new Caixa() : caixa;
 	}
 
 	public void setCaixa(Caixa caixa) {
