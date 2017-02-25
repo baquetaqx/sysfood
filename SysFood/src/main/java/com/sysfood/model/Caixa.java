@@ -11,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Type;
 
@@ -50,8 +49,7 @@ public class Caixa implements Serializable {
 		this.dataDeAbertura = dataDeAbertura;
 	}
 
-	@NotNull
-	@Column(name = "fundo_de_caixa", nullable = false, precision = 10, scale = 2)
+	@Column(name = "fundo_de_caixa", precision = 10, scale = 2)
 	public BigDecimal getFundoDeCaixa() {
 		return fundoDeCaixa;
 	}
@@ -60,8 +58,7 @@ public class Caixa implements Serializable {
 		this.fundoDeCaixa = fundoDeCaixa;
 	}
 
-	@NotNull
-	@Column(nullable = false, precision = 10, scale = 2)
+	@Column(precision = 10, scale = 2)
 	public BigDecimal getDebito() {
 		return debito;
 	}
@@ -70,8 +67,7 @@ public class Caixa implements Serializable {
 		this.debito = debito;
 	}
 
-	@NotNull
-	@Column(nullable = false, precision = 10, scale = 2)
+	@Column(precision = 10, scale = 2)
 	public BigDecimal getCredito() {
 		return credito;
 	}
@@ -80,8 +76,7 @@ public class Caixa implements Serializable {
 		this.credito = credito;
 	}
 
-	@NotNull
-	@Column(nullable = false, precision = 10, scale = 2)
+	@Column(precision = 10, scale = 2)
 	public BigDecimal getDinheiro() {
 		return dinheiro;
 	}
@@ -90,8 +85,7 @@ public class Caixa implements Serializable {
 		this.dinheiro = dinheiro;
 	}
 
-	@NotNull
-	@Column(name = "numero_de_pedidos", nullable = false, length = 3)
+	@Column(name = "numero_de_pedidos", length = 3)
 	public Integer getNumeroDePedidos() {
 		return numeroDePedidos;
 	}
@@ -100,8 +94,7 @@ public class Caixa implements Serializable {
 		this.numeroDePedidos = numeroDePedidos;
 	}
 
-	@NotNull
-	@Column(nullable = false, precision = 10, scale = 2)
+	@Column(precision = 10, scale = 2)
 	public BigDecimal getTotal() {
 		return total;
 	}

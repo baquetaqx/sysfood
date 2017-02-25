@@ -19,21 +19,17 @@ public class CaixaBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Caixa caixa;
-	
+
 	@Inject
 	private CaixaBo caixaBo;
-	
-	public CaixaBean() {
-		limpar();
-	}
 
-	private void limpar() {
-		caixa = new Caixa();
+	public CaixaBean() {
+		setCaixa(getCaixa());
 	}
 
 	public void abrirCaixa() {
 		try {
-			getCaixa().setDataDeAbertura(new Date());
+			caixa.setDataDeAbertura(new Date());
 			caixa.setCaixaAberto(true);
 			caixa = caixaBo.salvar(caixa);
 
@@ -51,6 +47,7 @@ public class CaixaBean implements Serializable {
 
 	public void recuperarCaixa() {
 		caixa = caixaBo.recuperarCaixa(new Date());
+		setCaixa(getCaixa());
 	}
 
 	public Caixa getCaixa() {
