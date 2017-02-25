@@ -14,6 +14,7 @@ import javax.persistence.criteria.Root;
 
 import com.sysfood.model.Caixa;
 import com.sysfood.model.Pedido;
+import com.sysfood.model.Produto;
 import com.sysfood.model.TipoPagamento;
 
 public class CaixaDao implements Serializable {
@@ -95,6 +96,10 @@ public class CaixaDao implements Serializable {
 
 		TypedQuery<Long> query = manager.createQuery(criteriaQuery);
 		return query.getSingleResult();
+	}
+
+	public Caixa porId(Long id) {
+		return manager.find(Caixa.class, id);
 	}
 
 }

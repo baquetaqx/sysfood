@@ -28,6 +28,9 @@ public class CaixaBean implements Serializable {
 	}
 
 	public void abrirCaixa() {
+		if (caixa.getId() != null) {
+			limpar();
+		}
 		try {
 			caixa.setDataDeAbertura(new Date());
 			caixa.setCaixaAberto(true);
@@ -35,12 +38,18 @@ public class CaixaBean implements Serializable {
 
 			FacesUtil.addInfoMessage("Caixa aberto com sucesso!");
 		} catch (NegocioException e) {
+			limpar();
 			FacesUtil.addErrorMessage(e.getMessage());
 
 		}
 	}
 
+	private void limpar() {
+		caixa = new Caixa();
+	}
+
 	public void fecharCaixa() {
+		caixa.setCaixaAberto(false);
 		caixa = caixaBo.fecharCaixa(caixa);
 		FacesUtil.addInfoMessage("Caixa fechado com sucesso!");
 	}

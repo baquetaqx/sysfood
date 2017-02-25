@@ -41,7 +41,6 @@
 								<p:outputLabel value="Fundo de Caixa: " styleClass="texto-info" />
 								<p:outputLabel value="#{caixaBean.caixa.fundoDeCaixa}" />
 
-
 								<p:outputLabel value="Débito: " styleClass="texto-info" />
 								<p:outputLabel value="#{caixaBean.caixa.debito}" />
 
@@ -62,7 +61,7 @@
 								Faça o fechamento do caixa
 								<p:commandButton value="Fechar caixa" style="float:right"
 									styleClass="btn btn-danger" action="#{caixaBean.fecharCaixa}"
-									disabled="#{!caixaBean.caixa.caixaAberto}" />
+									disabled="#{!caixaBean.caixa.caixaAberto}" update="@form" />
 							</h4>
 
 
@@ -80,7 +79,7 @@
 						<p:outputLabel value="Fundo de caixa:" styleClass="centralizar" />
 						<br />
 						<p:inputText id="money" label="money" styleClass="moeda"
-							value="#{caixaBean.caixa.fundoDeCaixa}" >
+							value="#{caixaBean.caixa.fundoDeCaixa}">
 							<f:convertNumber minFractionDigits="2" maxFractionDigits="2"
 								locale="pt-BR" />
 						</p:inputText>

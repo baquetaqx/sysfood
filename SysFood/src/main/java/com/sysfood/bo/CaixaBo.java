@@ -22,13 +22,16 @@ public class CaixaBo implements Serializable {
 	public Caixa salvar(Caixa caixa) throws NegocioException {
 		Caixa caixaExistente = caixaDao.porData(caixa.getDataDeAbertura());
 
-		if (caixaExistente != null && caixaExistente.equals(caixa)) {
+		if (caixaExistente != null) {
 			throw new NegocioException("Caixa já foi aberto hoje!");
 		}
 		return caixaDao.guardar(caixa);
 	}
 
-	public Caixa fecharCaixa(Caixa caixa) {
+	@Transactional
+	public Caixa fecharCaixa(Caixa c) {
+		Caixa caixa = caixaDao.porId(c.getId());
+
 		BigDecimal debito = caixaDao.calcularDebito(caixa);
 		BigDecimal credito = caixaDao.calcularCredito(caixa);
 		BigDecimal dinheiro = caixaDao.calcularDinheiro(caixa);
@@ -37,7 +40,7 @@ public class CaixaBo implements Serializable {
 		total.add(debito).add(credito).add(dinheiro);
 
 		caixa.setDebito(debito);
-		caixa.setDebito(debito);
+		caixa.setCredito(credito);
 		caixa.setDinheiro(dinheiro);
 		caixa.setNumeroDePedidos(quantidadePedidos);
 		caixa.setTotal(total);
