@@ -37,25 +37,37 @@
 							<h:panelGrid columns="2">
 								<p:outputLabel value="Data de abertura: "
 									styleClass="texto-info" />
-								<p:outputLabel value="#{caixaBean.caixa.dataDeAbertura}" />
+								<p:outputLabel value="#{caixaBean.caixa.dataDeAbertura}">
+									<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
+								</p:outputLabel>
 								<p:outputLabel value="Fundo de Caixa: " styleClass="texto-info" />
-								<p:outputLabel value="#{caixaBean.caixa.fundoDeCaixa}" />
+								<p:outputLabel value="#{caixaBean.caixa.fundoDeCaixa}">
+									<f:convertNumber type="currency" locale="pt_BR" />
+								</p:outputLabel>
 
 								<p:outputLabel value="Débito: " styleClass="texto-info" />
-								<p:outputLabel value="#{caixaBean.caixa.debito}" />
+								<p:outputLabel value="#{caixaBean.caixa.debito}">
+									<f:convertNumber type="currency" locale="pt_BR" />
+								</p:outputLabel>
 
 								<p:outputLabel value="Crédito: " styleClass="texto-info" />
-								<p:outputLabel value="#{caixaBean.caixa.credito}" />
+								<p:outputLabel value="#{caixaBean.caixa.credito}">
+									<f:convertNumber type="currency" locale="pt_BR" />
+								</p:outputLabel>
 
 								<p:outputLabel value="Dinheiro: " styleClass="texto-info" />
-								<p:outputLabel value="#{caixaBean.caixa.dinheiro}" />
+								<p:outputLabel value="#{caixaBean.caixa.dinheiro}">
+									<f:convertNumber type="currency" locale="pt_BR" />
+								</p:outputLabel>
 
 								<p:outputLabel value="Número de pedidos: "
 									styleClass="texto-info" />
 								<p:outputLabel value="#{caixaBean.caixa.numeroDePedidos}" />
 
 								<p:outputLabel value="Total: " styleClass="texto-info" />
-								<p:outputLabel value="#{caixaBean.caixa.total}" />
+								<p:outputLabel value="#{caixaBean.caixa.total}">
+									<f:convertNumber type="currency" locale="pt_BR" />
+								</p:outputLabel>
 							</h:panelGrid>
 							<h4 class="page-header">
 								Faça o fechamento do caixa

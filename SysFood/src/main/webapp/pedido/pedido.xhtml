@@ -63,7 +63,7 @@
 								</p:column>
 								<p:column headerText="Valor Unitário" width="120">
 									<h:outputLabel value="#{produto.preco}">
-										<f:convertNumber type="currency" locale="pt-BR" />
+										<f:convertNumber type="currency" locale="pt_BR" />
 									</h:outputLabel>
 								</p:column>
 								<p:column headerText="Etq" width="50">
@@ -113,13 +113,13 @@
 								<p:column headerText="Preco" width="80">
 									<p:outputLabel value="#{item.produto.preco}"
 										styleClass="text-money">
-										<f:convertNumber type="currency" locale="pt-BR" />
+										<f:convertNumber type="currency" locale="pt_BR" />
 									</p:outputLabel>
 								</p:column>
 								<p:column headerText="Pco Total" width="90">
 									<p:outputLabel value="#{item.valorTotal}" id="pcoTotal"
 										styleClass="text-money">
-										<f:convertNumber type="currency" locale="pt-BR" />
+										<f:convertNumber type="currency" locale="pt_BR" />
 									</p:outputLabel>
 								</p:column>
 								<p:column headerText="Rmv" width="50" style="text-align: center">
@@ -137,7 +137,7 @@
 								<p:outputLabel id="valorTotalPedido"
 									value="Valor Total R$: #{cadastroPedidoBean.pedido.valorTotal}"
 									style="float:right">
-									<f:convertNumber locale="pt-BR" type="currency" />
+									<f:convertNumber locale="pt_BR" type="currency" />
 								</p:outputLabel>
 							</h:panelGrid>
 
@@ -176,7 +176,7 @@
 									<br />
 									<h:outputLabel value="R$ #{cadastroPedidoBean.troco}"
 										id="valorTroco" styleClass="texto-span moeda">
-										<f:convertNumber pattern="#,##0.00" />
+										<f:convertNumber type="currency" locale="pt_BR" />
 									</h:outputLabel>
 								</div>
 							</h:panelGroup>
@@ -187,7 +187,7 @@
 								<br />
 								<p:outputLabel value="#{cadastroPedidoBean.pedido.valorTotal}"
 									styleClass="texto-span" id="valorTotalPedidoDlg">
-									<f:convertNumber type="currency" locale="pt-BR" />
+									<f:convertNumber type="currency" locale="pt_BR" />
 								</p:outputLabel>
 							</div>
 
@@ -203,7 +203,7 @@
 										<p:inputText id="money" label="money" styleClass="moeda"
 											value="#{cadastroPedidoBean.valorPago}">
 											<f:convertNumber minFractionDigits="2" maxFractionDigits="2"
-												locale="pt-BR" />
+												locale="pt_BR" />
 											<p:ajax event="keyup" process="@this"
 												listener="#{cadastroPedidoBean.calcularTroco}"
 												update="formPedido:valorTroco" />
