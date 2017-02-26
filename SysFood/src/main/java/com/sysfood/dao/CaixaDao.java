@@ -2,6 +2,7 @@ package com.sysfood.dao;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.inject.Inject;
@@ -10,11 +11,11 @@ import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
 import com.sysfood.model.Caixa;
 import com.sysfood.model.Pedido;
-import com.sysfood.model.Produto;
 import com.sysfood.model.TipoPagamento;
 
 public class CaixaDao implements Serializable {
@@ -45,10 +46,22 @@ public class CaixaDao implements Serializable {
 		Root<Pedido> pedido = criteriaQuery.from(Pedido.class);
 		criteriaQuery.select(builder.sum(pedido.get("valorTotal")));
 
+		ParameterExpression<Date> dataInicial = builder.parameter(Date.class, "dataInicial");
+		ParameterExpression<Date> dataFinal = builder.parameter(Date.class, "dataFinal");
+
 		criteriaQuery.where(builder.and(builder.equal(pedido.get("tipoPagamento"), TipoPagamento.CARTAO_DEBITO),
-				builder.equal(pedido.get("dataPedido"), caixaDebito.getDataDeAbertura())));
+				builder.between(pedido.get("dataPedido"), dataInicial, dataFinal)));
 
 		TypedQuery<BigDecimal> query = manager.createQuery(criteriaQuery);
+
+		Calendar dataIni = Calendar.getInstance();
+		dataIni.setTime(caixaDebito.getDataDeAbertura());
+		Calendar dataFin = Calendar.getInstance();
+		dataFin.setTime(caixaDebito.getDataDeAbertura());
+		dataFin.set(Calendar.DATE, dataFin.get(Calendar.DATE) + 1);
+
+		query.setParameter("dataInicial", dataIni.getTime());
+		query.setParameter("dataFinal", dataFin.getTime());
 
 		return query.getSingleResult() == null ? BigDecimal.ZERO : query.getSingleResult();
 	}
@@ -61,10 +74,23 @@ public class CaixaDao implements Serializable {
 		Root<Pedido> pedido = criteriaQuery.from(Pedido.class);
 		criteriaQuery.select(builder.sum(pedido.get("valorTotal")));
 
+		ParameterExpression<Date> dataInicial = builder.parameter(Date.class, "dataInicial");
+		ParameterExpression<Date> dataFinal = builder.parameter(Date.class, "dataFinal");
+
 		criteriaQuery.where(builder.and(builder.equal(pedido.get("tipoPagamento"), TipoPagamento.CARTAO_CREDITO),
-				builder.equal(pedido.get("dataPedido"), caixaCredito.getDataDeAbertura())));
+				builder.between(pedido.get("dataPedido"), dataInicial, dataFinal)));
 
 		TypedQuery<BigDecimal> query = manager.createQuery(criteriaQuery);
+
+		Calendar dataIni = Calendar.getInstance();
+		dataIni.setTime(caixaCredito.getDataDeAbertura());
+		Calendar dataFin = Calendar.getInstance();
+		dataFin.setTime(caixaCredito.getDataDeAbertura());
+		dataFin.set(Calendar.DATE, dataFin.get(Calendar.DATE) + 1);
+
+		query.setParameter("dataInicial", dataIni.getTime());
+		query.setParameter("dataFinal", dataFin.getTime());
+
 		return query.getSingleResult() == null ? BigDecimal.ZERO : query.getSingleResult();
 	}
 
@@ -76,10 +102,23 @@ public class CaixaDao implements Serializable {
 		Root<Pedido> pedido = criteriaQuery.from(Pedido.class);
 		criteriaQuery.select(builder.sum(pedido.get("valorTotal")));
 
+		ParameterExpression<Date> dataInicial = builder.parameter(Date.class, "dataInicial");
+		ParameterExpression<Date> dataFinal = builder.parameter(Date.class, "dataFinal");
+
 		criteriaQuery.where(builder.and(builder.equal(pedido.get("tipoPagamento"), TipoPagamento.DINHEIRO),
-				builder.equal(pedido.get("dataPedido"), caixaDinheiro.getDataDeAbertura())));
+				builder.between(pedido.get("dataPedido"), dataInicial, dataFinal)));
 
 		TypedQuery<BigDecimal> query = manager.createQuery(criteriaQuery);
+
+		Calendar dataIni = Calendar.getInstance();
+		dataIni.setTime(caixaDinheiro.getDataDeAbertura());
+		Calendar dataFin = Calendar.getInstance();
+		dataFin.setTime(caixaDinheiro.getDataDeAbertura());
+		dataFin.set(Calendar.DATE, dataFin.get(Calendar.DATE) + 1);
+
+		query.setParameter("dataInicial", dataIni.getTime());
+		query.setParameter("dataFinal", dataFin.getTime());
+
 		return query.getSingleResult() == null ? BigDecimal.ZERO : query.getSingleResult();
 	}
 
