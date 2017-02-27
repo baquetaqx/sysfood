@@ -131,9 +131,22 @@ public class CaixaDao implements Serializable {
 		Root<Pedido> pedido = criteriaQuery.from(Pedido.class);
 		criteriaQuery.multiselect(builder.count(pedido));
 
-		criteriaQuery.where(builder.equal(pedido.get("dataPedido"), caixaQuantidade.getDataDeAbertura()));
+		ParameterExpression<Date> dataInicial = builder.parameter(Date.class, "dataInicial");
+		ParameterExpression<Date> dataFinal = builder.parameter(Date.class, "dataFinal");
+
+		criteriaQuery.where(builder.between(pedido.get("dataPedido"), dataInicial, dataFinal));
 
 		TypedQuery<Long> query = manager.createQuery(criteriaQuery);
+
+		Calendar dataIni = Calendar.getInstance();
+		dataIni.setTime(caixaQuantidade.getDataDeAbertura());
+		Calendar dataFin = Calendar.getInstance();
+		dataFin.setTime(caixaQuantidade.getDataDeAbertura());
+		dataFin.set(Calendar.DATE, dataFin.get(Calendar.DATE) + 1);
+
+		query.setParameter("dataInicial", dataIni.getTime());
+		query.setParameter("dataFinal", dataFin.getTime());
+
 		return query.getSingleResult();
 	}
 

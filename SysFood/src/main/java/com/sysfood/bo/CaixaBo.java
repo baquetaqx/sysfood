@@ -37,7 +37,7 @@ public class CaixaBo implements Serializable {
 		BigDecimal dinheiro = caixaDao.calcularDinheiro(caixa);
 		Integer quantidadePedidos = Integer.valueOf(caixaDao.calcularQuantidadePedidos(caixa).toString());
 		BigDecimal total = BigDecimal.ZERO;
-		total = total.add(debito).add(credito).add(dinheiro);
+		total = total.add(debito).add(credito).add(dinheiro).add(c.getFundoDeCaixa());
 
 		caixa.setDebito(debito);
 		caixa.setCredito(credito);
