@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -48,4 +49,16 @@ public class UsuarioDao implements Serializable {
 		TypedQuery<Usuario> query = manager.createQuery(criteriaQuery);
 		return query.getResultList();
 	}
+
+	public Usuario porCPF(String cpf) {
+		Usuario usuario = null;
+		try {
+			usuario = this.manager.createQuery("from Usuario where cpf = :cpf", Usuario.class).setParameter("cpf", cpf)
+					.getSingleResult();
+		} catch (NoResultException e) {
+			// nenhum usuário encontrado com o cpf informado
+		}
+		return usuario;
+	}
+
 }

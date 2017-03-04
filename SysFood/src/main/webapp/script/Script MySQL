@@ -1,0 +1,44 @@
+-- Script MySQL --
+-- Criando um Usuário     --
+
+-- Copie o script abaixo e cole no seu MySQL 
+-- para criar um usuario Administrador--
+--______________________________________________________________________________--
+
+CREATE SCHEMA `sys_food` ;
+
+use sys_food
+
+CREATE TABLE `usuario` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `cpf` varchar(14) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `endereco` varchar(255) DEFAULT NULL,
+  `nome` varchar(80) NOT NULL,
+  `perfil_usuario` varchar(13) NOT NULL,
+  `senha` varchar(30) NOT NULL,
+  `telefone` varchar(15) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UK_898atepo5gx8dqj60c07k766b` (`cpf`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+INSERT INTO `sys_food`.`usuario`
+(`cpf`,
+`email`,
+`endereco`,
+`nome`,
+`perfil_usuario`,
+`senha`,
+`telefone`)
+VALUES
+('448.484.101-00',
+'teste@gmail.com',
+'Rua X e Y',
+'Administrador',
+'ADMINISTRADOR',
+'123',
+'(99)9 9999-9999');
+
+-- ________________________________________________________________________________
+ 

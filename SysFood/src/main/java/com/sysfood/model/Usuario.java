@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -46,7 +47,7 @@ public class Usuario {
 	}
 
 	@CPF
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, unique = true, length = 14)
 	public String getCpf() {
 		return cpf;
 	}
@@ -56,7 +57,7 @@ public class Usuario {
 	}
 
 	@NotNull(message = "Numero do telefone é obrigatório")
-	@Column
+	@Column(length = 15)
 	public String getTelefone() {
 		return telefone;
 	}
@@ -75,7 +76,7 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	@Column
+	@Email
 	public String getEmail() {
 		return email;
 	}
@@ -84,7 +85,6 @@ public class Usuario {
 		this.email = email;
 	}
 
-	@Column
 	public String getEndereco() {
 		return endereco;
 	}
@@ -92,8 +92,9 @@ public class Usuario {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-	
+
 	@Enumerated(EnumType.STRING)
+	@Column(name = "perfil_usuario", nullable = false, length = 13)
 	public PerfilUsuario getPerfilUsuario() {
 		return perfilUsuario;
 	}
