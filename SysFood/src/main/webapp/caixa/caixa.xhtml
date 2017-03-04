@@ -77,12 +77,56 @@
 							</h4>
 
 
+							<!-- COMEÇO DA DIV PARA PESQUISAR POR DADA -->
+
+							<br /> <br /> <br />
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title">
+										<i class="fa fa-fw fa-money"></i> Pesquisar Controle de Caixa
+									</h3>
+								</div>
+								<br /> Data para pesquisar:
+								<p:calendar id="popup" />
+
+								<p:commandButton value="Pesquisar"
+									action="#{pesquisaUsuarioBean.pesquisar}"
+									update="tabelaProduto" icon="fa fa-search"
+									styleClass="btnSearch" />
+								<br /> <br />
+								<p:messages />
+								<p:dataTable paginator="true" rows="10"
+									emptyMessage="Nenhum produto encontrado"
+									paginatorPosition="bottom" id="tabelaProduto"
+									value="#{pesquisaUsuarioBean.usuariosFiltrados}" var="usuario"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="5,10,15">
+
+									<p:column headerText="Data de abertura" width="300">
+										<h:outputText value="#{usuario.nome}" />
+									</p:column>
+									<p:column headerText="Visualizar" width="100"
+										styleClass="centralizar">
+										<p:button icon="fa fa-bars" title="Editar"
+											outcome="/usuario/cad-usuario" styleClass="" onclick="PF('dlgCaixa').show();">
+											<f:param name="usuario" value="#{usuario.id}" />
+										</p:button>
+									</p:column>
+									<p:column headerText="Gerar Relatório" width="100"
+										styleClass="centralizar">
+										<p:button icon="fa fa-print" title="Editar"
+											outcome="/usuario/cad-usuario" styleClass="">
+											<f:param name="usuario" value="#{usuario.id}" />
+										</p:button>
+									</p:column>
+								</p:dataTable>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-2"></div>
 
-				<!-- INICIO DO DIALOGO -->
+				<!-- INICIO DO DIALOGO DE ABERTURA DE CAIXA -->
+				<div class="col-lg-2"></div>
 
 				<p:dialog header="Informe o valor que seu caixa está começando"
 					widgetVar="dlg" focus="money" modal="true" closable="true"
@@ -93,7 +137,7 @@
 						<p:inputText id="money" label="money" styleClass="moeda"
 							value="#{caixaBean.caixa.fundoDeCaixa}">
 							<f:convertNumber minFractionDigits="2" maxFractionDigits="2"
-								locale="pt-BR" />
+								locale="pt_BR" />
 						</p:inputText>
 
 					</div>
@@ -108,8 +152,44 @@
 					</f:facet>
 				</p:dialog>
 
-				<!-- FIM DO DIALOGO -->
+				<!-- FIM DO DIALOGO DE ABERTURA DE CAIXA -->
 
+				<!-- INICIO DO DIALOGO DE VISUALIZAR PESQUISA DE CAIXA -->
+
+				<p:dialog header="Caixa" widgetVar="dlgCaixa" focus="money"
+					modal="true" closable="true" resizable="false"
+					id="dialogVisualizarCaixa">
+					<div class="col-lg-12">
+						<h4 class="page-header">Dados do caixa!</h4>
+						<h:panelGrid columns="2">
+							<p:outputLabel value="Fundo de caixa:" />
+							<p:outputLabel>
+								<f:convertNumber type="currency" locale="pt_BR" />
+							</p:outputLabel>
+							<p:outputLabel value="Dinheiro: " />
+							<p:outputLabel>
+								<f:convertNumber type="currency" locale="pt_BR" />
+							</p:outputLabel>
+							<p:outputLabel value="Débito:" />
+							<p:outputLabel>
+								<f:convertNumber type="currency" locale="pt_BR" />
+							</p:outputLabel>
+							<p:outputLabel value="Crédito: " />
+							<p:outputLabel>
+								<f:convertNumber type="currency" locale="pt_BR" />
+							</p:outputLabel>
+							<p:outputLabel value="Número de pedidos:" />
+							<p:outputLabel value="" />
+							<p:outputLabel value="Total: " />
+							<p:outputLabel>
+								<f:convertNumber type="currency" locale="pt_BR" />
+							</p:outputLabel>
+						</h:panelGrid>
+					</div>
+
+				</p:dialog>
+
+				<!-- FIM DO DIALOGO DE VISUALIZAR PESQUISA DE CAIXA -->
 			</h:form>
 		</div>
 		<!-- /.row -->
