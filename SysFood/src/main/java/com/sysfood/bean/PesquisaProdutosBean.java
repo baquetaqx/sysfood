@@ -3,6 +3,7 @@ package com.sysfood.bean;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -30,6 +31,11 @@ public class PesquisaProdutosBean implements Serializable {
 	public PesquisaProdutosBean() {
 		filtro = new ProdutoFilter();
 		produto = new Produto();
+	}
+	
+	@PostConstruct
+	public void init(){
+		pesquisar();
 	}
 
 	public void pesquisar() {
