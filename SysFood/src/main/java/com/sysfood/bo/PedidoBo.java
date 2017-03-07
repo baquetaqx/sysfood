@@ -19,6 +19,9 @@ public class PedidoBo implements Serializable {
 
 	@Inject
 	private EstoqueBo estoqueBo;
+	
+	@Inject
+	private CumpomBo cumpomBo;
 
 	@Transactional
 	public Pedido salvar(Pedido pedido) throws NegocioException {
@@ -31,6 +34,9 @@ public class PedidoBo implements Serializable {
 		estoqueBo.baixarItensEstoque(pedido);
 
 		pedido = pedidoDao.guardar(pedido);
+		
+		cumpomBo.imprimirCupom(pedido);
+		
 		return pedido;
 	}
 

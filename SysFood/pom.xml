@@ -128,5 +128,13 @@
 			<scope>compile</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>mp2032_jna</groupId>
+			<artifactId>mp2032_jna</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${basedir}\src\main\webapp\WEB-INF\lib\mp2032_jna.jar</systemPath>
+		</dependency>
+
 	</dependencies>
 </project>
