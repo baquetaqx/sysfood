@@ -67,7 +67,7 @@ public class Usuario {
 	}
 
 	@NotNull(message = "Senha é obrigatório")
-	@Column(length = 30)
+	@Column(length = 64)
 	public String getSenha() {
 		return senha;
 	}
