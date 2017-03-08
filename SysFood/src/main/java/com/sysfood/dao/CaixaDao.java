@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -16,6 +17,7 @@ import javax.persistence.criteria.Root;
 
 import com.sysfood.model.Caixa;
 import com.sysfood.model.Pedido;
+import com.sysfood.model.Produto;
 import com.sysfood.model.TipoPagamento;
 
 public class CaixaDao implements Serializable {
@@ -39,87 +41,15 @@ public class CaixaDao implements Serializable {
 	}
 
 	public BigDecimal calcularDebito(Caixa caixaDebito) {
-		CriteriaBuilder builder = manager.getCriteriaBuilder();
-
-		CriteriaQuery<BigDecimal> criteriaQuery = builder.createQuery(BigDecimal.class);
-
-		Root<Pedido> pedido = criteriaQuery.from(Pedido.class);
-		criteriaQuery.select(builder.sum(pedido.get("valorTotal")));
-
-		ParameterExpression<Date> dataInicial = builder.parameter(Date.class, "dataInicial");
-		ParameterExpression<Date> dataFinal = builder.parameter(Date.class, "dataFinal");
-
-		criteriaQuery.where(builder.and(builder.equal(pedido.get("tipoPagamento"), TipoPagamento.CARTAO_DEBITO),
-				builder.between(pedido.get("dataPedido"), dataInicial, dataFinal)));
-
-		TypedQuery<BigDecimal> query = manager.createQuery(criteriaQuery);
-
-		Calendar dataIni = Calendar.getInstance();
-		dataIni.setTime(caixaDebito.getDataDeAbertura());
-		Calendar dataFin = Calendar.getInstance();
-		dataFin.setTime(caixaDebito.getDataDeAbertura());
-		dataFin.set(Calendar.DATE, dataFin.get(Calendar.DATE) + 1);
-
-		query.setParameter("dataInicial", dataIni.getTime());
-		query.setParameter("dataFinal", dataFin.getTime());
-
-		return query.getSingleResult() == null ? BigDecimal.ZERO : query.getSingleResult();
+		return calcular(caixaDebito, TipoPagamento.CARTAO_DEBITO);
 	}
 
 	public BigDecimal calcularCredito(Caixa caixaCredito) {
-		CriteriaBuilder builder = manager.getCriteriaBuilder();
-
-		CriteriaQuery<BigDecimal> criteriaQuery = builder.createQuery(BigDecimal.class);
-
-		Root<Pedido> pedido = criteriaQuery.from(Pedido.class);
-		criteriaQuery.select(builder.sum(pedido.get("valorTotal")));
-
-		ParameterExpression<Date> dataInicial = builder.parameter(Date.class, "dataInicial");
-		ParameterExpression<Date> dataFinal = builder.parameter(Date.class, "dataFinal");
-
-		criteriaQuery.where(builder.and(builder.equal(pedido.get("tipoPagamento"), TipoPagamento.CARTAO_CREDITO),
-				builder.between(pedido.get("dataPedido"), dataInicial, dataFinal)));
-
-		TypedQuery<BigDecimal> query = manager.createQuery(criteriaQuery);
-
-		Calendar dataIni = Calendar.getInstance();
-		dataIni.setTime(caixaCredito.getDataDeAbertura());
-		Calendar dataFin = Calendar.getInstance();
-		dataFin.setTime(caixaCredito.getDataDeAbertura());
-		dataFin.set(Calendar.DATE, dataFin.get(Calendar.DATE) + 1);
-
-		query.setParameter("dataInicial", dataIni.getTime());
-		query.setParameter("dataFinal", dataFin.getTime());
-
-		return query.getSingleResult() == null ? BigDecimal.ZERO : query.getSingleResult();
+		return calcular(caixaCredito, TipoPagamento.CARTAO_CREDITO);
 	}
 
 	public BigDecimal calcularDinheiro(Caixa caixaDinheiro) {
-		CriteriaBuilder builder = manager.getCriteriaBuilder();
-
-		CriteriaQuery<BigDecimal> criteriaQuery = builder.createQuery(BigDecimal.class);
-
-		Root<Pedido> pedido = criteriaQuery.from(Pedido.class);
-		criteriaQuery.select(builder.sum(pedido.get("valorTotal")));
-
-		ParameterExpression<Date> dataInicial = builder.parameter(Date.class, "dataInicial");
-		ParameterExpression<Date> dataFinal = builder.parameter(Date.class, "dataFinal");
-
-		criteriaQuery.where(builder.and(builder.equal(pedido.get("tipoPagamento"), TipoPagamento.DINHEIRO),
-				builder.between(pedido.get("dataPedido"), dataInicial, dataFinal)));
-
-		TypedQuery<BigDecimal> query = manager.createQuery(criteriaQuery);
-
-		Calendar dataIni = Calendar.getInstance();
-		dataIni.setTime(caixaDinheiro.getDataDeAbertura());
-		Calendar dataFin = Calendar.getInstance();
-		dataFin.setTime(caixaDinheiro.getDataDeAbertura());
-		dataFin.set(Calendar.DATE, dataFin.get(Calendar.DATE) + 1);
-
-		query.setParameter("dataInicial", dataIni.getTime());
-		query.setParameter("dataFinal", dataFin.getTime());
-
-		return query.getSingleResult() == null ? BigDecimal.ZERO : query.getSingleResult();
+		return calcular(caixaDinheiro, TipoPagamento.DINHEIRO);
 	}
 
 	// SELECT COUNTnome_coluna) FROM nome_tabela
@@ -141,8 +71,7 @@ public class CaixaDao implements Serializable {
 		Calendar dataIni = Calendar.getInstance();
 		dataIni.setTime(caixaQuantidade.getDataDeAbertura());
 		Calendar dataFin = Calendar.getInstance();
-		dataFin.setTime(caixaQuantidade.getDataDeAbertura());
-		dataFin.set(Calendar.DATE, dataFin.get(Calendar.DATE) + 1);
+		dataFin.setTime(new Date());
 
 		query.setParameter("dataInicial", dataIni.getTime());
 		query.setParameter("dataFinal", dataFin.getTime());
@@ -154,4 +83,47 @@ public class CaixaDao implements Serializable {
 		return manager.find(Caixa.class, id);
 	}
 
+	private BigDecimal calcular(Caixa caixa, TipoPagamento tipoPagamento) {
+		CriteriaBuilder builder = manager.getCriteriaBuilder();
+
+		CriteriaQuery<BigDecimal> criteriaQuery = builder.createQuery(BigDecimal.class);
+
+		Root<Pedido> pedido = criteriaQuery.from(Pedido.class);
+		criteriaQuery.select(builder.sum(pedido.get("valorTotal")));
+
+		ParameterExpression<Date> dataInicial = builder.parameter(Date.class, "dataInicial");
+		ParameterExpression<Date> dataFinal = builder.parameter(Date.class, "dataFinal");
+
+		criteriaQuery.where(builder.and(builder.equal(pedido.get("tipoPagamento"), tipoPagamento),
+				builder.between(pedido.get("dataPedido"), dataInicial, dataFinal)));
+
+		TypedQuery<BigDecimal> query = manager.createQuery(criteriaQuery);
+
+		Calendar dataIni = Calendar.getInstance();
+		dataIni.setTime(caixa.getDataDeAbertura());
+		Calendar dataFin = Calendar.getInstance();
+		dataFin.setTime(new Date());
+
+		query.setParameter("dataInicial", dataIni.getTime());
+		query.setParameter("dataFinal", dataFin.getTime());
+
+		return query.getSingleResult() == null ? BigDecimal.ZERO : query.getSingleResult();
+	}
+
+	public List<Caixa> filtrados(Date data) {
+		if (data != null) {
+			return manager.createQuery("from Caixa where dataDeAbertura = :dataDeAbertura", Caixa.class)
+					.setParameter("dataDeAbertura", data).getResultList();
+		}
+		return manager.createQuery("from Caixa", Caixa.class).getResultList();
+	}
+
+	public Produto porNome(String nome) {
+		try {
+			return manager.createQuery("from Produto where nome = :nome", Produto.class).setParameter("nome", nome)
+					.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
 }
