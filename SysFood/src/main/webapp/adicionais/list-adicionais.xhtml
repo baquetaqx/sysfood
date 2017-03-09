@@ -14,8 +14,9 @@
 		<ol class="breadcrumb">
 			<li class="active"><i class="fa fa-th-list"></i> Cadastre um
 				adicional</li>
-			<a href="cad-adicionais.xhtml"><i class="fa fa-arrow-circle-right"></i>
-				Clique Aqui <i class="fa fa-arrow-circle-left"></i></a>
+			<a href="cad-adicionais.xhtml"><i
+				class="fa fa-arrow-circle-right"></i> Clique Aqui <i
+				class="fa fa-arrow-circle-left"></i></a>
 		</ol>
 	</ui:define>
 	<ui:define name="conteudo">
@@ -42,9 +43,10 @@
 							<br />
 							<p:messages />
 							<p:dataTable paginator="true" rows="10"
-								emptyMessage="Nenhum produto encontrado"
+								emptyMessage="Nenhum adicional encontrado"
 								paginatorPosition="bottom" id="tabelaProduto"
-								value="#{pesquisaAdicionaisBean.adicionaisFiltrados}" var="adicionais"
+								value="#{pesquisaAdicionaisBean.adicionaisFiltrados}"
+								var="adicionais"
 								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 								rowsPerPageTemplate="5,10,15">
 								<p:column headerText="Status" width="100"
@@ -62,7 +64,8 @@
 												width="20" />
 										</h:panelGroup>
 										<f:setPropertyActionListener
-											target="#{pesquisaAdicionaisBean.adicionais}" value="#{adicionais}" />
+											target="#{pesquisaAdicionaisBean.adicionais}"
+											value="#{adicionais}" />
 										<f:setPropertyActionListener
 											target="#{pesquisaAdicionaisBean.adicionais.status}"
 											value="#{!adicionais.status}" />
@@ -71,10 +74,12 @@
 								<p:column headerText="Nome do adicional">
 									<h:outputText value="#{adicionais.nome}" />
 								</p:column>
-								
-								<p:column headerText="Editar" width="120" styleClass="centralizar">
+
+								<p:column headerText="Editar" width="120"
+									styleClass="centralizar">
 									<p:button icon="fa fa-pencil-square-o" title="Editar"
-										outcome="/adicionais/cad-adicionais" disabled="#{!adicionais.status}" styleClass="">
+										outcome="/adicionais/cad-adicionais"
+										disabled="#{!adicionais.status}" styleClass="">
 										<f:param name="adicionais" value="#{adicionais.id}" />
 									</p:button>
 								</p:column>

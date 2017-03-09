@@ -65,26 +65,26 @@
 									<f:convertNumber minFractionDigits="2" maxFractionDigits="2"
 										locale="pt-BR" />
 								</p:inputText>
-								
+
 								<h:panelGroup>
-								<script>
-									function configurarMoeda() {
-										$(".moeda").maskMoney({
-											decimal : ",",
-											thousands : ".",
-											allowZero : true
+									<script>
+										function configurarMoeda() {
+											$(".moeda").maskMoney({
+												decimal : ",",
+												thousands : ".",
+												allowZero : true
+											});
+										}
+										$(document).ready(function() {
+											configurarMoeda();
 										});
-									}
-									$(document).ready(function() {
-										configurarMoeda();
-									});
-								</script>
+									</script>
 									<br />
 									<br />
 								</h:panelGroup>
 
 								<h:panelGroup>
-									<h:outputLabel value="Secão" />
+									<h:outputLabel value="Seção" />
 									<h:outputLabel value=" *" styleClass="obrigatorio" />
 									<h:outputLabel value=":" />
 								</h:panelGroup>
