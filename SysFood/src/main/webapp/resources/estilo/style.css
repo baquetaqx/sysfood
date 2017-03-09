@@ -2,6 +2,7 @@
 
 .centralizar {
 	text-align: center !important;
+	margin:auto;
 	margin-bottom: 4px;
 }
 .text-money{

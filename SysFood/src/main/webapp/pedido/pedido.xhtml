@@ -16,18 +16,18 @@
 		</f:metadata>
 		<div class="row">
 			<h:form id="formPedido">
-				<div class="col-lg-6">
+
+				<div class="col-lg-12 centralizar">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h3 class="panel-title">
-								<i class="fa fa-reorder"></i> Produtos
+								<i class="fa fa-fw fa-cutlery"></i> Escolha os produtos do
+								pedido
 							</h3>
 						</div>
 						<div class="panel-body">
-
-							<p:messages id="mensagens" closable="true" />
-							<h:panelGrid columns="2" style="width:100%" id="gridProduto">
-							Nome do Cliente:
+							<h:panelGrid columns="2" width="500" style="margin:auto">
+						Nome do Cliente:
 							<h:panelGroup>
 									<p:inputText styleClass="form-control"
 										value="#{cadastroPedidoBean.pedido.cliente}"
@@ -36,53 +36,25 @@
 									<p:commandButton icon="fa fa-plus"
 										update=":formPedido:nomeCliente :formPedido:mensagens" />
 								</h:panelGroup>
-								<h:panelGroup>
-									<br />
-								Nome do Produto:
-								</h:panelGroup>
-
-								<h:panelGroup>
-									<br />
-									<p:inputText styleClass="form-control"
-										value="#{cadastroPedidoBean.produtoFilter.nome}"
-										style="display:inline-table;width:70%; margin-right:5px" />
-									<p:commandButton icon="fa fa-search"
-										update=":formPedido:tabelaProduto"
-										action="#{cadastroPedidoBean.pesquisarProduto}" />
-								</h:panelGroup>
 							</h:panelGrid>
 							<br />
-							<p:dataTable paginator="true" rows="10"
-								paginatorPosition="bottom" id="tabelaProduto"
-								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-								rowsPerPageTemplate="5,10,15"
-								value="#{cadastroPedidoBean.produtosFiltrados}" var="produto"
-								emptyMessage="Nenhum produto encontrado">
-								<p:column headerText="Nome do produto">
-									<h:outputLabel value="#{produto.nome}" />
-								</p:column>
-								<p:column headerText="Valor Unitário" width="120">
-									<h:outputLabel value="#{produto.preco}">
-										<f:convertNumber type="currency" locale="pt_BR" />
-									</h:outputLabel>
-								</p:column>
-								<p:column headerText="Etq" width="50">
-									<h:outputLabel value="#{produto.quantidadeEstoque}" />
-								</p:column>
-								<p:column headerText="Add" width="50">
-									<p:commandButton icon="fa fa-plus"
-										action="#{cadastroPedidoBean.adicionarItem}"
-										update=":formPedido:tabelaItens :formPedido:valorTotalPedido :formPedido:valorTotalPedidoDlg :formPedido:mensagens">
-										<f:setPropertyActionListener
-											target="#{cadastroPedidoBean.produto}" value="#{produto}" />
-									</p:commandButton>
-								</p:column>
+							<p:commandButton value="Produtos"
+								styleClass="btn btn-success btn-lg btn-salvar"
+								onclick="PF('dlgProduto').show();"
+								process="@this :formPedido:nomeCliente"
+								update=":formPedido:mensagens" icon="fa fa-fw fa-cutlery" />
 
-							</p:dataTable>
+							<p:commandButton value="Adicionais" icon="fa fa-cart-plus"
+								styleClass="btn btn-warning btn-lg btn-salvar"
+								onclick="PF('dlgAdicionais').show();"
+								process="@this :formPedido:nomeCliente"
+								update=":formPedido:mensagens" />
 						</div>
 					</div>
+
 				</div>
-				<div class="col-lg-6">
+				<div class="col-lg-2"></div>
+				<div class="col-lg-8">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h3 class="panel-title">
@@ -98,7 +70,10 @@
 								var="item" id="tabelaItens"
 								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 								emptyMessage="Nenhum produto selecionado">
-								<p:column headerText="Nome do produto" width="200">
+								<p:column width="15">
+									<p:rowToggler />
+								</p:column>
+								<p:column headerText="Nome do produto" width="190">
 									<p:outputLabel value="#{item.produto.nome}"
 										styleClass="text-money" />
 								</p:column>
@@ -110,26 +85,33 @@
 											update=":formPedido:tabelaItens :formPedido:valorTotalPedido :formPedido:valorTotalPedidoDlg" />
 									</p:inputText>
 								</p:column>
-								<p:column headerText="Preco" width="80">
+								<p:column headerText="Preco" width="60">
 									<p:outputLabel value="#{item.produto.preco}"
 										styleClass="text-money">
 										<f:convertNumber type="currency" locale="pt_BR" />
 									</p:outputLabel>
 								</p:column>
-								<p:column headerText="Pco Total" width="90">
+								<p:column headerText="Pco Total" width="70">
 									<p:outputLabel value="#{item.valorTotal}" id="pcoTotal"
 										styleClass="text-money">
 										<f:convertNumber type="currency" locale="pt_BR" />
 									</p:outputLabel>
 								</p:column>
-								<p:column headerText="Rmv" width="50" style="text-align: center">
+								<p:column headerText="Adicionais" width="80"
+									style="text-align: center">
+									<p:commandLink styleClass="fa fa-plus-circle"
+										action="#{cadastroPedidoBean.removerItem(item)}"
+										process="@this"
+										update=":formPedido:tabelaItens :formPedido:valorTotalPedido :formPedido:mensagens formPedido:valorTotalPedidoDlg" />
+								</p:column>
+								<p:column headerText="Rmv" width="40" style="text-align: center">
 									<p:commandLink styleClass="fa fa-remove"
 										action="#{cadastroPedidoBean.removerItem(item)}"
 										process="@this"
 										update=":formPedido:tabelaItens :formPedido:valorTotalPedido :formPedido:mensagens formPedido:valorTotalPedidoDlg" />
 								</p:column>
-							</p:dataTable>
 
+							</p:dataTable>
 
 							<hr class="zig" />
 							<hr class="zag" />
@@ -145,7 +127,7 @@
 						<br />
 						<div class="centralizar">
 							<p:commandButton value="Finalizar Pedido"
-								styleClass="btn btn-success btn-lg btn-salvar"
+								styleClass="btn btn-primary btn-lg btn-salvar"
 								onclick="PF('dlg').show();"
 								process="@this :formPedido:nomeCliente"
 								update=":formPedido:mensagens" />
@@ -155,6 +137,74 @@
 						</div>
 					</div>
 				</div>
+				<div class="col-lg-2"></div>
+
+				<p:dialog widgetVar="dlgProduto" resizable="false"
+					id="dialogProduto" closable="true" width="700" modal="true"
+					header="Escolha os produtos">
+					<div class="col-lg-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									<i class="fa fa-reorder"></i> Produtos
+								</h3>
+							</div>
+							<div class="panel-body">
+
+								<p:messages id="mensagens" closable="true" />
+								<h:panelGrid columns="2" style="width:100%" id="gridProduto">
+
+									<h:panelGroup>
+										<br />
+								Nome do Produto:
+								</h:panelGroup>
+
+									<h:panelGroup>
+										<br />
+										<p:inputText styleClass="form-control"
+											value="#{cadastroPedidoBean.produtoFilter.nome}"
+											style="display:inline-table;width:70%; margin-right:5px" />
+										<p:commandButton icon="fa fa-search"
+											update=":formPedido:tabelaProduto"
+											action="#{cadastroPedidoBean.pesquisarProduto}" />
+									</h:panelGroup>
+								</h:panelGrid>
+								<br />
+								<p:dataTable paginator="true" rows="10"
+									paginatorPosition="bottom" id="tabelaProduto"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="5,10,15"
+									value="#{cadastroPedidoBean.produtosFiltrados}" var="produto"
+									emptyMessage="Nenhum produto encontrado">
+									<p:column headerText="Nome do produto">
+										<h:outputLabel value="#{produto.nome}" />
+									</p:column>
+									<p:column headerText="Valor Unitário" width="120">
+										<h:outputLabel value="#{produto.preco}">
+											<f:convertNumber type="currency" locale="pt_BR" />
+										</h:outputLabel>
+									</p:column>
+									<p:column headerText="Etq" width="50">
+										<h:outputLabel value="#{produto.quantidadeEstoque}" />
+									</p:column>
+									<p:column headerText="Add" width="50">
+										<p:commandButton icon="fa fa-plus"
+											action="#{cadastroPedidoBean.adicionarItem}"
+											update=":formPedido:tabelaItens :formPedido:valorTotalPedido :formPedido:valorTotalPedidoDlg :formPedido:mensagens">
+											<f:setPropertyActionListener
+												target="#{cadastroPedidoBean.produto}" value="#{produto}" />
+										</p:commandButton>
+									</p:column>
+
+								</p:dataTable>
+							</div>
+						</div>
+					</div>
+
+					<p:commandButton value="Concluir produtos"
+						onclick="PF('dlgProduto').hide()" update="@form"
+						styleClass="btn btn-success btn-lg btn-salvar" />
+				</p:dialog>
 				<p:dialog header="Realizando o pagamento da venda" widgetVar="dlg"
 					focus="money" modal="true" closable="true" resizable="false"
 					id="dialogFinalizandoPedido">
