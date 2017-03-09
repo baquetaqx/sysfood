@@ -3,6 +3,7 @@ package com.sysfood.bo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -37,7 +38,7 @@ public class CaixaBo implements Serializable {
 		BigDecimal dinheiro = caixaDao.calcularDinheiro(caixa);
 		Integer quantidadePedidos = Integer.valueOf(caixaDao.calcularQuantidadePedidos(caixa).toString());
 		BigDecimal total = BigDecimal.ZERO;
-		total = total.add(debito).add(credito).add(dinheiro).add(c.getFundoDeCaixa());
+		total = total.add(debito).add(credito).add(dinheiro);
 
 		caixa.setDebito(debito);
 		caixa.setCredito(credito);
@@ -52,6 +53,10 @@ public class CaixaBo implements Serializable {
 
 	public Caixa recuperarCaixa(Date date) {
 		return caixaDao.porData(date);
+	}
+
+	public List<Caixa> filtrados(Date data) {
+		return caixaDao.filtrados(data);
 	}
 
 }

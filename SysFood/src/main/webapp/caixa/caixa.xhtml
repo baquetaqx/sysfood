@@ -16,7 +16,7 @@
 			<f:viewAction action="#{caixaBean.recuperarCaixa}" />
 		</f:metadata>
 		<div class="row">
-			<h:form id="formPedido">
+			<h:form id="formCaixa">
 				<div class="col-lg-2"></div>
 				<div class="col-lg-8">
 					<div class="panel panel-default">
@@ -87,37 +87,36 @@
 									</h3>
 								</div>
 								<br /> Data para pesquisar:
-								<p:calendar id="popup" />
+								<p:calendar id="popup" value="#{caixaBean.data}" size="10"
+									pattern="dd/MM/yyyy" />
 
 								<p:commandButton value="Pesquisar"
-									action="#{pesquisaUsuarioBean.pesquisar}"
-									update="tabelaProduto" icon="fa fa-search"
-									styleClass="btnSearch" />
+									action="#{caixaBean.pesquisar}" update="tabelaCaixa"
+									icon="fa fa-search" styleClass="btnSearch" />
 								<br /> <br />
-								
+
 								<p:dataTable paginator="true" rows="10"
-									emptyMessage="Nenhum produto encontrado"
-									paginatorPosition="bottom" id="tabelaProduto"
-									value="#{pesquisaUsuarioBean.usuariosFiltrados}" var="usuario"
+									emptyMessage="Nenhum caixa encontrado"
+									paginatorPosition="bottom" id="tabelaCaixa"
+									value="#{caixaBean.caixaFiltrados}" var="caixa"
 									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 									rowsPerPageTemplate="5,10,15">
 
 									<p:column headerText="Data de abertura" width="300">
-										<h:outputText value="#{usuario.nome}" />
+										<h:outputText value="#{caixa.dataDeAbertura}" />
 									</p:column>
 									<p:column headerText="Visualizar" width="100"
 										styleClass="centralizar">
-										<p:button icon="fa fa-bars" title="Editar"
-											outcome="/usuario/cad-usuario" styleClass="" onclick="PF('dlgCaixa').show();">
-											<f:param name="usuario" value="#{usuario.id}" />
-										</p:button>
+										<p:commandButton icon="fa fa-bars" title="Editar"
+											oncomplete="PF('dlgCaixa').show();"
+											update=":formCaixa:dialogVisualizarCaixa">
+											<f:setPropertyActionListener
+												target="#{caixaBean.caixaDialogo}" value="#{caixa}" />
+										</p:commandButton>
 									</p:column>
 									<p:column headerText="Gerar Relatório" width="100"
 										styleClass="centralizar">
-										<p:button icon="fa fa-print" title="Editar"
-											outcome="/usuario/cad-usuario" styleClass="">
-											<f:param name="usuario" value="#{usuario.id}" />
-										</p:button>
+										<p:button icon="fa fa-print" title="Editar" />
 									</p:column>
 								</p:dataTable>
 							</div>
@@ -163,32 +162,31 @@
 						<h4 class="page-header">Dados do caixa!</h4>
 						<h:panelGrid columns="2">
 							<p:outputLabel value="Fundo de caixa:" />
-							<p:outputLabel>
+							<p:outputLabel value="#{caixaBean.caixaDialogo.fundoDeCaixa}">
 								<f:convertNumber type="currency" locale="pt_BR" />
 							</p:outputLabel>
 							<p:outputLabel value="Dinheiro: " />
-							<p:outputLabel>
+							<p:outputLabel value="#{caixaBean.caixaDialogo.dinheiro}">
 								<f:convertNumber type="currency" locale="pt_BR" />
 							</p:outputLabel>
 							<p:outputLabel value="Débito:" />
-							<p:outputLabel>
+							<p:outputLabel value="#{caixaBean.caixaDialogo.debito}">
 								<f:convertNumber type="currency" locale="pt_BR" />
 							</p:outputLabel>
 							<p:outputLabel value="Crédito: " />
-							<p:outputLabel>
+							<p:outputLabel value="#{caixaBean.caixaDialogo.credito}">
 								<f:convertNumber type="currency" locale="pt_BR" />
 							</p:outputLabel>
 							<p:outputLabel value="Número de pedidos:" />
-							<p:outputLabel value="" />
+							<p:outputLabel value="#{caixaBean.caixaDialogo.numeroDePedidos}" />
 							<p:outputLabel value="Total: " />
-							<p:outputLabel>
+							<p:outputLabel value="#{caixaBean.caixaDialogo.total}">
 								<f:convertNumber type="currency" locale="pt_BR" />
 							</p:outputLabel>
 						</h:panelGrid>
 					</div>
 
 				</p:dialog>
-
 				<!-- FIM DO DIALOGO DE VISUALIZAR PESQUISA DE CAIXA -->
 			</h:form>
 		</div>

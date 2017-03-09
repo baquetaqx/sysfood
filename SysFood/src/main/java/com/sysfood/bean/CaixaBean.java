@@ -2,6 +2,7 @@ package com.sysfood.bean;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -19,6 +20,10 @@ public class CaixaBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Caixa caixa;
+	private Caixa caixaDialogo;
+	private Date data;
+
+	private List<Caixa> caixaFiltrados;
 
 	@Inject
 	private CaixaBo caixaBo;
@@ -59,12 +64,36 @@ public class CaixaBean implements Serializable {
 		setCaixa(getCaixa());
 	}
 
+	public void pesquisar() {
+		caixaFiltrados = caixaBo.filtrados(data);
+	}
+
 	public Caixa getCaixa() {
 		return caixa == null ? new Caixa() : caixa;
 	}
 
 	public void setCaixa(Caixa caixa) {
 		this.caixa = caixa;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	public List<Caixa> getCaixaFiltrados() {
+		return caixaFiltrados;
+	}
+
+	public Caixa getCaixaDialogo() {
+		return caixaDialogo;
+	}
+
+	public void setCaixaDialogo(Caixa caixaDialogo) {
+		this.caixaDialogo = caixaDialogo;
 	}
 
 }
