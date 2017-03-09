@@ -65,11 +65,42 @@
 									<f:convertNumber minFractionDigits="2" maxFractionDigits="2"
 										locale="pt-BR" />
 								</p:inputText>
+								
+								<h:panelGroup>
+								<script>
+									function configurarMoeda() {
+										$(".moeda").maskMoney({
+											decimal : ",",
+											thousands : ".",
+											allowZero : true
+										});
+									}
+									$(document).ready(function() {
+										configurarMoeda();
+									});
+								</script>
+									<br />
+									<br />
+								</h:panelGroup>
+
+								<h:panelGroup>
+									<h:outputLabel value="Secão" />
+									<h:outputLabel value=" *" styleClass="obrigatorio" />
+									<h:outputLabel value=":" />
+								</h:panelGroup>
+								<h:selectOneMenu id="secaoProduto"
+									value="#{cadastroProdutoBean.produto.secao}">
+									<f:selectItem itemLabel="Selecione a seção do Produto" />
+									<f:selectItems value="#{cadastroProdutoBean.secao}" var="secao"
+										itemLabel="#{secao.descricao}" itemValue="#{secao}" />
+								</h:selectOneMenu>
 
 								<h:panelGroup>
 									<br />
 									<br />
 								</h:panelGroup>
+
+
 								<h:panelGroup>
 									<h:outputLabel value="Quantidade" />
 									<h:outputLabel value=":" />

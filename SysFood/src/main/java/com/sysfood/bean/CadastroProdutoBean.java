@@ -9,6 +9,7 @@ import javax.inject.Named;
 import com.sysfood.bo.ProdutoBo;
 import com.sysfood.exception.NegocioException;
 import com.sysfood.model.Produto;
+import com.sysfood.model.SecaoProduto;
 import com.sysfood.util.jsf.FacesUtil;
 
 @Named
@@ -35,6 +36,10 @@ public class CadastroProdutoBean implements Serializable {
 		} catch (NegocioException e) {
 			FacesUtil.addErrorMessage(e.getMessage());
 		}
+	}
+	
+	public SecaoProduto[] getSecao(){
+		return SecaoProduto.values();
 	}
 
 	public boolean isEditando() {

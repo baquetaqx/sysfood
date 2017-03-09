@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,6 +32,7 @@ public class Produto implements Serializable {
 	private Integer quantidadeEstoque = 0;
 	private Boolean status = true;
 	private Boolean controlarEstoque = false;
+	private SecaoProduto secao;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -86,6 +89,16 @@ public class Produto implements Serializable {
 	@Column(name = "controlar_estoque")
 	public Boolean getControlarEstoque() {
 		return controlarEstoque;
+	}
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "secao_produto", nullable = false)
+	public SecaoProduto getSecao() {
+		return secao;
+	}
+
+	public void setSecao(SecaoProduto secao) {
+		this.secao = secao;
 	}
 
 	public void setControlarEstoque(Boolean controlarEstoque) {
