@@ -58,7 +58,6 @@
 									<br />
 								</h:panelGroup>
 
-
 								<h:panelGroup>
 
 									<h:outputLabel value="Nome do Funcionário"
@@ -127,7 +126,7 @@
 									<br />
 								</h:panelGroup>
 
-								<h:panelGroup>
+								<h:panelGroup rendered="#{usuarioBean.usuario.idNull}">
 									<p:outputLabel value="Senha " for="pwd1"
 										indicateRequired="false" />
 									<h:outputLabel value=" *" styleClass="obrigatorio" />
@@ -135,6 +134,7 @@
 								</h:panelGroup>
 								<p:password id="pwd1" value="#{usuarioBean.usuario.senha}"
 									match="pwd2" redisplay="true" feedback="true"
+									rendered="#{usuarioBean.usuario.idNull}"
 									validatorMessage="As senhas informadas são diferentes, digite novamente"
 									size="25" label="Senha" promptLabel="Digite a senha"
 									weakLabel="Senha fraca" goodLabel="Senha média"
@@ -145,13 +145,14 @@
 								<h:panelGroup>
 									<br />
 								</h:panelGroup>
-								<h:panelGroup>
+								<h:panelGroup rendered="#{usuarioBean.usuario.idNull}">
 									<h:outputLabel value="Confirmar senha" />
 									<h:outputLabel value=" *" styleClass="obrigatorio" />
 									<h:outputLabel value=":" />
 								</h:panelGroup>
 								<p:password id="pwd2" value="#{usuarioBean.usuario.senha}"
-									size="25" label="Confirmar Senha" required="true" />
+									size="25" label="Confirmar Senha" required="true"
+									rendered="#{usuarioBean.usuario.idNull}" />
 
 							</h:panelGrid>
 

@@ -30,4 +30,14 @@ public class UsuarioBo implements Serializable {
 		return usuarioDao.filtrados(filtro);
 	}
 
+	@Transactional
+	public Usuario alterarSenha(String cpf, String senhaAtual, String novaSenha) throws NegocioException {
+		Usuario usuario = usuarioDao.porCPF(cpf);
+		if (new BCryptPasswordEncoder().matches(senhaAtual, usuario.getSenha())) {
+			usuario.setSenha(new BCryptPasswordEncoder().encode(novaSenha));
+			return usuarioDao.guardar(usuario);
+		}
+		throw new NegocioException("Senha atual incorreta, tente novamente!");
+	}
+
 }

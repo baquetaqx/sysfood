@@ -6,12 +6,9 @@ import java.util.List;
 import javax.inject.Inject;
 
 import com.sysfood.dao.AdicionaisDao;
-import com.sysfood.dao.ProdutoDao;
 import com.sysfood.dao.filter.AdicionaisFiltro;
-import com.sysfood.dao.filter.ProdutoFilter;
 import com.sysfood.exception.NegocioException;
 import com.sysfood.model.Adicionais;
-import com.sysfood.model.Produto;
 import com.sysfood.util.jpa.Transactional;
 
 public class AdicionaisBO implements Serializable{

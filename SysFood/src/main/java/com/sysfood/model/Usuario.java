@@ -7,6 +7,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -101,6 +102,21 @@ public class Usuario {
 
 	public void setPerfilUsuario(PerfilUsuario perfilUsuario) {
 		this.perfilUsuario = perfilUsuario;
+	}
+
+	@Transient
+	public boolean isIdNull() {
+		return id == null;
+	}
+
+	@Transient
+	public boolean isAdm() {
+		return perfilUsuario == PerfilUsuario.ADMINISTRADOR;
+	}
+
+	@Transient
+	public boolean isNotAdm() {
+		return !isAdm();
 	}
 
 	@Override

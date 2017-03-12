@@ -56,6 +56,15 @@
 					<ul class="dropdown-menu">
 
 						<h:form onsubmit="action='#{request.contextPath}/logout';">
+							<h:panelGroup>
+								<p:commandLink id="lnkAlterarSenha" value="Alterar senha"
+									oncomplete="PF('dlgAlterarSenha').show();" immediate="true"
+									title="Alterar sua senha">
+									<f:setPropertyActionListener target="#{usuarioBean.usuario}"
+										value="#{seguranca.usuarioLogado.usuario}" />
+								</p:commandLink>
+							</h:panelGroup>
+
 							<li><p:commandLink ajax="false" title="Sair do sistema">
 									<i class="fa fa-fw fa-power-off"></i> Log Out 
 								</p:commandLink></li>
@@ -85,7 +94,7 @@
 							<li><p:link href="/produtos/list-produto.xhtml">Produtos</p:link></li>
 							<li><a href="/SysFood/usuario/list-usuario.xhtml">Usuarios</a></li>
 							<li><a href="/SysFood/adicionais/list-adicionais.xhtml">Adicionais</a></li>
-							
+
 
 						</ul></li>
 					<p:separator></p:separator>
@@ -113,6 +122,46 @@
 				<ui:insert name="conteudo" />
 			</div>
 		</div>
+
+		<h:form>
+			<p:dialog header="Alterar Senha" widgetVar="dlgAlterarSenha"
+				closeOnEscape="true" resizable="false" id="dlgAlterarSenha"
+				showEffect="clip" hideEffect="clip" modal="true" draggable="false"
+				width="300" height="230">
+				<h:panelGrid columns="1">
+					<h:panelGroup>
+						<h:outputLabel value="Senha atual" />
+						<h:outputText value=" * " style="color: red;" />
+					</h:panelGroup>
+					<p:password value="#{usuarioBean.senhaAtual}" size="31"
+						id="alterar-senha-antiga" maxlength="25" required="true"
+						requiredMessage="Campo Senha antiga obrigatório!" />
+					<h:panelGroup>
+						<h:outputLabel value="Nova senha" styleClass="myLabel" />
+						<h:outputText value=" * " style="color: red;" />
+					</h:panelGroup>
+					<p:password size="31" id="nova-senha"
+						value="#{usuarioBean.novaSenha}" maxlength="25" required="true"
+						requiredMessage="Campo Senha obrigatório!" match="confirmar-senha"
+						feedback="true" promptLabel="Digite sua senha"
+						weakLabel="Nível da senha: fraco" goodLabel="Nível da senha: bom"
+						strongLabel="Nível da senha: forte">
+					</p:password>
+					<h:panelGroup>
+						<h:outputText value="Confirmar senha" styleClass="myLabel" />
+						<h:outputText value=" * " style="color: red;" />
+					</h:panelGroup>
+					<p:password id="confirmar-senha" required="true"
+						requiredMessage="Campo confirmar senha obrigatório!" size="31" />
+					<br />
+					<p:commandButton id="btnAlterarSenha" value="Alterar" update="@all"
+						action="#{usuarioBean.alterarSenha}" icon="ui-icon-pencil"
+						ajax="false" />
+				</h:panelGrid>
+
+			</p:dialog>
+		</h:form>
+
 	</div>
 	<script>
 		function configurarMoeda() {
