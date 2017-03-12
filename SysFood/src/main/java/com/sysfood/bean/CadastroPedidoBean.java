@@ -12,7 +12,9 @@ import com.sysfood.bo.PedidoBo;
 import com.sysfood.bo.ProdutoBo;
 import com.sysfood.dao.filter.ProdutoFilter;
 import com.sysfood.exception.NegocioException;
+import com.sysfood.model.Adicionais;
 import com.sysfood.model.ItemPedido;
+import com.sysfood.model.PastelComAdicionais;
 import com.sysfood.model.Pedido;
 import com.sysfood.model.Produto;
 import com.sysfood.model.TipoPagamento;
@@ -30,6 +32,7 @@ public class CadastroPedidoBean implements Serializable {
 	private Produto produto;
 	private BigDecimal valorPago;
 	private BigDecimal troco;
+	private List<Adicionais> adicionais;
 
 	@Inject
 	private ProdutoBo produtoBo;
@@ -77,6 +80,12 @@ public class CadastroPedidoBean implements Serializable {
 			pedido.getItens().add(item);
 			recalcularPedido();
 		}
+	}
+
+	public void adicionarAdicionaisAoPastel() {
+		PastelComAdicionais pastelComAdicionais = new PastelComAdicionais();
+		pastelComAdicionais.setPastel(produto);
+		pastelComAdicionais.setAdicionais(adicionais);
 	}
 
 	private boolean existeItemComProduto(Produto produto) {
@@ -150,6 +159,10 @@ public class CadastroPedidoBean implements Serializable {
 
 	public void setTroco(BigDecimal troco) {
 		this.troco = troco;
+	}
+
+	public List<Adicionais> getAdicionais() {
+		return adicionais;
 	}
 
 }

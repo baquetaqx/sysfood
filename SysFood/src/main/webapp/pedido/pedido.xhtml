@@ -44,11 +44,11 @@
 								process="@this :formPedido:nomeCliente"
 								update=":formPedido:mensagens" icon="fa fa-fw fa-cutlery" />
 
-<!-- 							<p:commandButton value="Adicionais" icon="fa fa-cart-plus" -->
-<!-- 								styleClass="btn btn-warning btn-lg btn-salvar" -->
-<!-- 								onclick="PF('dlgAdicionais').show();" -->
-<!-- 								process="@this :formPedido:nomeCliente" -->
-<!-- 								update=":formPedido:mensagens" /> -->
+							<!-- 							<p:commandButton value="Adicionais" icon="fa fa-cart-plus" -->
+							<!-- 								styleClass="btn btn-warning btn-lg btn-salvar" -->
+							<!-- 								onclick="PF('dlgAdicionais').show();" -->
+							<!-- 								process="@this :formPedido:nomeCliente" -->
+							<!-- 								update=":formPedido:mensagens" /> -->
 						</div>
 					</div>
 
@@ -70,9 +70,6 @@
 								var="item" id="tabelaItens"
 								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 								emptyMessage="Nenhum produto selecionado">
-								<p:column width="15">
-									<p:rowToggler />
-								</p:column>
 								<p:column headerText="Nome do produto" width="190">
 									<p:outputLabel value="#{item.produto.nome}"
 										styleClass="text-money" />
@@ -96,13 +93,6 @@
 										styleClass="text-money">
 										<f:convertNumber type="currency" locale="pt_BR" />
 									</p:outputLabel>
-								</p:column>
-								<p:column headerText="Adicionais" width="80"
-									style="text-align: center">
-									<p:commandLink styleClass="fa fa-plus-circle"
-										action="#{cadastroPedidoBean.removerItem(item)}"
-										process="@this"
-										update=":formPedido:tabelaItens :formPedido:valorTotalPedido :formPedido:mensagens formPedido:valorTotalPedidoDlg" />
 								</p:column>
 								<p:column headerText="Rmv" width="40" style="text-align: center">
 									<p:commandLink styleClass="fa fa-remove"
@@ -176,6 +166,9 @@
 									rowsPerPageTemplate="5,10,15"
 									value="#{cadastroPedidoBean.produtosFiltrados}" var="produto"
 									emptyMessage="Nenhum produto encontrado">
+									<p:column width="15">
+										<p:rowToggler />
+									</p:column>
 									<p:column headerText="Nome do produto">
 										<h:outputLabel value="#{produto.nome}" />
 									</p:column>
@@ -185,7 +178,13 @@
 										</h:outputLabel>
 									</p:column>
 									<p:column headerText="Etq" width="50">
-										<h:outputLabel value="#{produto.quantidadeEstoque}" />
+										<h:outputLabel value="#{produto.quantidadeEstoque}"
+											rendered="#{produto.notPastel}" />
+									</p:column>
+									<p:column headerText="Adicionais" width="80"
+										style="text-align: center">
+										<p:commandLink styleClass="fa fa-plus-circle"
+											rendered="#{produto.pastel}" />
 									</p:column>
 									<p:column headerText="Add" width="50">
 										<p:commandButton icon="fa fa-plus"

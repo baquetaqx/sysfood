@@ -106,6 +106,16 @@ public class Produto implements Serializable {
 	}
 
 	@Transient
+	public boolean isPastel() {
+		return secao == SecaoProduto.PASTEIS;
+	}
+
+	@Transient
+	public boolean isNotPastel() {
+		return !isPastel();
+	}
+
+	@Transient
 	public Produto baixarEstoque(Integer quantidade) throws NegocioException {
 		if (controlarEstoque) {
 			int novaQuantidade = this.getQuantidadeEstoque() - quantidade;
