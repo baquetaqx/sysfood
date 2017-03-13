@@ -51,7 +51,7 @@ public class ProdutoDao implements Serializable {
 		List<Predicate> predicates = new ArrayList<>();
 
 		if (StringUtils.isNotBlank(filtro.getNome())) {
-			predicates.add(builder.like(produto.get("nome"), filtro.getNome() + "%"));
+			predicates.add(builder.like(produto.get("nome"), "%" + filtro.getNome() + "%"));
 		}
 
 		if (filtro.getStatus() != null) {
