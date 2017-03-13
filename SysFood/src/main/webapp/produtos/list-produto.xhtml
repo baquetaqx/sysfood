@@ -29,11 +29,15 @@
 					</div>
 					<div class="panel-body">
 
-						<h:form prependId="false">
+						<h:form id="formProduto">
 							Nome do Produto:
 							<p:inputText styleClass="form-control"
 								value="#{pesquisaProdutosBean.filtro.nome}"
-								style="display:inline-table;width:70%; margin-right:5px" />
+								style="display:inline-table;width:70%; margin-right:5px">
+								<!-- <p:ajax event="keyup"
+									listener="#{pesquisaProdutosBean.pesquisar}"
+									update=":formProduto:tabelaProduto" /> -->
+							</p:inputText>
 							<p:commandButton value="Pesquisar"
 								action="#{pesquisaProdutosBean.pesquisar}"
 								update="tabelaProduto" icon="fa fa-search"
@@ -76,12 +80,15 @@
 										<f:convertNumber type="currency" locale="pt-BR" />
 									</h:outputText>
 								</p:column>
-								<p:column headerText="Estoque" width="100" styleClass="centralizar">
+								<p:column headerText="Estoque" width="100"
+									styleClass="centralizar">
 									<h:outputText value="#{produto.quantidadeEstoque}" />
 								</p:column>
-								<p:column headerText="Editar" width="120" styleClass="centralizar">
+								<p:column headerText="Editar" width="120"
+									styleClass="centralizar">
 									<p:button icon="fa fa-pencil-square-o" title="Editar"
-										outcome="/produtos/cad-produto" disabled="#{!produto.status}" styleClass="">
+										outcome="/produtos/cad-produto" disabled="#{!produto.status}"
+										styleClass="">
 										<f:param name="produto" value="#{produto.id}" />
 									</p:button>
 								</p:column>

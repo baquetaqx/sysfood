@@ -151,25 +151,29 @@
 
 									<h:panelGroup>
 										<br />
-										<p:inputText styleClass="form-control"
+										<p:inputText styleClass="form-control" id="filtroProduto"
 											value="#{cadastroPedidoBean.produtoFilter.nome}"
-											style="display:inline-table;width:70%; margin-right:5px" />
+											style="display:inline-table;width:70%; margin-right:5px">
+											<p:ajax event="keyup"
+												listener="#{cadastroPedidoBean.pesquisarProduto}"
+												update=":formPedido:tabelaProduto" />
+										</p:inputText>
 										<p:commandButton icon="fa fa-search"
 											update=":formPedido:tabelaProduto"
 											action="#{cadastroPedidoBean.pesquisarProduto}" />
 									</h:panelGroup>
 								</h:panelGrid>
 								<br />
-								<p:dataTable paginator="true" rows="10"
+								<p:dataTable paginator="true" rows="6"
 									paginatorPosition="bottom" id="tabelaProduto"
 									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-									rowsPerPageTemplate="5,10,15"
+									rowsPerPageTemplate="6,12,18"
 									value="#{cadastroPedidoBean.produtosFiltrados}" var="produto"
 									emptyMessage="Nenhum produto encontrado">
-									<p:column width="15">
+									<p:column width="35">
 										<p:rowToggler />
 									</p:column>
-									<p:column headerText="Nome do produto">
+									<p:column headerText="Nome do produto" width="240">
 										<h:outputLabel value="#{produto.nome}" />
 									</p:column>
 									<p:column headerText="Valor Unitário" width="120">
@@ -177,14 +181,16 @@
 											<f:convertNumber type="currency" locale="pt_BR" />
 										</h:outputLabel>
 									</p:column>
-									<p:column headerText="Etq" width="50">
+									<p:column headerText="Etq" width="50"
+										style="text-align: center">
 										<h:outputLabel value="#{produto.quantidadeEstoque}"
 											rendered="#{produto.notPastel}" />
 									</p:column>
-									<p:column headerText="Adicionais" width="80"
+									<p:column headerText="Adicionais" width="85"
 										style="text-align: center">
 										<p:commandLink styleClass="fa fa-plus-circle"
-											rendered="#{produto.pastel}" />
+											rendered="#{produto.pastel}"
+											onclick="PF('dlgAdicional').show()" />
 									</p:column>
 									<p:column headerText="Add" width="50">
 										<p:commandButton icon="fa fa-plus"
@@ -204,6 +210,50 @@
 						onclick="PF('dlgProduto').hide()" update="@form"
 						styleClass="btn btn-success btn-lg btn-salvar" />
 				</p:dialog>
+
+
+				<p:dialog widgetVar="dlgAdicional" resizable="false"
+					id="dialogAdicional" closable="true" width="700" modal="true"
+					header="Escolha os Adicionais">
+					Nome do Adicional:
+							<p:inputText styleClass="form-control"
+						value="#{pesquisaAdicionaisBean.filtro.nome}"
+						style="display:inline-table;width:70%; margin-right:5px">
+
+						<p:ajax event="keyup"
+							listener="#{pesquisaAdicionaisBean.pesquisar}"
+							update=":formPedido:tabelaAdicionais" />
+					</p:inputText>
+					<p:commandButton icon="fa fa-search"
+						update=":formPedido:tabelaAdicionais"
+						action="#{pesquisaAdicionaisBean.pesquisar}" />
+					<br />
+					<br />
+					<p:messages />
+					<p:dataTable paginator="true" rows="6"
+						emptyMessage="Nenhum adicional encontrado"
+						paginatorPosition="bottom" id="tabelaAdicionais"
+						value="#{pesquisaAdicionaisBean.adicionaisFiltrados}"
+						var="adicionais"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="6,12,18">
+
+						<p:column headerText="Nome do adicional">
+							<h:outputLabel value="#{adicionais.nome}" />
+						</p:column>
+
+						<p:column headerText="Add" width="50">
+							<p:commandButton icon="fa fa-plus"
+								update=":formPedido:tabelaItens :formPedido:valorTotalPedido :formPedido:valorTotalPedidoDlg :formPedido:mensagens">
+								<f:setPropertyActionListener
+									target="#{cadastroPedidoBean.produto}" value="#{produto}" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+
+
+				</p:dialog>
+
 				<p:dialog header="Realizando o pagamento da venda" widgetVar="dlg"
 					focus="money" modal="true" closable="true" resizable="false"
 					id="dialogFinalizandoPedido">

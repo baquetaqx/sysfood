@@ -34,7 +34,11 @@
 							Nome do Adicional:
 							<p:inputText styleClass="form-control"
 								value="#{pesquisaAdicionaisBean.filtro.nome}"
-								style="display:inline-table;width:70%; margin-right:5px" />
+								style="display:inline-table;width:70%; margin-right:5px">
+								<p:ajax event="keyup"
+									listener="#{pesquisaAdicionaisBean.pesquisar}"
+									update=":formPedido:tabelaAdicionais" />
+							</p:inputText>
 							<p:commandButton value="Pesquisar"
 								action="#{pesquisaAdicionaisBean.pesquisar}"
 								update="tabelaProduto" icon="fa fa-search"
