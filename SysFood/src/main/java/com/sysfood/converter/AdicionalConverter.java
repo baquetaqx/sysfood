@@ -8,22 +8,22 @@ import javax.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.sysfood.dao.AdicionaisDao;
-import com.sysfood.model.Adicionais;
+import com.sysfood.dao.AdicionalDao;
+import com.sysfood.model.Adicional;
 
-@FacesConverter(forClass = Adicionais.class)
+@FacesConverter(forClass = Adicional.class)
 public class AdicionalConverter implements Converter {
 
 	@Inject
-	private AdicionaisDao adicionaisDao;
+	private AdicionalDao adicionalDao;
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		Adicionais retorno = new Adicionais();
+		Adicional retorno = new Adicional();
 
 		if (StringUtils.isNotBlank(value)) {
 			Long id = new Long(value);
-			retorno = adicionaisDao.porId(id);
+			retorno = adicionalDao.porId(id);
 		}
 
 		return retorno;
@@ -32,8 +32,8 @@ public class AdicionalConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if (value != null) {
-			Adicionais adicionais = (Adicionais) value;
-			return adicionais.getId() == null ? null : adicionais.getId().toString();
+			Adicional adicional = (Adicional) value;
+			return adicional.getId() == null ? null : adicional.getId().toString();
 		}
 
 		return null;

@@ -34,9 +34,6 @@ public class ItemPedido implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "pedido_id", nullable = false)
 	private Pedido pedido;
-	@ManyToOne
-	@JoinColumn(name = "pastel_com_adicionais_id")
-	private PastelComAdicionais pastelComAdicionais;
 
 	public Long getId() {
 		return id;
@@ -81,14 +78,6 @@ public class ItemPedido implements Serializable {
 	@Transient
 	public BigDecimal getValorTotal() {
 		return getValorUnitario().multiply(new BigDecimal(quantidade));
-	}
-
-	public PastelComAdicionais getPastelComAdicionais() {
-		return pastelComAdicionais;
-	}
-
-	public void setPastelComAdicionais(PastelComAdicionais pastelComAdicionais) {
-		this.pastelComAdicionais = pastelComAdicionais;
 	}
 
 	@Override

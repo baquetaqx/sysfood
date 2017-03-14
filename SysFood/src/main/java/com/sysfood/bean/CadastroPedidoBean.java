@@ -2,19 +2,21 @@ package com.sysfood.bean;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.sysfood.bo.AdicionalBO;
 import com.sysfood.bo.PedidoBo;
 import com.sysfood.bo.ProdutoBo;
 import com.sysfood.dao.filter.ProdutoFilter;
 import com.sysfood.exception.NegocioException;
-import com.sysfood.model.Adicionais;
+import com.sysfood.model.Adicional;
 import com.sysfood.model.ItemPedido;
-import com.sysfood.model.PastelComAdicionais;
 import com.sysfood.model.Pedido;
 import com.sysfood.model.Produto;
 import com.sysfood.model.TipoPagamento;
@@ -32,13 +34,19 @@ public class CadastroPedidoBean implements Serializable {
 	private Produto produto;
 	private BigDecimal valorPago;
 	private BigDecimal troco;
-	private List<Adicionais> adicionais;
+	private List<Adicional> adicionalFiltrados;
+	private Adicional adicionalFiltro;
+	private Adicional adicional;
+	private Map<Produto, List<Adicional>> pastelComAdicionai;
 
 	@Inject
 	private ProdutoBo produtoBo;
 
 	@Inject
 	private PedidoBo pedidoBo;
+
+	@Inject
+	private AdicionalBO adicionalBo;
 
 	public CadastroPedidoBean() {
 		limpar();
@@ -50,6 +58,8 @@ public class CadastroPedidoBean implements Serializable {
 		produto = new Produto();
 		valorPago = null;
 		troco = null;
+		adicionalFiltro = new Adicional();
+		adicional = new Adicional();
 	}
 
 	public void salvar() {
@@ -69,6 +79,10 @@ public class CadastroPedidoBean implements Serializable {
 		produtosFiltrados = produtoBo.filtrados(produtoFilter);
 	}
 
+	public void pesquisarAdicional() {
+		adicionalFiltrados = adicionalBo.filtrados(adicionalFiltro);
+	}
+
 	public void adicionarItem() {
 		if (existeItemComProduto(produto)) {
 			FacesUtil.addErrorMessage("Já existe um item no pedido com o produto informado.");
@@ -82,10 +96,11 @@ public class CadastroPedidoBean implements Serializable {
 		}
 	}
 
-	public void adicionarAdicionaisAoPastel() {
-		PastelComAdicionais pastelComAdicionais = new PastelComAdicionais();
-		pastelComAdicionais.setPastel(produto);
-		pastelComAdicionais.setAdicionais(adicionais);
+	public void adicionarAdicionalAoPastel() {
+		if (pastelComAdicionai.containsKey(produto)) {
+
+		}
+		pastelComAdicionai.put(produto, new ArrayList<>());
 	}
 
 	private boolean existeItemComProduto(Produto produto) {
@@ -161,8 +176,12 @@ public class CadastroPedidoBean implements Serializable {
 		this.troco = troco;
 	}
 
-	public List<Adicionais> getAdicionais() {
-		return adicionais;
+	public List<Adicional> getAdicionalFiltrados() {
+		return adicionalFiltrados;
+	}
+
+	public Adicional getAdicionalFiltro() {
+		return adicionalFiltro;
 	}
 
 }

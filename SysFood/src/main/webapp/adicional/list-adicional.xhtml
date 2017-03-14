@@ -6,15 +6,15 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-	<ui:define name="title">SysFood - Lista de Adicionais</ui:define>
+	<ui:define name="title">SysFood - Lista de Adicional</ui:define>
 	<ui:define name="page-header">
-		<h1 class="page-header">Lista dos Adicionais Cadastrados</h1>
+		<h1 class="page-header">Lista dos Adicional Cadastrados</h1>
 	</ui:define>
 	<ui:define name="page-header-title">
 		<ol class="breadcrumb">
 			<li class="active"><i class="fa fa-th-list"></i> Cadastre um
 				adicional</li>
-			<a href="cad-adicionais.xhtml"><i
+			<a href="cad-adicional.xhtml"><i
 				class="fa fa-arrow-circle-right"></i> Clique Aqui <i
 				class="fa fa-arrow-circle-left"></i></a>
 		</ol>
@@ -25,7 +25,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							<i class="fa fa-product-hunt"></i> Adicionais
+							<i class="fa fa-product-hunt"></i> Adicional
 						</h3>
 					</div>
 					<div class="panel-body">
@@ -33,58 +33,54 @@
 						<h:form prependId="false">
 							Nome do Adicional:
 							<p:inputText styleClass="form-control"
-								value="#{pesquisaAdicionaisBean.filtro.nome}"
+								value="#{pesquisaAdicionalBean.filtro.nome}"
 								style="display:inline-table;width:70%; margin-right:5px">
 								<p:ajax event="keyup"
-									listener="#{pesquisaAdicionaisBean.pesquisar}"
-									update=":formPedido:tabelaAdicionais" />
+									listener="#{pesquisaAdicionalBean.pesquisar}"
+									update="tabelaAdicional" />
 							</p:inputText>
-							<p:commandButton value="Pesquisar"
-								action="#{pesquisaAdicionaisBean.pesquisar}"
-								update="tabelaProduto" icon="fa fa-search"
-								styleClass="btnSearch" />
 							<br />
 							<br />
 							<p:messages />
 							<p:dataTable paginator="true" rows="10"
 								emptyMessage="Nenhum adicional encontrado"
-								paginatorPosition="bottom" id="tabelaProduto"
-								value="#{pesquisaAdicionaisBean.adicionaisFiltrados}"
-								var="adicionais"
+								paginatorPosition="bottom" id="tabelaAdicional"
+								value="#{pesquisaAdicionalBean.adicionalFiltrados}"
+								var="adicional"
 								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 								rowsPerPageTemplate="5,10,15">
 								<p:column headerText="Status" width="100"
 									style="text-align:center">
 									<p:commandLink id="lnkAlterarStatus"
-										action="#{pesquisaAdicionaisBean.updateAtivo}" ajax="false"
-										update="tabelaProduto"
-										title="#{adicionais.status ? 'Desativar' : 'Ativar'}">
-										<h:panelGroup rendered="#{!adicionais.status}">
+										action="#{pesquisaAdicionalBean.updateAtivo}" ajax="false"
+										update="tabelaAdicional"
+										title="#{adicional.status ? 'Desativar' : 'Ativar'}">
+										<h:panelGroup rendered="#{!adicional.status}">
 											<h:graphicImage library="imagens" name="check_False.png"
 												width="20" />
 										</h:panelGroup>
-										<h:panelGroup rendered="#{adicionais.status}">
+										<h:panelGroup rendered="#{adicional.status}">
 											<h:graphicImage library="imagens" name="check_True.png"
 												width="20" />
 										</h:panelGroup>
 										<f:setPropertyActionListener
-											target="#{pesquisaAdicionaisBean.adicionais}"
-											value="#{adicionais}" />
+											target="#{pesquisaAdicionalBean.adicional}"
+											value="#{adicional}" />
 										<f:setPropertyActionListener
-											target="#{pesquisaAdicionaisBean.adicionais.status}"
-											value="#{!adicionais.status}" />
+											target="#{pesquisaAdicionalBean.adicional.status}"
+											value="#{!adicional.status}" />
 									</p:commandLink>
 								</p:column>
 								<p:column headerText="Nome do adicional">
-									<h:outputText value="#{adicionais.nome}" />
+									<h:outputText value="#{adicional.nome}" />
 								</p:column>
 
 								<p:column headerText="Editar" width="120"
 									styleClass="centralizar">
 									<p:button icon="fa fa-pencil-square-o" title="Editar"
-										outcome="/adicionais/cad-adicionais"
-										disabled="#{!adicionais.status}" styleClass="">
-										<f:param name="adicionais" value="#{adicionais.id}" />
+										outcome="/adicional/cad-adicional"
+										disabled="#{!adicional.status}" styleClass="">
+										<f:param name="adicional" value="#{adicional.id}" />
 									</p:button>
 								</p:column>
 							</p:dataTable>

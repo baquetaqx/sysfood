@@ -11,9 +11,6 @@
 		<h1 class="page-header">Realize o pedido</h1>
 	</ui:define>
 	<ui:define name="conteudo">
-		<f:metadata>
-			<f:viewAction action="#{cadastroPedidoBean.pesquisarProduto}" />
-		</f:metadata>
 		<div class="row">
 			<h:form id="formPedido">
 
@@ -39,16 +36,11 @@
 							</h:panelGrid>
 							<br />
 							<p:commandButton value="Produtos"
+								action="#{cadastroPedidoBean.pesquisarProduto}"
 								styleClass="btn btn-success btn-lg btn-salvar"
 								onclick="PF('dlgProduto').show();"
 								process="@this :formPedido:nomeCliente"
 								update=":formPedido:mensagens" icon="fa fa-fw fa-cutlery" />
-
-							<!-- 							<p:commandButton value="Adicionais" icon="fa fa-cart-plus" -->
-							<!-- 								styleClass="btn btn-warning btn-lg btn-salvar" -->
-							<!-- 								onclick="PF('dlgAdicionais').show();" -->
-							<!-- 								process="@this :formPedido:nomeCliente" -->
-							<!-- 								update=":formPedido:mensagens" /> -->
 						</div>
 					</div>
 
@@ -167,7 +159,6 @@
 								<p:dataTable paginator="true" rows="6"
 									paginatorPosition="bottom" id="tabelaProduto"
 									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-									rowsPerPageTemplate="6,12,18"
 									value="#{cadastroPedidoBean.produtosFiltrados}" var="produto"
 									emptyMessage="Nenhum produto encontrado">
 									<p:column width="35">
@@ -186,10 +177,11 @@
 										<h:outputLabel value="#{produto.quantidadeEstoque}"
 											rendered="#{produto.notPastel}" />
 									</p:column>
-									<p:column headerText="Adicionais" width="85"
+									<p:column headerText="Adicional" width="85"
 										style="text-align: center">
 										<p:commandLink styleClass="fa fa-plus-circle"
 											rendered="#{produto.pastel}"
+											action="#{cadastroPedidoBean.pesquisarAdicional}"
 											onclick="PF('dlgAdicional').show()" />
 									</p:column>
 									<p:column headerText="Add" width="50">
@@ -214,43 +206,39 @@
 
 				<p:dialog widgetVar="dlgAdicional" resizable="false"
 					id="dialogAdicional" closable="true" width="700" modal="true"
-					header="Escolha os Adicionais">
+					header="Escolha os Adicional">
 					Nome do Adicional:
 							<p:inputText styleClass="form-control"
-						value="#{pesquisaAdicionaisBean.filtro.nome}"
+						value="#{cadastroPedidoBean.adicionalFiltro.nome}"
 						style="display:inline-table;width:70%; margin-right:5px">
 
 						<p:ajax event="keyup"
-							listener="#{pesquisaAdicionaisBean.pesquisar}"
-							update=":formPedido:tabelaAdicionais" />
+							listener="#{cadastroPedidoBean.pesquisarAdicional}"
+							update=":formPedido:tabelaAdicional" />
 					</p:inputText>
-					<p:commandButton icon="fa fa-search"
-						update=":formPedido:tabelaAdicionais"
-						action="#{pesquisaAdicionaisBean.pesquisar}" />
 					<br />
 					<br />
 					<p:messages />
 					<p:dataTable paginator="true" rows="6"
 						emptyMessage="Nenhum adicional encontrado"
-						paginatorPosition="bottom" id="tabelaAdicionais"
-						value="#{pesquisaAdicionaisBean.adicionaisFiltrados}"
-						var="adicionais"
+						paginatorPosition="bottom" id="tabelaAdicional"
+						value="#{cadastroPedidoBean.adicionalFiltrados}" var="adicional"
 						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 						rowsPerPageTemplate="6,12,18">
 
 						<p:column headerText="Nome do adicional">
-							<h:outputLabel value="#{adicionais.nome}" />
+							<h:outputLabel value="#{adicional.nome}" />
 						</p:column>
 
 						<p:column headerText="Add" width="50">
 							<p:commandButton icon="fa fa-plus"
+								action="#{cadastroPedidoBean.adicionarAdicionalAoPastel}"
 								update=":formPedido:tabelaItens :formPedido:valorTotalPedido :formPedido:valorTotalPedidoDlg :formPedido:mensagens">
 								<f:setPropertyActionListener
-									target="#{cadastroPedidoBean.produto}" value="#{produto}" />
+									target="#{cadastroPedidoBean.adicional}" value="#{produto}" />
 							</p:commandButton>
 						</p:column>
 					</p:dataTable>
-
 
 				</p:dialog>
 

@@ -1,6 +1,5 @@
 package com.sysfood.model;
 
-
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -14,7 +13,7 @@ import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-public class Adicionais implements Serializable{
+public class Adicional implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
@@ -67,7 +66,7 @@ public class Adicionais implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Adicionais other = (Adicionais) obj;
+		Adicional other = (Adicional) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -75,7 +74,5 @@ public class Adicionais implements Serializable{
 			return false;
 		return true;
 	}
-
-	
 
 }
