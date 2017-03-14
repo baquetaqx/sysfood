@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Type;
-import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class Adicional implements Serializable {
@@ -30,7 +29,6 @@ public class Adicional implements Serializable {
 		this.id = id;
 	}
 
-	@NotBlank(message = "Nome do Adicional é obrigatório")
 	@Size(max = 80)
 	@Column(nullable = false, length = 80)
 	public String getNome() {
