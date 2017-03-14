@@ -31,8 +31,8 @@ public class AdicionalDao implements Serializable {
 
 	public Adicional porNome(String nome) {
 		try {
-			return manager.createQuery("from Adicional where nome = :nome", Adicional.class)
-					.setParameter("nome", nome).getSingleResult();
+			return manager.createQuery("from Adicional where nome = :nome", Adicional.class).setParameter("nome", nome)
+					.getSingleResult();
 		} catch (NoResultException e) {
 			return null;
 		}
@@ -50,7 +50,7 @@ public class AdicionalDao implements Serializable {
 		List<Predicate> predicates = new ArrayList<>();
 
 		if (StringUtils.isNotBlank(filtro.getNome())) {
-			predicates.add(builder.like(adicional.get("nome"), filtro.getNome() + "%"));
+			predicates.add(builder.like(adicional.get("nome"), "%" + filtro.getNome() + "%"));
 		}
 
 		if (filtro.getStatus() != null) {

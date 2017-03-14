@@ -1,6 +1,6 @@
 CREATE SCHEMA `sys_food` ;
 
-use sys_food
+use `sys_food`;
 
 CREATE TABLE `usuario` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
