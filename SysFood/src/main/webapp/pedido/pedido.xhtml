@@ -26,12 +26,12 @@
 							<h:panelGrid columns="2" width="500" style="margin:auto">
 						Nome do Cliente:
 							<h:panelGroup>
-									<p:inputText styleClass="form-control"
+									<p:inputText styleClass="form-control" id="inputCliente"
 										value="#{cadastroPedidoBean.pedido.cliente}"
 										style="display:inline-table;width:70%; margin-right:5px"
 										required="true" requiredMessage="Coloque o nome do cliente" />
-									<p:commandButton icon="fa fa-plus"
-										update=":formPedido:nomeCliente :formPedido:mensagens" />
+									<p:commandButton icon="fa fa-plus" process="inputCliente"
+										update="formPedido:nomeCliente :formPedido:mensagens" />
 								</h:panelGroup>
 							</h:panelGrid>
 							<br />
@@ -40,7 +40,8 @@
 								styleClass="btn btn-success btn-lg btn-salvar"
 								onclick="PF('dlgProduto').show();"
 								process="@this :formPedido:nomeCliente"
-								update=":formPedido:mensagens" icon="fa fa-fw fa-cutlery" />
+								update=":formPedido:mensagens :formPedido:tabelaProduto"
+								icon="fa fa-fw fa-cutlery" />
 						</div>
 					</div>
 
@@ -150,9 +151,6 @@
 												listener="#{cadastroPedidoBean.pesquisarProduto}"
 												update=":formPedido:tabelaProduto" />
 										</p:inputText>
-										<p:commandButton icon="fa fa-search"
-											update=":formPedido:tabelaProduto"
-											action="#{cadastroPedidoBean.pesquisarProduto}" />
 									</h:panelGroup>
 								</h:panelGrid>
 								<br />
