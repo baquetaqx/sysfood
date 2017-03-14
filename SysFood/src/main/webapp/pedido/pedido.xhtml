@@ -75,7 +75,7 @@
 											update=":formPedido:tabelaItens :formPedido:valorTotalPedido :formPedido:valorTotalPedidoDlg" />
 									</p:spinner>
 								</p:column>
-								<p:column headerText="Preco" width="55">
+								<p:column headerText="Preço" width="55">
 									<p:outputLabel value="#{item.produto.preco}"
 										styleClass="text-money">
 										<f:convertNumber type="currency" locale="pt_BR" />
@@ -158,7 +158,7 @@
 									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 									value="#{cadastroPedidoBean.produtosFiltrados}" var="produto"
 									emptyMessage="Nenhum produto encontrado">
-									<p:column width="35">
+									<p:column width="35" rendered="#{!empty cadastroPedidoBean.pastelComAdicionais}">
 										<p:rowToggler
 											rendered="#{cadastroPedidoBean.pastelComAdicionais(produto)}" />
 									</p:column>
