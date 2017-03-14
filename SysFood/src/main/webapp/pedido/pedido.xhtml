@@ -189,7 +189,8 @@
 									<p:column headerText="Add" width="50">
 										<p:commandButton icon="fa fa-plus"
 											action="#{cadastroPedidoBean.adicionarItem}"
-											update=":formPedido:tabelaItens :formPedido:valorTotalPedido :formPedido:valorTotalPedidoDlg :formPedido:mensagens">
+											update=":formPedido:tabelaItens :formPedido:valorTotalPedido :formPedido:valorTotalPedidoDlg :formPedido:mensagens"
+											process="@this">
 											<f:setPropertyActionListener
 												target="#{cadastroPedidoBean.produto}" value="#{produto}" />
 										</p:commandButton>
