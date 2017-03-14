@@ -67,21 +67,21 @@
 									<p:outputLabel value="#{item.produto.nome}"
 										styleClass="text-money" />
 								</p:column>
-								<p:column headerText="Qtd" width="65">
-									<p:inputText value="#{item.quantidade}"
-										styleClass="form-control" maxlength="2">
-										<p:ajax event="keyup" process="@this"
+								<p:column headerText="Qtd" width="65" styleClass="centralizar">
+									<p:spinner value="#{item.quantidade}"
+										styleClass="" maxlength="2" min="1" max="20" size="1">
+										<p:ajax process="@this"
 											listener="#{cadastroPedidoBean.recalcularPedido}"
 											update=":formPedido:tabelaItens :formPedido:valorTotalPedido :formPedido:valorTotalPedidoDlg" />
-									</p:inputText>
+									</p:spinner>
 								</p:column>
-								<p:column headerText="Preco" width="60">
+								<p:column headerText="Preco" width="55">
 									<p:outputLabel value="#{item.produto.preco}"
 										styleClass="text-money">
 										<f:convertNumber type="currency" locale="pt_BR" />
 									</p:outputLabel>
 								</p:column>
-								<p:column headerText="Pco Total" width="70">
+								<p:column headerText="Pco Total" width="65">
 									<p:outputLabel value="#{item.valorTotal}" id="pcoTotal"
 										styleClass="text-money">
 										<f:convertNumber type="currency" locale="pt_BR" />
@@ -91,7 +91,7 @@
 									<p:commandLink styleClass="fa fa-remove"
 										action="#{cadastroPedidoBean.removerItem(item)}"
 										process="@this"
-										update=":formPedido:tabelaItens :formPedido:valorTotalPedido :formPedido:mensagens formPedido:valorTotalPedidoDlg" />
+										update=":formPedido:tabelaItens :formPedido:valorTotalPedido formPedido:valorTotalPedidoDlg" />
 								</p:column>
 
 							</p:dataTable>
