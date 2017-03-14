@@ -19,6 +19,9 @@ public class CaixaBo implements Serializable {
 	@Inject
 	private CaixaDao caixaDao;
 
+	@Inject
+	private CumpomBo cumpomBo;
+
 	@Transactional
 	public Caixa salvar(Caixa caixa) throws NegocioException {
 		Caixa caixaExistente = caixaDao.porData(caixa.getDataDeAbertura());
@@ -26,7 +29,11 @@ public class CaixaBo implements Serializable {
 		if (caixaExistente != null) {
 			throw new NegocioException("Caixa já foi aberto hoje!");
 		}
-		return caixaDao.guardar(caixa);
+		
+		caixaDao.guardar(caixa);
+		cumpomBo.imprimirCaixa(caixa);
+		
+		return caixa;
 	}
 
 	@Transactional
