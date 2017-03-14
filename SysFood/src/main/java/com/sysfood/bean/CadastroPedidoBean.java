@@ -88,14 +88,17 @@ public class CadastroPedidoBean implements Serializable {
 	public void adicionarItem() {
 		if (existeItemComProduto(produto)) {
 			FacesUtil.addErrorMessage("Já existe um item no pedido com o produto informado.");
+
 		} else {
 			ItemPedido item = new ItemPedido();
 			item.setPedido(pedido);
 			item.setProduto(produto);
 			item.setValorUnitario(produto.getPreco());
+			item.setPastelComAdicionais(pastelComAdicionais);
 			pedido.getItens().add(item);
 			recalcularPedido();
 		}
+		pastelComAdicionais = new HashMap<>();
 	}
 
 	public void adicionarAdicionalAoPastel() {
@@ -122,7 +125,11 @@ public class CadastroPedidoBean implements Serializable {
 		boolean existeItem = false;
 
 		for (ItemPedido item : this.getPedido().getItens()) {
-			if (produto.equals(item.getProduto())) {
+			if (produto.equals(item.getProduto()) && !item.getPastelComAdicionais().containsKey(produto) && pastelComAdicionais.isEmpty()) {
+				existeItem = true;
+				break;
+			} else if (item.getPastelComAdicionais().containsKey(produto)
+					&& item.getPastelComAdicionais().get(produto).equals(pastelComAdicionais.get(produto))) {
 				existeItem = true;
 				break;
 			}
@@ -148,7 +155,11 @@ public class CadastroPedidoBean implements Serializable {
 	}
 
 	public void calcularTroco() {
-		troco = valorPago.subtract(pedido.getValorTotal());
+		try {
+			troco = valorPago.subtract(pedido.getValorTotal());
+		} catch (NullPointerException e) {
+			troco = BigDecimal.ZERO;
+		}
 	}
 
 	public Pedido getPedido() {

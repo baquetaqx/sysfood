@@ -2,6 +2,8 @@ package com.sysfood.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,7 +39,8 @@ public class ItemPedido implements Serializable {
 	// @LazyCollection(LazyCollectionOption.FALSE)
 	// @JoinTable(name = "usuario_segunda", joinColumns = @JoinColumn(name =
 	// "id_segunda"))
-	// private Map<Produto, List<Adicional>> pastelComAdicionais;
+	@Transient
+	private Map<Produto, List<Adicional>> pastelComAdicionais;
 
 	public Long getId() {
 		return id;
@@ -82,6 +85,14 @@ public class ItemPedido implements Serializable {
 	@Transient
 	public BigDecimal getValorTotal() {
 		return getValorUnitario().multiply(new BigDecimal(quantidade));
+	}
+
+	public Map<Produto, List<Adicional>> getPastelComAdicionais() {
+		return pastelComAdicionais;
+	}
+
+	public void setPastelComAdicionais(Map<Produto, List<Adicional>> pastelComAdicionais) {
+		this.pastelComAdicionais = pastelComAdicionais;
 	}
 
 	@Override

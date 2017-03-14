@@ -68,8 +68,8 @@
 										styleClass="text-money" />
 								</p:column>
 								<p:column headerText="Qtd" width="65" styleClass="centralizar">
-									<p:spinner value="#{item.quantidade}"
-										styleClass="" maxlength="2" min="1" max="20" size="1">
+									<p:spinner value="#{item.quantidade}" styleClass=""
+										maxlength="2" min="1" max="20" size="1">
 										<p:ajax process="@this"
 											listener="#{cadastroPedidoBean.recalcularPedido}"
 											update=":formPedido:tabelaItens :formPedido:valorTotalPedido :formPedido:valorTotalPedidoDlg" />
@@ -138,7 +138,7 @@
 								<h:panelGrid columns="2" style="width:100%" id="gridProduto">
 
 									<h:panelGroup>
-									<br/>
+										<br />
 								Nome do Produto:
 								</h:panelGroup>
 
@@ -159,7 +159,8 @@
 									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 									value="#{cadastroPedidoBean.produtosFiltrados}" var="produto"
 									emptyMessage="Nenhum produto encontrado">
-									<p:column width="35" rendered="#{!empty cadastroPedidoBean.pastelComAdicionais}">
+									<p:column width="35"
+										rendered="#{!empty cadastroPedidoBean.pastelComAdicionais}">
 										<p:rowToggler
 											rendered="#{cadastroPedidoBean.pastelComAdicionais(produto)}" />
 									</p:column>
@@ -179,8 +180,8 @@
 									<p:column headerText="Adicional" width="85"
 										style="text-align: center">
 										<p:commandLink styleClass="fa fa-plus-circle"
-											rendered="#{produto.pastel}" process="@this"
-											update=":formPedido:tabelaAdicional"
+											rendered="#{produto.pastel and empty cadastroPedidoBean.pastelComAdicionais}"
+											process="@this" update=":formPedido:tabelaAdicional"
 											action="#{cadastroPedidoBean.pesquisarAdicional}"
 											onclick="PF('dlgAdicional').show()">
 											<f:setPropertyActionListener
@@ -190,7 +191,8 @@
 									<p:column headerText="Add" width="50">
 										<p:commandButton icon="fa fa-plus"
 											action="#{cadastroPedidoBean.adicionarItem}"
-											update=":formPedido:tabelaItens :formPedido:valorTotalPedido :formPedido:valorTotalPedidoDlg :formPedido:mensagens"
+											update=":formPedido:tabelaItens :formPedido:valorTotalPedido :formPedido:valorTotalPedidoDlg :formPedido:mensagens 
+											:formPedido:tabelaProduto"
 											process="@this">
 											<f:setPropertyActionListener
 												target="#{cadastroPedidoBean.produto}" value="#{produto}" />

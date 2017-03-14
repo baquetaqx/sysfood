@@ -35,7 +35,7 @@ public class PedidoBo implements Serializable {
 
 		pedido = pedidoDao.guardar(pedido);
 		
-		cumpomBo.imprimirCupom(pedido);
+//		cumpomBo.imprimirCupom(pedido);
 		
 		return pedido;
 	}
