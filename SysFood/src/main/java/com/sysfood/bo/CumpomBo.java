@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.sysfood.exception.NegocioException;
+import com.sysfood.model.Caixa;
 import com.sysfood.model.ItemPedido;
 import com.sysfood.model.Pedido;
 
@@ -54,6 +55,31 @@ public class CumpomBo implements Serializable {
 			}
 		}
 
+	}
+	
+	public void imprimirCaixa(Caixa caixa) throws NegocioException {
+		BematechNFiscal cupom = BematechNFiscal.Instance;
+		List<Integer> iRetornos = new ArrayList<>();
+		iRetornos.add(cupom.ConfiguraModeloImpressora(7));
+		iRetornos.add(cupom.IniciaPorta("COM3"));
+
+		iRetornos.add(cupom.FormataTX("PASTEL DO CÉU - RELATÓRIO DE CAIXA\n\n\n", 3, 0, 0, 0, 0));
+		iRetornos.add(cupom.FormataTX("---------------------------------------------\n", 2, 0, 0, 0, 0));
+		iRetornos.add(cupom.FormataTX(
+				"Data de abertura:\t " + new SimpleDateFormat("dd/MM/yyy - HH:mm").format(caixa.getDataDeAbertura()) + "\n", 2,
+				0, 0, 0, 0));
+		iRetornos.add(cupom.FormataTX("Fundo de caixa:\t"+caixa.getFundoDeCaixa() +"\n", 2, 0, 0, 0, 0));
+		iRetornos.add(cupom.FormataTX("Débito:\t"+caixa.getDebito() +"\n", 2, 0, 0, 0, 0));
+		iRetornos.add(cupom.FormataTX("Crédito:\t"+caixa.getCredito() +"\n", 2, 0, 0, 0, 0));
+		iRetornos.add(cupom.FormataTX("Dinheiro:\t"+caixa.getDinheiro() +"\n", 2, 0, 0, 0, 0));
+		iRetornos.add(cupom.FormataTX("Número de pedidos:\t"+caixa.getNumeroDePedidos() +"\n", 2, 0, 0, 0, 0));
+		iRetornos.add(cupom.FormataTX("Total:\t"+caixa.getTotal() +"\n", 2, 0, 0, 0, 0));
+		iRetornos.add(cupom.FormataTX("---------------------------------------------\n", 2, 0, 0, 0, 0));
+		for (Integer integer : iRetornos) {
+			if (integer == 0) {
+				throw new NegocioException("Erro de comunicação física.");
+			}
+		}
 	}
 
 }
