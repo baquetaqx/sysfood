@@ -29,14 +29,14 @@
 					</div>
 					<div class="panel-body">
 
-						<h:form id="formProduto">
+						<h:form prependId="false">
 							Nome do Produto:
 							<p:inputText styleClass="form-control"
 								value="#{pesquisaProdutosBean.filtro.nome}"
 								style="display:inline-table;width:70%; margin-right:5px">
-								<!-- <p:ajax event="keyup"
+								<p:ajax event="keyup"
 									listener="#{pesquisaProdutosBean.pesquisar}"
-									update=":formProduto:tabelaProduto" /> -->
+									update="tabelaProduto" />
 							</p:inputText>
 							<p:commandButton value="Pesquisar"
 								action="#{pesquisaProdutosBean.pesquisar}"
@@ -50,7 +50,7 @@
 								paginatorPosition="bottom" id="tabelaProduto"
 								value="#{pesquisaProdutosBean.produtosFiltrados}" var="produto"
 								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-								rowsPerPageTemplate="5,10,15">
+								rowsPerPageTemplate="5,10,15" >
 								<p:column headerText="Status" width="100"
 									style="text-align:center">
 									<p:commandLink id="lnkAlterarStatus"
