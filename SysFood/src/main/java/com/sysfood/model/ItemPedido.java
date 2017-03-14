@@ -34,6 +34,10 @@ public class ItemPedido implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "pedido_id", nullable = false)
 	private Pedido pedido;
+	// @LazyCollection(LazyCollectionOption.FALSE)
+	// @JoinTable(name = "usuario_segunda", joinColumns = @JoinColumn(name =
+	// "id_segunda"))
+	// private Map<Produto, List<Adicional>> pastelComAdicionais;
 
 	public Long getId() {
 		return id;

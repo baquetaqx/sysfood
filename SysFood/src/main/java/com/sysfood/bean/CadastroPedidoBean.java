@@ -3,6 +3,7 @@ package com.sysfood.bean;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +38,7 @@ public class CadastroPedidoBean implements Serializable {
 	private List<Adicional> adicionalFiltrados;
 	private Adicional adicionalFiltro;
 	private Adicional adicional;
-	private Map<Produto, List<Adicional>> pastelComAdicionai;
+	private Map<Produto, List<Adicional>> pastelComAdicionais;
 
 	@Inject
 	private ProdutoBo produtoBo;
@@ -59,7 +60,8 @@ public class CadastroPedidoBean implements Serializable {
 		valorPago = null;
 		troco = null;
 		adicionalFiltro = new Adicional();
-		adicional = new Adicional();
+		setAdicional(new Adicional());
+		pastelComAdicionais = new HashMap<>();
 	}
 
 	public void salvar() {
@@ -97,10 +99,23 @@ public class CadastroPedidoBean implements Serializable {
 	}
 
 	public void adicionarAdicionalAoPastel() {
-		if (pastelComAdicionai.containsKey(produto)) {
-
+		if (existePastelComAdicionais(produto, adicional)) {
+			FacesUtil.addErrorMessage("Já existe um pastel com o adiconal informado.");
+		} else if (!pastelComAdicionais.containsKey(produto)) {
+			List<Adicional> adicionais = new ArrayList<>();
+			adicionais.add(adicional);
+			pastelComAdicionais.put(produto, adicionais);
+		} else {
+			pastelComAdicionais.get(produto).add(adicional);
 		}
-		pastelComAdicionai.put(produto, new ArrayList<>());
+	}
+
+	private boolean existePastelComAdicionais(Produto produto, Adicional adicional) {
+		boolean existePastel = false;
+		if (pastelComAdicionais.containsKey(produto)) {
+			existePastel = pastelComAdicionais.get(produto).contains(adicional);
+		}
+		return existePastel;
 	}
 
 	private boolean existeItemComProduto(Produto produto) {
@@ -182,6 +197,30 @@ public class CadastroPedidoBean implements Serializable {
 
 	public Adicional getAdicionalFiltro() {
 		return adicionalFiltro;
+	}
+
+	public Adicional getAdicional() {
+		return adicional;
+	}
+
+	public void setAdicional(Adicional adicional) {
+		this.adicional = adicional;
+	}
+
+	public Map<Produto, List<Adicional>> getPastelComAdicionais() {
+		return pastelComAdicionais;
+	}
+
+	public List<Adicional> adicionaisNoPastel(Produto produto) {
+		return pastelComAdicionais.get(produto);
+	}
+
+	public boolean pastelComAdicionais(Produto produto) {
+		return pastelComAdicionais.containsKey(produto);
+	}
+
+	public void setPastelComAdicionais(Map<Produto, List<Adicional>> pastelComAdicionais) {
+		this.pastelComAdicionais = pastelComAdicionais;
 	}
 
 }

@@ -159,7 +159,8 @@
 									value="#{cadastroPedidoBean.produtosFiltrados}" var="produto"
 									emptyMessage="Nenhum produto encontrado">
 									<p:column width="35">
-										<p:rowToggler />
+										<p:rowToggler
+											rendered="#{cadastroPedidoBean.pastelComAdicionais(produto)}" />
 									</p:column>
 									<p:column headerText="Nome do produto" width="240">
 										<h:outputLabel value="#{produto.nome}" />
@@ -177,9 +178,13 @@
 									<p:column headerText="Adicional" width="85"
 										style="text-align: center">
 										<p:commandLink styleClass="fa fa-plus-circle"
-											rendered="#{produto.pastel}"
+											rendered="#{produto.pastel}" process="@this"
+											update=":formPedido:tabelaAdicional"
 											action="#{cadastroPedidoBean.pesquisarAdicional}"
-											onclick="PF('dlgAdicional').show()" />
+											onclick="PF('dlgAdicional').show()">
+											<f:setPropertyActionListener
+												target="#{cadastroPedidoBean.produto}" value="#{produto}" />
+										</p:commandLink>
 									</p:column>
 									<p:column headerText="Add" width="50">
 										<p:commandButton icon="fa fa-plus"
@@ -189,6 +194,18 @@
 												target="#{cadastroPedidoBean.produto}" value="#{produto}" />
 										</p:commandButton>
 									</p:column>
+
+									<p:rowExpansion>
+										<p:dataTable
+											value="#{cadastroPedidoBean.adicionaisNoPastel(produto)}"
+											var="adicional">
+
+											<p:column headerText="Nome do adicional">
+												<h:outputLabel value="#{adicional.nome}" />
+											</p:column>
+
+										</p:dataTable>
+									</p:rowExpansion>
 
 								</p:dataTable>
 							</div>
@@ -228,11 +245,11 @@
 						</p:column>
 
 						<p:column headerText="Add" width="50">
-							<p:commandButton icon="fa fa-plus"
-								action="#{cadastroPedidoBean.adicionarAdicionalAoPastel}"
-								update=":formPedido:tabelaItens :formPedido:valorTotalPedido :formPedido:valorTotalPedidoDlg :formPedido:mensagens">
+							<p:commandButton icon="fa fa-plus" process="@this"
+								update=":formPedido:tabelaProduto"
+								action="#{cadastroPedidoBean.adicionarAdicionalAoPastel}">
 								<f:setPropertyActionListener
-									target="#{cadastroPedidoBean.adicional}" value="#{produto}" />
+									target="#{cadastroPedidoBean.adicional}" value="#{adicional}" />
 							</p:commandButton>
 						</p:column>
 					</p:dataTable>
