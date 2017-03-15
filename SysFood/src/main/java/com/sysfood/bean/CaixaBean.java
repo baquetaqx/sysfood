@@ -53,7 +53,7 @@ public class CaixaBean implements Serializable {
 		caixa = new Caixa();
 	}
 
-	public void fecharCaixa() {
+	public void fecharCaixa() throws NegocioException {
 		caixa.setCaixaAberto(false);
 		caixa = caixaBo.fecharCaixa(caixa);
 		FacesUtil.addInfoMessage("Caixa fechado com sucesso!");

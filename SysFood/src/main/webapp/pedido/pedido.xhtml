@@ -44,7 +44,7 @@
 								icon="fa fa-fw fa-cutlery" />
 						</div>
 					</div>
-
+					<p:messages id="mensagens" closable="true" />
 				</div>
 				<div class="col-lg-2"></div>
 				<div class="col-lg-8">
@@ -91,7 +91,7 @@
 									<p:commandLink styleClass="fa fa-remove"
 										action="#{cadastroPedidoBean.removerItem(item)}"
 										process="@this"
-										update=":formPedido:tabelaItens :formPedido:valorTotalPedido formPedido:valorTotalPedidoDlg" />
+										update=":formPedido:tabelaItens :formPedido:valorTotalPedido :formPedido:valorTotalPedidoDlg :formPedido:mensagens" />
 								</p:column>
 
 							</p:dataTable>
@@ -134,7 +134,6 @@
 							</div>
 							<div class="panel-body">
 
-								<p:messages id="mensagens" closable="true" />
 								<h:panelGrid columns="2" style="width:100%" id="gridProduto">
 
 									<h:panelGroup>
@@ -236,7 +235,7 @@
 					</p:inputText>
 					<br />
 					<br />
-					<p:messages />
+
 					<p:dataTable paginator="true" rows="6"
 						emptyMessage="Nenhum adicional encontrado"
 						paginatorPosition="bottom" id="tabelaAdicional"
@@ -312,6 +311,19 @@
 											<p:ajax event="keyup" process="@this"
 												listener="#{cadastroPedidoBean.calcularTroco}"
 												update="formPedido:valorTroco" />
+
+											<script>
+												function configurarMoeda() {
+													$(".moeda").maskMoney({
+														decimal : ",",
+														thousands : ".",
+														allowZero : true
+													});
+												}
+												$(document).ready(function() {
+													configurarMoeda();
+												});
+											</script>
 										</p:inputText>
 
 										<br />

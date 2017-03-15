@@ -31,13 +31,13 @@ public class CaixaBo implements Serializable {
 		}
 		
 		caixaDao.guardar(caixa);
-		cumpomBo.imprimirCaixa(caixa);
+		
 		
 		return caixa;
 	}
 
 	@Transactional
-	public Caixa fecharCaixa(Caixa c) {
+	public Caixa fecharCaixa(Caixa c) throws NegocioException {
 		Caixa caixa = caixaDao.porId(c.getId());
 
 		BigDecimal debito = caixaDao.calcularDebito(caixa);
@@ -53,7 +53,7 @@ public class CaixaBo implements Serializable {
 		caixa.setNumeroDePedidos(quantidadePedidos);
 		caixa.setTotal(total);
 		caixa.setCaixaAberto(false);
-
+		cumpomBo.imprimirCaixa(caixa);
 		return caixaDao.guardar(caixa);
 
 	}

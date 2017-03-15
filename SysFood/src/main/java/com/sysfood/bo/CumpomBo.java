@@ -99,18 +99,24 @@ public class CumpomBo implements Serializable {
 		iRetornos.add(cupom.FormataTX("---------------------------------------------\n", 2, 0, 0, 0, 0));
 		iRetornos.add(cupom.FormataTX("Data de abertura:\t "
 				+ new SimpleDateFormat("dd/MM/yyy - HH:mm").format(caixa.getDataDeAbertura()) + "\n", 2, 0, 0, 0, 0));
-		iRetornos.add(cupom.FormataTX("Fundo de caixa:\t" + caixa.getFundoDeCaixa() + "\n", 2, 0, 0, 0, 0));
-		iRetornos.add(cupom.FormataTX("Débito:\t" + caixa.getDebito() + "\n", 2, 0, 0, 0, 0));
-		iRetornos.add(cupom.FormataTX("Crédito:\t" + caixa.getCredito() + "\n", 2, 0, 0, 0, 0));
-		iRetornos.add(cupom.FormataTX("Dinheiro:\t" + caixa.getDinheiro() + "\n", 2, 0, 0, 0, 0));
-		iRetornos.add(cupom.FormataTX("Número de pedidos:\t" + caixa.getNumeroDePedidos() + "\n", 2, 0, 0, 0, 0));
-		iRetornos.add(cupom.FormataTX("Total:\t" + caixa.getTotal() + "\n", 2, 0, 0, 0, 0));
+		iRetornos.add(cupom.FormataTX("Fundo de caixa:\t" + "R$ " +caixa.getFundoDeCaixa() + "\n", 2, 0, 0, 0, 0));
+		iRetornos.add(cupom.FormataTX("Débito:\t" + "R$ " +caixa.getDebito() + "\n", 2, 0, 0, 0, 0));
+		iRetornos.add(cupom.FormataTX("Crédito:\t" + "R$ " +caixa.getCredito() + "\n", 2, 0, 0, 0, 0));
+		iRetornos.add(cupom.FormataTX("Dinheiro:\t" + "R$ " +caixa.getDinheiro() + "\n", 2, 0, 0, 0, 0));
+		iRetornos.add(cupom.FormataTX("Número de pedidos: \t" +"R$ " +caixa.getNumeroDePedidos() + "\n", 2, 0, 0, 0, 0));
+		iRetornos.add(cupom.FormataTX("Total:\t" + "R$ " +caixa.getTotal() + "\n", 2, 0, 0, 0, 0));
 		iRetornos.add(cupom.FormataTX("---------------------------------------------\n", 2, 0, 0, 0, 0));
+		iRetornos.add(cupom.AcionaGuilhotina(1));
+
+		// Fechar Porta
+		iRetornos.add(cupom.FechaPorta());
+
 		for (Integer integer : iRetornos) {
 			if (integer == 0) {
 				throw new NegocioException("Erro de comunicação física.");
 			}
 		}
+		
 	}
 
 }
