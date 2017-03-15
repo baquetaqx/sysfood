@@ -100,6 +100,9 @@ public class ItemPedido implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((pastelComAdicionais == null) ? 0 : pastelComAdicionais.hashCode());
+		result = prime * result + ((pedido == null) ? 0 : pedido.hashCode());
+		result = prime * result + ((produto == null) ? 0 : produto.hashCode());
 		return result;
 	}
 
@@ -116,6 +119,21 @@ public class ItemPedido implements Serializable {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
+			return false;
+		if (pastelComAdicionais == null) {
+			if (other.pastelComAdicionais != null)
+				return false;
+		} else if (!pastelComAdicionais.equals(other.pastelComAdicionais))
+			return false;
+		if (pedido == null) {
+			if (other.pedido != null)
+				return false;
+		} else if (!pedido.equals(other.pedido))
+			return false;
+		if (produto == null) {
+			if (other.produto != null)
+				return false;
+		} else if (!produto.equals(other.produto))
 			return false;
 		return true;
 	}
