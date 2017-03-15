@@ -12,6 +12,7 @@ import com.sysfood.bo.ProdutoBo;
 import com.sysfood.dao.filter.ProdutoFilter;
 import com.sysfood.exception.NegocioException;
 import com.sysfood.model.Produto;
+import com.sysfood.model.SecaoProduto;
 import com.sysfood.util.jsf.FacesUtil;
 
 @Named
@@ -32,9 +33,9 @@ public class PesquisaProdutosBean implements Serializable {
 		filtro = new ProdutoFilter();
 		produto = new Produto();
 	}
-	
+
 	@PostConstruct
-	public void init(){
+	public void init() {
 		pesquisar();
 	}
 
@@ -70,6 +71,10 @@ public class PesquisaProdutosBean implements Serializable {
 
 	public void setProduto(Produto produto) {
 		this.produto = produto;
+	}
+
+	public SecaoProduto[] getSecao() {
+		return SecaoProduto.values();
 	}
 
 }

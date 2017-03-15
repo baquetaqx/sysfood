@@ -20,6 +20,7 @@ import com.sysfood.model.Adicional;
 import com.sysfood.model.ItemPedido;
 import com.sysfood.model.Pedido;
 import com.sysfood.model.Produto;
+import com.sysfood.model.SecaoProduto;
 import com.sysfood.model.TipoPagamento;
 import com.sysfood.util.jsf.FacesUtil;
 
@@ -125,7 +126,8 @@ public class CadastroPedidoBean implements Serializable {
 		boolean existeItem = false;
 
 		for (ItemPedido item : this.getPedido().getItens()) {
-			if (produto.equals(item.getProduto()) && !item.getPastelComAdicionais().containsKey(produto) && pastelComAdicionais.isEmpty()) {
+			if (produto.equals(item.getProduto()) && !item.getPastelComAdicionais().containsKey(produto)
+					&& pastelComAdicionais.isEmpty()) {
 				existeItem = true;
 				break;
 			} else if (item.getPastelComAdicionais().containsKey(produto)
@@ -232,6 +234,10 @@ public class CadastroPedidoBean implements Serializable {
 
 	public void setPastelComAdicionais(Map<Produto, List<Adicional>> pastelComAdicionais) {
 		this.pastelComAdicionais = pastelComAdicionais;
+	}
+
+	public SecaoProduto[] getSecao() {
+		return SecaoProduto.values();
 	}
 
 }

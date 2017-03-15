@@ -151,6 +151,15 @@
 												update=":formPedido:tabelaProduto" />
 										</p:inputText>
 									</h:panelGroup>
+									<h:outputText value="Seção" />
+									<p:selectOneRadio value="#{cadastroPedidoBean.produtoFilter.secao}">
+										<f:selectItems value="#{cadastroPedidoBean.secao}"
+											var="secao" itemLabel="#{secao.descricao}"
+											itemValue="#{secao}" />
+										<p:ajax event="change"
+											listener="#{cadastroPedidoBean.pesquisarProduto}"
+											update=":formPedido:tabelaProduto" />
+									</p:selectOneRadio>
 								</h:panelGrid>
 								<br />
 								<p:dataTable paginator="true" rows="4"

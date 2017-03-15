@@ -30,18 +30,26 @@
 					<div class="panel-body">
 
 						<h:form prependId="false">
+							<h:panelGrid columns="2">
 							Nome do Produto:
 							<p:inputText styleClass="form-control"
-								value="#{pesquisaProdutosBean.filtro.nome}"
-								style="display:inline-table;width:70%; margin-right:5px">
-								<p:ajax event="keyup"
-									listener="#{pesquisaProdutosBean.pesquisar}"
-									update="tabelaProduto" />
-							</p:inputText>
-							<p:commandButton value="Pesquisar"
-								action="#{pesquisaProdutosBean.pesquisar}"
-								update="tabelaProduto" icon="fa fa-search"
-								styleClass="btnSearch" />
+									value="#{pesquisaProdutosBean.filtro.nome}"
+									style="display:inline-table;width:70%; margin-right:5px">
+									<p:ajax event="keyup"
+										listener="#{pesquisaProdutosBean.pesquisar}"
+										update="tabelaProduto" />
+								</p:inputText>
+								<h:outputText value="Seção" />
+								<p:selectOneRadio value="#{pesquisaProdutosBean.filtro.secao}">
+									<f:selectItems value="#{pesquisaProdutosBean.secao}"
+										var="secao" itemLabel="#{secao.descricao}"
+										itemValue="#{secao}" />
+								</p:selectOneRadio>
+								<p:commandButton value="Pesquisar"
+									action="#{pesquisaProdutosBean.pesquisar}"
+									update="tabelaProduto" icon="fa fa-search"
+									styleClass="btnSearch" />
+							</h:panelGrid>
 							<br />
 							<br />
 							<p:messages />
@@ -50,7 +58,7 @@
 								paginatorPosition="bottom" id="tabelaProduto"
 								value="#{pesquisaProdutosBean.produtosFiltrados}" var="produto"
 								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-								rowsPerPageTemplate="5,10,15" >
+								rowsPerPageTemplate="5,10,15">
 								<p:column headerText="Status" width="100"
 									style="text-align:center">
 									<p:commandLink id="lnkAlterarStatus"
