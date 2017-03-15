@@ -19,7 +19,7 @@ public class PedidoBo implements Serializable {
 
 	@Inject
 	private EstoqueBo estoqueBo;
-	
+
 	@Inject
 	private CumpomBo cumpomBo;
 
@@ -32,11 +32,11 @@ public class PedidoBo implements Serializable {
 		}
 
 		estoqueBo.baixarItensEstoque(pedido);
-
+		Pedido pedidoImprimir = pedido;
 		pedido = pedidoDao.guardar(pedido);
-		
-//		cumpomBo.imprimirCupom(pedido);
-		
+
+		cumpomBo.imprimirCupom(pedidoImprimir);
+
 		return pedido;
 	}
 

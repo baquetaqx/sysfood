@@ -62,7 +62,7 @@ public class CumpomBo implements Serializable {
 
 		for (ItemPedido item : pedido.getItens()) {
 			iRetornos.add(cupom.FormataTX(
-					"Qtd = " + item.getQuantidade() + "/" + item.getProduto().getNome() + temAdicional(item), 2, 0, 0,
+					"Qtd = " + item.getQuantidade() + "/" + item.getProduto().getNome() + temAdicional(item)+"\n", 2, 0, 0,
 					0, 0));
 		}
 
@@ -81,7 +81,7 @@ public class CumpomBo implements Serializable {
 	}
 
 	private String temAdicional(ItemPedido item) {
-		if (item.getPastelComAdicionais().get(item.getProduto()) != null) {
+		if (item.getPastelComAdicionais()!=null && item.getPastelComAdicionais().get(item.getProduto()) != null) {
 			return "\n" + "Adicional(is): "
 					+ item.getPastelComAdicionais().get(item.getProduto()).toString().replaceAll("[\\[\\]]", "");
 		}
