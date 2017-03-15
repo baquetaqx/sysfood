@@ -73,4 +73,9 @@ public class Adicional implements Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return nome;
+	}
+
 }

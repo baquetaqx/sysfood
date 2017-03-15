@@ -62,8 +62,8 @@ public class CumpomBo implements Serializable {
 
 		for (ItemPedido item : pedido.getItens()) {
 			iRetornos.add(cupom.FormataTX(
-					"Qtd = " + item.getQuantidade() + "/" + item.getProduto().getNome() + "\n" + "Adicionais: - " , 2, 0,
-					0, 0, 0));
+					"Qtd = " + item.getQuantidade() + "/" + item.getProduto().getNome() + temAdicional(item), 2, 0, 0,
+					0, 0));
 		}
 
 		iRetornos.add(cupom.FormataTX("=============================================\n", 2, 0, 0, 0, 0));
@@ -80,6 +80,15 @@ public class CumpomBo implements Serializable {
 
 	}
 
+	private String temAdicional(ItemPedido item) {
+		if (item.getPastelComAdicionais().get(item.getProduto()) != null) {
+			return "\n" + "Adicional(is): "
+					+ item.getPastelComAdicionais().get(item.getProduto()).toString().replaceAll("[\\[\\]]", "");
+		}
+
+		return "";
+	}
+
 	public void imprimirCaixa(Caixa caixa) throws NegocioException {
 		BematechNFiscal cupom = BematechNFiscal.Instance;
 		List<Integer> iRetornos = new ArrayList<>();
@@ -88,11 +97,8 @@ public class CumpomBo implements Serializable {
 
 		iRetornos.add(cupom.FormataTX("PASTEL DO CÉU - RELATÓRIO DE CAIXA\n\n\n", 3, 0, 0, 0, 0));
 		iRetornos.add(cupom.FormataTX("---------------------------------------------\n", 2, 0, 0, 0, 0));
-		iRetornos
-				.add(cupom.FormataTX(
-						"Data de abertura:\t "
-								+ new SimpleDateFormat("dd/MM/yyy - HH:mm").format(caixa.getDataDeAbertura()) + "\n",
-						2, 0, 0, 0, 0));
+		iRetornos.add(cupom.FormataTX("Data de abertura:\t "
+				+ new SimpleDateFormat("dd/MM/yyy - HH:mm").format(caixa.getDataDeAbertura()) + "\n", 2, 0, 0, 0, 0));
 		iRetornos.add(cupom.FormataTX("Fundo de caixa:\t" + caixa.getFundoDeCaixa() + "\n", 2, 0, 0, 0, 0));
 		iRetornos.add(cupom.FormataTX("Débito:\t" + caixa.getDebito() + "\n", 2, 0, 0, 0, 0));
 		iRetornos.add(cupom.FormataTX("Crédito:\t" + caixa.getCredito() + "\n", 2, 0, 0, 0, 0));
