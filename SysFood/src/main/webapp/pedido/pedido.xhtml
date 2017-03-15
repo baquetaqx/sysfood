@@ -124,7 +124,7 @@
 
 				<p:dialog widgetVar="dlgProduto" resizable="false"
 					id="dialogProduto" closable="true" width="700" modal="true"
-					header="Escolha os produtos" height="530">
+					header="Escolha os produtos" height="500">
 					<div class="col-lg-12">
 						<div class="panel panel-default">
 							<div class="panel-heading">
@@ -152,10 +152,10 @@
 										</p:inputText>
 									</h:panelGroup>
 									<h:outputText value="Seção" />
-									<p:selectOneRadio value="#{cadastroPedidoBean.produtoFilter.secao}">
-										<f:selectItems value="#{cadastroPedidoBean.secao}"
-											var="secao" itemLabel="#{secao.descricao}"
-											itemValue="#{secao}" />
+									<p:selectOneRadio
+										value="#{cadastroPedidoBean.produtoFilter.secao}">
+										<f:selectItems value="#{cadastroPedidoBean.secao}" var="secao"
+											itemLabel="#{secao.descricao}" itemValue="#{secao}" />
 										<p:ajax event="change"
 											listener="#{cadastroPedidoBean.pesquisarProduto}"
 											update=":formPedido:tabelaProduto" />
@@ -265,7 +265,10 @@
 							</p:commandButton>
 						</p:column>
 					</p:dataTable>
-
+					<br />
+					<p:commandButton value="Concluir Adicionais"
+						onclick="PF('dlgAdicional').hide()"
+						styleClass="btn btn-success btn-lg btn-salvar" />
 				</p:dialog>
 
 				<p:dialog header="Realizando o pagamento da venda" widgetVar="dlg"
