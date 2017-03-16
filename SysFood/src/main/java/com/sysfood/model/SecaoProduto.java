@@ -1,7 +1,7 @@
 package com.sysfood.model;
 
 public enum SecaoProduto {
-	PASTEIS("Pastéis"), REFRIGERANTES("Refrigerantes"), SUCOS("Sucos");
+	PASTEIS("Pastéis G"),MINI("Mini Pasteis") ,REFRIGERANTES("Refrigerantes"), SUCOS("Sucos"), AGUA("Água");
 	
 	private String descricao;
 
