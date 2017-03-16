@@ -11,6 +11,8 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.context.RequestContext;
+
 import com.sysfood.bo.AdicionalBO;
 import com.sysfood.bo.PedidoBo;
 import com.sysfood.bo.ProdutoBo;
@@ -91,16 +93,29 @@ public class CadastroPedidoBean implements Serializable {
 			FacesUtil.addErrorMessage("Já existe um item no pedido com o produto informado.");
 
 		} else {
+
 			ItemPedido item = new ItemPedido();
 			item.setPedido(pedido);
 			item.setProduto(produto);
 			item.setValorUnitario(produto.getPreco());
 			item.setPastelComAdicionais(pastelComAdicionais);
+			item.setPastelComAdicionais(pastelComAdicionais);
 			pedido.getItens().add(item);
 			recalcularPedido();
 		}
 		pastelComAdicionais = new HashMap<>();
+
 	}
+	
+	public void verificarPastel(){
+		if ((produto.getSecao() == SecaoProduto.PASTEIS) && !pastelComAdicionais.containsKey(produto)) {
+			RequestContext.getCurrentInstance().execute("PF('dlgAdicional').show()");
+		}	else{
+			adicionarItem();
+		}
+	}
+	
+
 
 	public void adicionarAdicionalAoPastel() {
 		if (existePastelComAdicionais(produto, adicional)) {

@@ -44,7 +44,7 @@ public class ProdutoDao implements Serializable {
 		CriteriaQuery<Produto> criteriaQuery = builder.createQuery(Produto.class);
 
 		Root<Produto> produto = criteriaQuery.from(Produto.class);
-		Order order = builder.asc(produto.get("nome"));
+		Order order = builder.asc(produto.get("secao"));
 
 		criteriaQuery.select(produto);
 

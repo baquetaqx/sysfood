@@ -151,7 +151,13 @@
 												update=":formPedido:tabelaProduto" />
 										</p:inputText>
 									</h:panelGroup>
-									<h:outputText value="Seção" />
+									<h:panelGroup>
+										<br />
+									</h:panelGroup>
+									<h:panelGroup>
+										<br />
+									</h:panelGroup>
+									<h:outputText value="Seção:" />
 									<p:selectOneRadio
 										value="#{cadastroPedidoBean.produtoFilter.secao}">
 										<f:selectItems value="#{cadastroPedidoBean.secao}" var="secao"
@@ -185,7 +191,7 @@
 										<h:outputLabel value="#{produto.quantidadeEstoque}"
 											rendered="#{produto.notPastel}" />
 									</p:column>
-									<p:column headerText="Adicional" width="85"
+									<!-- <p:column headerText="Adicional" width="85"
 										style="text-align: center">
 										<p:commandLink styleClass="fa fa-plus-circle"
 											rendered="#{produto.pastel and empty cadastroPedidoBean.pastelComAdicionais}"
@@ -195,10 +201,10 @@
 											<f:setPropertyActionListener
 												target="#{cadastroPedidoBean.produto}" value="#{produto}" />
 										</p:commandLink>
-									</p:column>
+									</p:column> -->
 									<p:column headerText="Add" width="50">
 										<p:commandButton icon="fa fa-plus"
-											action="#{cadastroPedidoBean.adicionarItem}"
+											action="#{cadastroPedidoBean.verificarPastel}"
 											update=":formPedido:tabelaItens :formPedido:valorTotalPedido :formPedido:valorTotalPedidoDlg :formPedido:mensagens 
 											:formPedido:tabelaProduto"
 											process="@this">
@@ -266,7 +272,7 @@
 						</p:column>
 					</p:dataTable>
 					<br />
-					<p:commandButton value="Concluir Adicionais"
+					<p:commandButton value="Concluir Adicionais" action="#{cadastroPedidoBean.verificarPastel}"
 						onclick="PF('dlgAdicional').hide()"
 						styleClass="btn btn-success btn-lg btn-salvar" />
 				</p:dialog>

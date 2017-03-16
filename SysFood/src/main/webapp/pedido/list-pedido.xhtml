@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/templates/layoutPrincipal.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">SysFood - Dados da empresa</ui:define>
+	<ui:define name="page-header">
+		<h1 class="page-header">Lista de Pedidos e Pedidos Cancelados</h1>
+	</ui:define>
+	<ui:define name="conteudo">
+		<div class="row">
+			<h:form id="formPedido">
+
+				<div class="col-lg-12 centralizar">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">
+								<i class="fa fa-fw fa-cutlery"></i> Controle de Pedidos
+							</h3>
+						</div>
+						<div class="panel-body">
+							<div class="col-lg-6">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h3 class="panel-title">
+											<i class="fa fa-reorder"></i> Lista de pedidos
+										</h3>
+									</div>
+									<div class="panel-body">
+										<p:messages />
+										<h:panelGrid columns="2" width="400">
+										Nome do Cliente:
+										<p:inputText styleClass="form-control" />
+
+											<h:panelGroup>
+												<br />
+										Data do pedido:
+										</h:panelGroup>
+											<h:panelGroup>
+												<br />
+												<p:calendar id="popup" size="10" pattern="dd/MM/yyyy"
+													style="float:left" />
+											</h:panelGroup>
+										</h:panelGrid>
+										<br />
+										<p:dataTable paginator="true" rows="10"
+											paginatorPosition="bottom"
+											paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+											rowsPerPageTemplate="5,10,15">
+											<p:column headerText="Nome do cliente">
+
+											</p:column>
+											<p:column headerText="Data do pedido" width="130">
+
+											</p:column>
+
+											<p:column headerText="Cancelar" width="100">
+
+											</p:column>
+
+										</p:dataTable>
+									</div>
+								</div>
+							</div>
+							
+							
+							<div class="col-lg-6">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h3 class="panel-title">
+											<i class="fa fa-reorder"></i> Lista de pedidos cancelados
+										</h3>
+									</div>
+									<div class="panel-body">
+										<p:messages />
+										<h:panelGrid columns="2" width="400">
+										Nome do Cliente:
+										<p:inputText styleClass="form-control" />
+
+											<h:panelGroup>
+												<br />
+										Data do pedido:
+										</h:panelGroup>
+											<h:panelGroup>
+												<br />
+												<p:calendar size="10" pattern="dd/MM/yyyy"
+													style="float:left" />
+											</h:panelGroup>
+										</h:panelGrid>
+										<br />
+										<p:dataTable paginator="true" rows="10"
+											paginatorPosition="bottom"
+											paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+											rowsPerPageTemplate="5,10,15">
+											<p:column headerText="Nome do cliente">
+
+											</p:column>
+											<p:column headerText="Data do pedido" width="130">
+
+											</p:column>
+
+											<p:column headerText="Motivo" width="100">
+
+											</p:column>
+
+										</p:dataTable>
+									</div>
+								</div>
+							</div>
+							
+							
+						</div>
+					</div>
+				</div>
+			</h:form>
+
+		</div>
+	</ui:define>
+</ui:composition>
