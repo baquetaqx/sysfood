@@ -99,23 +99,20 @@ public class CadastroPedidoBean implements Serializable {
 			item.setProduto(produto);
 			item.setValorUnitario(produto.getPreco());
 			item.setPastelComAdicionais(pastelComAdicionais);
-			item.setPastelComAdicionais(pastelComAdicionais);
 			pedido.getItens().add(item);
 			recalcularPedido();
 		}
 		pastelComAdicionais = new HashMap<>();
 
 	}
-	
-	public void verificarPastel(){
-		if ((produto.getSecao() == SecaoProduto.PASTEIS) && !pastelComAdicionais.containsKey(produto)) {
+
+	public void verificarPastel() {
+		if ((produto.isPastel()) && !pastelComAdicionais.containsKey(produto)) {
 			RequestContext.getCurrentInstance().execute("PF('dlgAdicional').show()");
-		}	else{
+		} else {
 			adicionarItem();
 		}
 	}
-	
-
 
 	public void adicionarAdicionalAoPastel() {
 		if (existePastelComAdicionais(produto, adicional)) {
@@ -239,12 +236,17 @@ public class CadastroPedidoBean implements Serializable {
 		return pastelComAdicionais;
 	}
 
-	public List<Adicional> adicionaisNoPastel(Produto produto) {
-		return pastelComAdicionais.get(produto);
+	public List<Adicional> adicionaisNoPastel(ItemPedido item) {
+		return item.getPastelComAdicionais().get(item.getProduto());
 	}
 
-	public boolean pastelComAdicionais(Produto produto) {
-		return pastelComAdicionais.containsKey(produto);
+	public boolean isContemPastelComAdicionais() {
+		for (ItemPedido item : pedido.getItens()) {
+			if (!item.getPastelComAdicionais().isEmpty()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void setPastelComAdicionais(Map<Produto, List<Adicional>> pastelComAdicionais) {

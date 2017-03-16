@@ -51,7 +51,7 @@
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h3 class="panel-title">
-								<i class="fa fa-sort-amount-asc"></i> Cupom Fiscal
+								<i class="fa fa-sort-amount-asc"></i> Pedido
 							</h3>
 						</div>
 						<div class="panel-body">
@@ -63,6 +63,10 @@
 								var="item" id="tabelaItens"
 								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 								emptyMessage="Nenhum produto selecionado">
+								<p:column width="35"
+									rendered="#{cadastroPedidoBean.contemPastelComAdicionais}">
+									<p:rowToggler rendered="#{!empty item.pastelComAdicionais}"/>
+								</p:column>
 								<p:column headerText="Nome do produto" width="190">
 									<p:outputLabel value="#{item.produto.nome}"
 										styleClass="text-money" />
@@ -93,6 +97,18 @@
 										process="@this"
 										update=":formPedido:tabelaItens :formPedido:valorTotalPedido :formPedido:valorTotalPedidoDlg :formPedido:mensagens" />
 								</p:column>
+
+								<p:rowExpansion>
+									<p:dataTable
+										value="#{cadastroPedidoBean.adicionaisNoPastel(item)}"
+										var="adicional">
+
+										<p:column headerText="Nome do adicional">
+											<h:outputLabel value="#{adicional.nome}" />
+										</p:column>
+
+									</p:dataTable>
+								</p:rowExpansion>
 
 							</p:dataTable>
 
@@ -173,11 +189,6 @@
 									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 									value="#{cadastroPedidoBean.produtosFiltrados}" var="produto"
 									emptyMessage="Nenhum produto encontrado">
-									<p:column width="35"
-										rendered="#{!empty cadastroPedidoBean.pastelComAdicionais}">
-										<p:rowToggler
-											rendered="#{cadastroPedidoBean.pastelComAdicionais(produto)}" />
-									</p:column>
 									<p:column headerText="Nome do produto" width="240">
 										<h:outputLabel value="#{produto.nome}" />
 									</p:column>
@@ -187,44 +198,22 @@
 										</h:outputLabel>
 									</p:column>
 									<p:column headerText="Etq" width="50"
+										rendered="#{cadastroPedidoBean.produtoFilter.notPastel}"
 										style="text-align: center">
 										<h:outputLabel value="#{produto.quantidadeEstoque}"
 											rendered="#{produto.notPastel}" />
 									</p:column>
-									<!-- <p:column headerText="Adicional" width="85"
-										style="text-align: center">
-										<p:commandLink styleClass="fa fa-plus-circle"
-											rendered="#{produto.pastel and empty cadastroPedidoBean.pastelComAdicionais}"
-											process="@this" update=":formPedido:tabelaAdicional"
-											action="#{cadastroPedidoBean.pesquisarAdicional}"
-											onclick="PF('dlgAdicional').show()">
-											<f:setPropertyActionListener
-												target="#{cadastroPedidoBean.produto}" value="#{produto}" />
-										</p:commandLink>
-									</p:column> -->
 									<p:column headerText="Add" width="50">
 										<p:commandButton icon="fa fa-plus"
 											action="#{cadastroPedidoBean.verificarPastel}"
 											update=":formPedido:tabelaItens :formPedido:valorTotalPedido :formPedido:valorTotalPedidoDlg :formPedido:mensagens 
-											:formPedido:tabelaProduto"
-											process="@this">
+											:formPedido:tabelaProduto :formPedido:tabelaAdicional"
+											process="@this"
+											actionListener="#{cadastroPedidoBean.pesquisarAdicional}">
 											<f:setPropertyActionListener
 												target="#{cadastroPedidoBean.produto}" value="#{produto}" />
 										</p:commandButton>
 									</p:column>
-
-									<p:rowExpansion>
-										<p:dataTable
-											value="#{cadastroPedidoBean.adicionaisNoPastel(produto)}"
-											var="adicional">
-
-											<p:column headerText="Nome do adicional">
-												<h:outputLabel value="#{adicional.nome}" />
-											</p:column>
-
-										</p:dataTable>
-									</p:rowExpansion>
-
 								</p:dataTable>
 							</div>
 						</div>
@@ -272,9 +261,12 @@
 						</p:column>
 					</p:dataTable>
 					<br />
-					<p:commandButton value="Concluir Adicionais" action="#{cadastroPedidoBean.verificarPastel}"
+					<p:commandButton value="Concluir Adicionais"
 						onclick="PF('dlgAdicional').hide()"
-						styleClass="btn btn-success btn-lg btn-salvar" />
+						update=":formPedido:tabelaProduto :formPedido:tabelaItens"
+						action="#{cadastroPedidoBean.adicionarItem}"
+						styleClass="btn btn-success btn-lg btn-salvar">
+					</p:commandButton>
 				</p:dialog>
 
 				<p:dialog header="Realizando o pagamento da venda" widgetVar="dlg"

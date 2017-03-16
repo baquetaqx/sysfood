@@ -36,4 +36,12 @@ public class ProdutoFilter implements Serializable {
 		this.secao = secao;
 	}
 
+	public boolean isPastel() {
+		return secao == SecaoProduto.PASTEIS;
+	}
+
+	public boolean isNotPastel() {
+		return !isPastel();
+	}
+
 }
