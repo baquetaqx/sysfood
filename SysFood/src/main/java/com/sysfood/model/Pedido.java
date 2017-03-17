@@ -19,6 +19,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
@@ -32,6 +33,8 @@ public class Pedido implements Serializable {
 	private String cliente;
 	private List<ItemPedido> itens = new ArrayList<>();
 	private TipoPagamento tipoPagamento;
+	private Boolean status = true;
+	private String motivoDoCancelamento;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -83,12 +86,13 @@ public class Pedido implements Serializable {
 		this.tipoPagamento = tipoPagamento;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
+	@Type(type = "true_false")
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
 	}
 
 	@NotNull
@@ -110,6 +114,23 @@ public class Pedido implements Serializable {
 			}
 		}
 		setValorTotal(total);
+	}
+
+	@Column(name = "motivo_do_cancelamento")
+	public String getMotivoDoCancelamento() {
+		return motivoDoCancelamento;
+	}
+
+	public void setMotivoDoCancelamento(String motivoDoCancelamento) {
+		this.motivoDoCancelamento = motivoDoCancelamento;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
 	}
 
 	@Override

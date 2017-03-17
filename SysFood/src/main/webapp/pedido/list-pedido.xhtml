@@ -33,7 +33,8 @@
 										<p:messages />
 										<h:panelGrid columns="2" width="400">
 										Nome do Cliente:
-										<p:inputText styleClass="form-control" />
+										<p:inputText styleClass="form-control"
+												value="#{pesquisaPedidoBean.pedidoFilterAtivo.cliente}" />
 
 											<h:panelGroup>
 												<br />
@@ -42,7 +43,8 @@
 											<h:panelGroup>
 												<br />
 												<p:calendar id="popup" size="10" pattern="dd/MM/yyyy"
-													style="float:left" />
+													style="float:left"
+													value="#{pesquisaPedidoBean.pedidoFilterAtivo.dataPedido}" />
 											</h:panelGroup>
 										</h:panelGrid>
 										<br />
@@ -65,8 +67,8 @@
 									</div>
 								</div>
 							</div>
-							
-							
+
+
 							<div class="col-lg-6">
 								<div class="panel panel-default">
 									<div class="panel-heading">
@@ -78,7 +80,8 @@
 										<p:messages />
 										<h:panelGrid columns="2" width="400">
 										Nome do Cliente:
-										<p:inputText styleClass="form-control" />
+										<p:inputText styleClass="form-control"
+												value="#{pesquisaPedidoBean.pedidoFilterInativo.cliente}" />
 
 											<h:panelGroup>
 												<br />
@@ -87,7 +90,8 @@
 											<h:panelGroup>
 												<br />
 												<p:calendar size="10" pattern="dd/MM/yyyy"
-													style="float:left" />
+													style="float:left"
+													value="#{pesquisaPedidoBean.pedidoFilterInativo.dataPedido}" />
 											</h:panelGroup>
 										</h:panelGrid>
 										<br />
@@ -110,8 +114,8 @@
 									</div>
 								</div>
 							</div>
-							
-							
+
+
 						</div>
 					</div>
 				</div>
