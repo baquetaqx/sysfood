@@ -131,6 +131,15 @@ public class Produto implements Serializable {
 		return null;
 	}
 
+	@Transient
+	public Produto remontarEstoque(Integer quantidade) {
+		if (controlarEstoque) {
+			this.setQuantidadeEstoque(this.getQuantidadeEstoque() + quantidade);
+			return this;
+		}
+		return null;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

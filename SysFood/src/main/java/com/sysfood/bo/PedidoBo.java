@@ -27,19 +27,23 @@ public class PedidoBo implements Serializable {
 
 	@Transactional
 	public Pedido salvar(Pedido pedido) throws NegocioException {
-		pedido.setDataPedido(new Date());
+		if (pedido.getStatus()) {
+			pedido.setDataPedido(new Date());
 
-		if (pedido.getItens().isEmpty()) {
-			throw new NegocioException("O pedido deve possuir pelo menos um item.");
+			if (pedido.getItens().isEmpty()) {
+				throw new NegocioException("O pedido deve possuir pelo menos um item.");
+			}
+
+			estoqueBo.baixarItensEstoque(pedido);
+			Pedido pedidoImprimir = pedido;
+			pedido = pedidoDao.guardar(pedido);
+
+			cumpomBo.imprimirCupom(pedidoImprimir);
+			return pedido;
 		}
+		estoqueBo.remontarItensEstoque(pedido);
+		return pedidoDao.guardar(pedido);
 
-		estoqueBo.baixarItensEstoque(pedido);
-		Pedido pedidoImprimir = pedido;
-		pedido = pedidoDao.guardar(pedido);
-
-		cumpomBo.imprimirCupom(pedidoImprimir);
-
-		return pedido;
 	}
 
 	public List<Pedido> filtrados(PedidoFilter pedidoFilterAtivo) {

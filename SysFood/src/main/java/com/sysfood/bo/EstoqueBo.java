@@ -27,4 +27,15 @@ public class EstoqueBo implements Serializable {
 			}
 		}
 	}
+
+	@Transactional
+	public void remontarItensEstoque(Pedido pedido) throws NegocioException {
+		for (ItemPedido item : pedido.getItens()) {
+			Produto produto = item.getProduto().remontarEstoque(item.getQuantidade());
+			if (produto != null) {
+				produtoBo.salvar(produto);
+			}
+		}
+
+	}
 }

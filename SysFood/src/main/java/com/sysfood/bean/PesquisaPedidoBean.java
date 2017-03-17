@@ -9,7 +9,9 @@ import javax.inject.Named;
 
 import com.sysfood.bo.PedidoBo;
 import com.sysfood.dao.filter.PedidoFilter;
+import com.sysfood.exception.NegocioException;
 import com.sysfood.model.Pedido;
+import com.sysfood.util.jsf.FacesUtil;
 
 @Named
 @ViewScoped
@@ -19,8 +21,8 @@ public class PesquisaPedidoBean implements Serializable {
 
 	private PedidoFilter pedidoFilterAtivo;
 	private PedidoFilter pedidoFilterInativo;
-	private List<Pedido> PedidosAtivosFiltrados;
-	private List<Pedido> PedidosInativosFiltrados;
+	private List<Pedido> pedidosAtivosFiltrados;
+	private List<Pedido> pedidosInativosFiltrados;
 	@Inject
 	private PedidoBo pedidoBo;
 
@@ -30,11 +32,22 @@ public class PesquisaPedidoBean implements Serializable {
 	}
 
 	public void pesquisarAtivos() {
-		PedidosAtivosFiltrados = pedidoBo.filtrados(pedidoFilterAtivo);
+		pedidoFilterAtivo.setStatus(true);
+		pedidosAtivosFiltrados = pedidoBo.filtrados(pedidoFilterAtivo);
 	}
 
 	public void pesquisarInativos() {
-		PedidosInativosFiltrados = pedidoBo.filtrados(pedidoFilterInativo);
+		pedidoFilterAtivo.setStatus(false);
+		pedidosInativosFiltrados = pedidoBo.filtrados(pedidoFilterInativo);
+	}
+
+	public void cancelarPedido(Pedido pedido) {
+		try {
+			pedidoBo.salvar(pedido);
+			FacesUtil.addInfoMessage("Pedido Cancelado!");
+		} catch (NegocioException e) {
+			FacesUtil.addErrorMessage(e.getMessage());
+		}
 	}
 
 	public PedidoFilter getPedidoFilterAtivo() {
@@ -46,11 +59,11 @@ public class PesquisaPedidoBean implements Serializable {
 	}
 
 	public List<Pedido> getPedidosAtivosFiltrados() {
-		return PedidosAtivosFiltrados;
+		return pedidosAtivosFiltrados;
 	}
 
 	public List<Pedido> getPedidosInativosFiltrados() {
-		return PedidosInativosFiltrados;
+		return pedidosInativosFiltrados;
 	}
 
 }
