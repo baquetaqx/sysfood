@@ -64,7 +64,8 @@ public class CaixaDao implements Serializable {
 		ParameterExpression<Date> dataInicial = builder.parameter(Date.class, "dataInicial");
 		ParameterExpression<Date> dataFinal = builder.parameter(Date.class, "dataFinal");
 
-		criteriaQuery.where(builder.between(pedido.get("dataPedido"), dataInicial, dataFinal));
+		criteriaQuery.where(builder.and(builder.between(pedido.get("dataPedido"), dataInicial, dataFinal),
+				builder.equal(pedido.get("status"), true)));
 
 		TypedQuery<Long> query = manager.createQuery(criteriaQuery);
 
@@ -95,7 +96,8 @@ public class CaixaDao implements Serializable {
 		ParameterExpression<Date> dataFinal = builder.parameter(Date.class, "dataFinal");
 
 		criteriaQuery.where(builder.and(builder.equal(pedido.get("tipoPagamento"), tipoPagamento),
-				builder.between(pedido.get("dataPedido"), dataInicial, dataFinal)));
+				builder.between(pedido.get("dataPedido"), dataInicial, dataFinal),
+				builder.equal(pedido.get("status"), true)));
 
 		TypedQuery<BigDecimal> query = manager.createQuery(criteriaQuery);
 
