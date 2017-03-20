@@ -131,8 +131,7 @@
 						onclick="PF('dlg').show();"
 						process="@this :formPedido:nomeCliente"
 						update=":formPedido:mensagens" />
-						<br />
-						<br />
+					<br /> <br />
 					<p:button value="Novo Pedido"
 						styleClass="btn btn-danger btn-lg btn-salvar"
 						outcome="/pedido/pedido.xhtml" />
@@ -198,7 +197,7 @@
 										</h:outputLabel>
 									</p:column>
 									<p:column headerText="Etq" width="50"
-										rendered="#{cadastroPedidoBean.produtoFilter.notPastel}"
+										rendered="#{cadastroPedidoBean.produtoFilter.notPastel and cadastroPedidoBean.produtoFilter.notMiniPastel}"
 										style="text-align: center">
 										<h:outputLabel value="#{produto.quantidadeEstoque}"
 											rendered="#{produto.notPastel}" />

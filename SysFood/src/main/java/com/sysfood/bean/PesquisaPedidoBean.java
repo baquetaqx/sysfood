@@ -7,6 +7,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.sysfood.bo.ItemPedidoBo;
 import com.sysfood.bo.PedidoBo;
 import com.sysfood.dao.filter.PedidoFilter;
 import com.sysfood.exception.NegocioException;
@@ -23,12 +24,17 @@ public class PesquisaPedidoBean implements Serializable {
 	private PedidoFilter pedidoFilterInativo;
 	private List<Pedido> pedidosAtivosFiltrados;
 	private List<Pedido> pedidosInativosFiltrados;
+	private String motivo;
+	private Pedido pedido;
 	@Inject
 	private PedidoBo pedidoBo;
+	@Inject
+	private ItemPedidoBo itemPedidoBo;
 
 	public PesquisaPedidoBean() {
 		pedidoFilterAtivo = new PedidoFilter();
 		pedidoFilterInativo = new PedidoFilter();
+		pedido = new Pedido();
 	}
 
 	public void pesquisarAtivos() {
@@ -41,10 +47,13 @@ public class PesquisaPedidoBean implements Serializable {
 		pedidosInativosFiltrados = pedidoBo.filtrados(pedidoFilterInativo);
 	}
 
-	public void cancelarPedido(Pedido pedido) {
+	public void cancelarPedido() {
 		try {
+			pedido.setItens(itemPedidoBo.porPedido(pedido));
+			pedido.setMotivoDoCancelamento(motivo);
 			pedidoBo.salvar(pedido);
 			FacesUtil.addInfoMessage("Pedido Cancelado!");
+			pesquisarAtivos();
 		} catch (NegocioException e) {
 			FacesUtil.addErrorMessage(e.getMessage());
 		}
@@ -64,6 +73,22 @@ public class PesquisaPedidoBean implements Serializable {
 
 	public List<Pedido> getPedidosInativosFiltrados() {
 		return pedidosInativosFiltrados;
+	}
+
+	public String getMotivo() {
+		return motivo;
+	}
+
+	public void setMotivo(String motivo) {
+		this.motivo = motivo;
+	}
+
+	public Pedido getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
 	}
 
 }

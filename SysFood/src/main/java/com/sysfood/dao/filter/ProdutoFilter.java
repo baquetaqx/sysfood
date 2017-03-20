@@ -44,4 +44,12 @@ public class ProdutoFilter implements Serializable {
 		return !isPastel();
 	}
 
+	public boolean isMiniPastel() {
+		return secao == SecaoProduto.MINI_PASTEIS;
+	}
+
+	public boolean isNotMiniPastel() {
+		return !isMiniPastel();
+	}
+
 }

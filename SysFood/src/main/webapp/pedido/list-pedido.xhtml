@@ -30,7 +30,7 @@
 										</h3>
 									</div>
 									<div class="panel-body">
-										<p:messages />
+										<p:messages id="msgPedidosAtivos" />
 										<h:panelGrid columns="2" width="400">
 										Nome do Cliente:
 										<p:inputText styleClass="form-control"
@@ -66,7 +66,13 @@
 											</p:column>
 
 											<p:column headerText="Cancelar" width="100">
-
+												<p:commandButton value="X" onclick="PF('dlgMotivo').show();">
+													<f:setPropertyActionListener
+														target="#{pesquisaPedidoBean.pedido}" value="#{pedido}" />
+													<f:setPropertyActionListener
+														target="#{pesquisaPedidoBean.pedido.status}"
+														value="#{!pedido.status}" />
+												</p:commandButton>
 											</p:column>
 
 										</p:dataTable>
@@ -99,6 +105,7 @@
 													style="float:left"
 													value="#{pesquisaPedidoBean.pedidoFilterInativo.dataPedido}" />
 												<p:commandButton value="Pesquisar"
+													update=":formPedido:pedidosInativos"
 													action="#{pesquisaPedidoBean.pesquisarInativos}" />
 											</h:panelGroup>
 
@@ -107,7 +114,7 @@
 										<p:dataTable paginator="true" rows="10"
 											paginatorPosition="bottom"
 											value="#{pesquisaPedidoBean.pedidosInativosFiltrados}"
-											var="pedido"
+											var="pedido" id="pedidosInativos"
 											paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 											rowsPerPageTemplate="5,10,15">
 											<p:column headerText="Nome do cliente">
@@ -130,6 +137,17 @@
 						</div>
 					</div>
 				</div>
+				<p:dialog widgetVar="dlgMotivo" resizable="false" id="dialogMotivo"
+					closable="true" width="700" modal="true" header="Diga o motivo">
+					<h:outputText value="Motivo" />
+					<p:inputText value="#{pesquisaPedidoBean.motivo}" />
+
+					<p:commandButton value="Confirmar cancelamento"
+						onclick="PF('dlgMotivo').hide()"
+						update=":formPedido:msgPedidosAtivos :formPedido:pedidosAtivos"
+						action="#{pesquisaPedidoBean.cancelarPedido}">
+					</p:commandButton>
+				</p:dialog>
 			</h:form>
 
 		</div>
