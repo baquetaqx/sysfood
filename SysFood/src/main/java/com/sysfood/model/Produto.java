@@ -112,7 +112,17 @@ public class Produto implements Serializable {
 
 	@Transient
 	public boolean isNotPastel() {
-		return !isPastel() && !(secao == SecaoProduto.MINI_PASTEIS);
+		return !isPastel();
+	}
+
+	@Transient
+	public boolean isMiniPastel() {
+		return secao == SecaoProduto.MINI_PASTEIS;
+	}
+
+	@Transient
+	public boolean isNotMiniPastel() {
+		return !isMiniPastel();
 	}
 
 	@Transient
