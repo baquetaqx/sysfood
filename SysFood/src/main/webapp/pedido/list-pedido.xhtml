@@ -45,10 +45,11 @@
 												<p:calendar id="popup" size="10" pattern="dd/MM/yyyy"
 													style="float:left"
 													value="#{pesquisaPedidoBean.pedidoFilterAtivo.dataPedido}" />
+												<p:commandButton value="Pesquisar"
+													update=":formPedido:pedidosAtivos"
+													action="#{pesquisaPedidoBean.pesquisarAtivos}" />
 											</h:panelGroup>
-											<p:commandButton value="Pesquisar"
-												update=":formPedido:pedidosAtivos"
-												action="#{pesquisaPedidoBean.pesquisarAtivos}" />
+
 										</h:panelGrid>
 										<br />
 										<p:dataTable paginator="true" rows="10"
@@ -97,9 +98,10 @@
 												<p:calendar size="10" pattern="dd/MM/yyyy"
 													style="float:left"
 													value="#{pesquisaPedidoBean.pedidoFilterInativo.dataPedido}" />
+												<p:commandButton value="Pesquisar"
+													action="#{pesquisaPedidoBean.pesquisarInativos}" />
 											</h:panelGroup>
-											<p:commandButton value="Pesquisar"
-												action="#{pesquisaPedidoBean.pesquisarInativos}" />
+
 										</h:panelGrid>
 										<br />
 										<p:dataTable paginator="true" rows="10"

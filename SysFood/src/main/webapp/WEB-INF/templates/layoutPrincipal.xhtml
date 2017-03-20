@@ -58,16 +58,18 @@
 
 						<h:form onsubmit="action='#{request.contextPath}/logout';">
 							<h:panelGroup>
-								<p:commandLink id="lnkAlterarSenha" value="Alterar senha"
+							
+								<p:commandLink id="lnkAlterarSenha"
 									oncomplete="PF('dlgAlterarSenha').show();" immediate="true"
 									title="Alterar sua senha">
+									<i class="fa fa-fw fa-lock"></i>Alterar senha
 									<f:setPropertyActionListener target="#{usuarioBean.usuario}"
 										value="#{seguranca.usuarioLogado.usuario}" />
 								</p:commandLink>
 							</h:panelGroup>
 
 							<li><p:commandLink ajax="false" title="Sair do sistema">
-									<i class="fa fa-fw fa-power-off"></i> Log Out 
+									<i class="fa fa-fw fa-power-off"></i>Log Out 
 								</p:commandLink></li>
 						</h:form>
 					</ul></li>

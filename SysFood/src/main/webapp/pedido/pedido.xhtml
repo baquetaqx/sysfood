@@ -46,7 +46,6 @@
 					</div>
 					<p:messages id="mensagens" closable="true" />
 				</div>
-				<div class="col-lg-2"></div>
 				<div class="col-lg-8">
 					<div class="panel panel-default">
 						<div class="panel-heading">
@@ -65,7 +64,7 @@
 								emptyMessage="Nenhum produto selecionado">
 								<p:column width="35"
 									rendered="#{cadastroPedidoBean.contemPastelComAdicionais}">
-									<p:rowToggler rendered="#{!empty item.pastelComAdicionais}"/>
+									<p:rowToggler rendered="#{!empty item.pastelComAdicionais}" />
 								</p:column>
 								<p:column headerText="Nome do produto" width="190">
 									<p:outputLabel value="#{item.produto.nome}"
@@ -124,19 +123,20 @@
 
 						</div>
 						<br />
-						<div class="centralizar">
-							<p:commandButton value="Finalizar Pedido"
-								styleClass="btn btn-primary btn-lg btn-salvar"
-								onclick="PF('dlg').show();"
-								process="@this :formPedido:nomeCliente"
-								update=":formPedido:mensagens" />
-							<p:button value="Novo Pedido"
-								styleClass="btn btn-danger btn-lg btn-salvar"
-								outcome="/pedido/pedido.xhtml" />
-						</div>
 					</div>
 				</div>
-				<div class="col-lg-2"></div>
+				<div class="col-lg-4">
+					<p:commandButton value="Finalizar Pedido"
+						styleClass="btn btn-primary btn-lg btn-salvar"
+						onclick="PF('dlg').show();"
+						process="@this :formPedido:nomeCliente"
+						update=":formPedido:mensagens" />
+						<br />
+						<br />
+					<p:button value="Novo Pedido"
+						styleClass="btn btn-danger btn-lg btn-salvar"
+						outcome="/pedido/pedido.xhtml" />
+				</div>
 
 				<p:dialog widgetVar="dlgProduto" resizable="false"
 					id="dialogProduto" closable="true" width="700" modal="true"
