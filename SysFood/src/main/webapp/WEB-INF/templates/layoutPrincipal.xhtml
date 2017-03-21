@@ -58,7 +58,7 @@
 
 						<h:form onsubmit="action='#{request.contextPath}/logout';">
 							<h:panelGroup>
-							
+
 								<p:commandLink id="lnkAlterarSenha"
 									oncomplete="PF('dlgAlterarSenha').show();" immediate="true"
 									title="Alterar sua senha">
@@ -85,6 +85,11 @@
 						class="#{view.viewId eq '/pedido/pedido.xhtml' ? 'active' : ''}"><p:link
 							href="/pedido/pedido.xhtml">
 							<i class="fa fa-fw fa-cutlery"></i> Fazer pedidos</p:link></li>
+					<li
+						class="#{view.viewId eq '/pedido/list-pedido.xhtml' ? 'active' : ''}"><p:link
+							href="/pedido/list-pedido.xhtml">
+							<i class="fa fa-fw fa-times-circle"></i> Cancelar pedidos</p:link></li>
+
 					<li class="#{view.viewId eq '/financeiro.xhtml' ? 'active' : ''}"><a
 						href="#"><i class="fa fa-fw fa-money"></i> Controle Financeiro</a></li>
 					<p:separator></p:separator>

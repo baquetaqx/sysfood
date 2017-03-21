@@ -103,7 +103,9 @@
 									rowsPerPageTemplate="5,10,15">
 
 									<p:column headerText="Data de abertura" width="300">
-										<h:outputText value="#{caixa.dataDeAbertura}" />
+										<h:outputText value="#{caixa.dataDeAbertura}" >
+										<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
+										</h:outputText>
 									</p:column>
 									<p:column headerText="Visualizar" width="100"
 										styleClass="centralizar">

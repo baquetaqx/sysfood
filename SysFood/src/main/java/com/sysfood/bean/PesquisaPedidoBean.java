@@ -26,6 +26,7 @@ public class PesquisaPedidoBean implements Serializable {
 	private List<Pedido> pedidosInativosFiltrados;
 	private String motivo;
 	private Pedido pedido;
+	private Pedido peditoDialogo;
 	@Inject
 	private PedidoBo pedidoBo;
 	@Inject
@@ -89,6 +90,14 @@ public class PesquisaPedidoBean implements Serializable {
 
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
+	}
+
+	public Pedido getPeditoDialogo() {
+		return peditoDialogo;
+	}
+
+	public void setPeditoDialogo(Pedido peditoDialogo) {
+		this.peditoDialogo = peditoDialogo;
 	}
 
 }
