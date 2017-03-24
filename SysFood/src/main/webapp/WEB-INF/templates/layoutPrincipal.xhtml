@@ -90,8 +90,14 @@
 							href="/pedido/list-pedido.xhtml">
 							<i class="fa fa-fw fa-times-circle"></i> Cancelar pedidos</p:link></li>
 
-					<li class="#{view.viewId eq '/financeiro.xhtml' ? 'active' : ''}"><a
-						href="#"><i class="fa fa-fw fa-money"></i> Controle Financeiro</a></li>
+					<li class="#{view.viewId eq 'financeiro/relatorioCaixa.xhtml' ? 'active' : ''}"><a
+						href="javascript:;" data-toggle="collapse" data-target="#demo"><i
+							class="fa fa-fw fa-money"></i> Controle Financeiro</a>
+						<ul id="demo" class="collapse">
+							<li><p:link href="/financeiro/relatorioCaixa.xhtml">Relatório Caixa</p:link></li>
+
+
+						</ul></li>
 					<p:separator></p:separator>
 					<li
 						class="#{view.viewId eq '/produtos/cad-produto.xhtml' ? 'active' : ''}"><a
