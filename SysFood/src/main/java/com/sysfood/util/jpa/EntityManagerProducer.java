@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.hibernate.Session;
+
 @ApplicationScoped
 public class EntityManagerProducer {
 
@@ -17,14 +19,26 @@ public class EntityManagerProducer {
 		factory = Persistence.createEntityManagerFactory("SysFoodPU");
 	}
 
+//	@Produces
+//	@RequestScoped
+//	public EntityManager createEntityManager() {
+//		return factory.createEntityManager();
+//	}
+	
+//	public void closeEntityManager(@Disposes EntityManager manager) {
+//		manager.close();
+//	}
+	
 	@Produces
 	@RequestScoped
-	public EntityManager createEntityManager() {
-		return factory.createEntityManager();
+	public Session createEntityManager(){
+		return (Session) this.factory.createEntityManager();
 	}
-
-	public void closeEntityManager(@Disposes EntityManager manager) {
+	
+	public void closeEntityManager(@Disposes Session manager) {
 		manager.close();
 	}
+
+	
 
 }
