@@ -9,7 +9,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotNull;
 
@@ -33,19 +33,17 @@ public class RelatorioCaixaBean implements Serializable {
 	@Inject
 	private HttpServletResponse response;
 
-	@Inject
-	private EntityManager manager;
-
 	public void emitir() {
 		Map<String, Object> parametros = new HashMap<>();
 		parametros.put("data_inicio", this.dataInicio);
 		parametros.put("data_fim", this.dataFim);
 
-		ExecutorRelatorio executor = new ExecutorRelatorio("/relatorio_informacoes_caixa.jasper", this.response,
-				parametros, "Informações do caixa.pdf");
+		ExecutorRelatorio executor = new ExecutorRelatorio("/relatorios/relatorio_informacoes_caixa.jasper",
+				this.response, parametros, "Informações do caixa.pdf");
 
-		Session session = (Session) manager.unwrap(Session.class);
-		session.doWork(executor);
+		try (Session session = (Session) Persistence.createEntityManagerFactory("SysFoodPU").createEntityManager()) {
+			session.doWork(executor);
+		}
 
 		if (executor.isRelatorioGerado()) {
 			facesContext.responseComplete();
