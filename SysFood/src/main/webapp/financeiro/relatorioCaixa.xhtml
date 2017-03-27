@@ -21,27 +21,29 @@
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h3 class="panel-title">
-								<i class="fa fa-fw fa-balance-scale"></i> Escolha as dias para serem
-								gerados os relatórios
+								<i class="fa fa-fw fa-balance-scale"></i> Escolha os dias para
+								serem gerados os relatórios
 							</h3>
 						</div>
 					</div>
 
 					<h:panelGrid width="350" columns="2">
 						<h:panelGroup> Data Inicio: <p:calendar id="popup"
-								value="#{caixaBean.data}" size="10" pattern="dd/MM/yyyy" />
+								value="#{relatorioCaixaBean.dataInicio}" size="10"
+								pattern="dd/MM/yyyy" />
 							<br />
 						</h:panelGroup>
 
 						<h:panelGroup> 
-						Data Final: <p:calendar value="#{caixaBean.data}" size="10"
-								pattern="dd/MM/yyyy" />
+						Data Final: <p:calendar value="#{relatorioCaixaBean.dataFim}"
+								size="10" pattern="dd/MM/yyyy" />
 							<br />
 						</h:panelGroup>
 						<h:panelGroup>
 							<br />
 							<p:commandButton value="Gerar Relatório" update="@form"
-								icon="fa fa-search" styleClass="btnSearch" />
+								icon="fa fa-search" styleClass="btnSearch"
+								action="#{relatorioCaixaBean.emitir}" />
 						</h:panelGroup>
 					</h:panelGrid>
 					<hr />
