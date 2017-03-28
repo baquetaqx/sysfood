@@ -30,7 +30,7 @@ public class CumpomBo implements Serializable {
 		iRetornos.add(cupom.FormataTX("FORTALEZA - CE\r\n\n", 2, 0, 0, 0, 0));
 		iRetornos.add(cupom.FormataTX("Nome do Cliente: " + pedido.getCliente() + "\n", 2, 0, 0, 0, 0));
 		iRetornos.add(cupom.FormataTX(
-				"Data do pedido: " + new SimpleDateFormat("dd/MM/yyy - HH:mm").format(pedido.getDataPedido()) + "\n", 2,
+				"Data do pedido: " + new SimpleDateFormat("dd/MM/yyyy - HH:mm").format(pedido.getDataPedido()) + "\n", 2,
 				0, 0, 0, 0));
 		iRetornos.add(cupom.FormataTX("=============================================\n", 2, 0, 0, 0, 0));
 		iRetornos.add(cupom.FormataTX("Descricao\tValor\tQtds\tTotal\n", 2, 0, 0, 0, 0));

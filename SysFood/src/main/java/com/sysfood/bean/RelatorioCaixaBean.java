@@ -1,8 +1,10 @@
 package com.sysfood.bean;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.enterprise.context.RequestScoped;
@@ -37,9 +39,10 @@ public class RelatorioCaixaBean implements Serializable {
 		Map<String, Object> parametros = new HashMap<>();
 		parametros.put("data_inicio", this.dataInicio);
 		parametros.put("data_fim", this.dataFim);
+		parametros.put("REPORT_LOCALE", new Locale("pt","BR"));
 
 		ExecutorRelatorio executor = new ExecutorRelatorio("/relatorios/relatorio_informacoes_caixa.jasper",
-				this.response, parametros, "Informações do caixa.pdf");
+				this.response, parametros, "Relatório Caixa - "+new SimpleDateFormat("dd/MM/yyyy").format(new Date())+".pdf");
 
 		try (Session session = (Session) Persistence.createEntityManagerFactory("SysFoodPU").createEntityManager()) {
 			session.doWork(executor);
