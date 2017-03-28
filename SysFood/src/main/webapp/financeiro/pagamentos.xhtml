@@ -6,9 +6,19 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-	<ui:define name="title">SysFood - Relatório Caixa</ui:define>
+	<ui:define name="title">SysFood - Pagamentos e Despesas</ui:define>
 	<ui:define name="page-header">
-		<h1 class="page-header">Relatório de caixa</h1>
+		<h1 class="page-header">Insira os seus pagamentos e despesas</h1>
+		<h:panelGrid columns="2" width="500">
+			<h:outputLabel value="*" styleClass="obrigatorio"
+				style="margin-right:5px;" />
+			<h5 style="text-align: justify">
+				Aqui é importante você ter em mente a <span>DATA</span> que você
+				gostaria de inserir seus pagamentos e despesas, Em seguida inserir o
+				tipo de dispesa(Ex.:Luz, ou Funcionário extra), Em seguida o valor
+				que deverá entrar para despesa.
+			</h5>
+		</h:panelGrid>
 	</ui:define>
 
 	<ui:define name="conteudo">
@@ -16,33 +26,73 @@
 			<f:viewAction />
 		</f:metadata>
 		<div class="row">
-			<h:form id="formRelatorioCaixa">
+			<h:form id="formPagamentos">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h3 class="panel-title">
-								<i class="fa fa-fw fa-balance-scale"></i> Escolha os dias para
-								serem gerados os relatórios
+								<i class="fa fa-fw fa-balance-scale"></i> Dados do
+								Pagamento/Despesas.
 							</h3>
 						</div>
 					</div>
 
-					<h:panelGrid width="350" columns="2">
-						<h:panelGroup> Data Inicio: <p:calendar id="popup"
-								value="#{relatorioCaixaBean.dataInicio}" size="10"
-								pattern="dd/MM/yyyy" />
-							<br />
-						</h:panelGroup>
-
-						<h:panelGroup> 
-						Data Final: <p:calendar value="#{relatorioCaixaBean.dataFim}"
-								size="10" pattern="dd/MM/yyyy" />
+					<h:panelGrid width="800" columns="2">
+						 Data do Pagamento: <p:calendar id="popup"
+							value="#{relatorioCaixaBean.dataInicio}" size="10"
+							pattern="dd/MM/yyyy" />
+						<h:panelGroup>
 							<br />
 						</h:panelGroup>
 						<h:panelGroup>
 							<br />
-							<p:commandButton value="Gerar Relatório" ajax="false"
-								icon="fa fa-search" styleClass="btnSearch"
+						</h:panelGroup>
+
+						Tipo de pagamento: 		<h:selectOneMenu id="tipoPagamento"
+							value="#{usuarioBean.usuario.perfilUsuario}" style="form-control">
+							<f:selectItem itemLabel="Selecione o tipo de Pagamento" />
+							<f:selectItems value="#{usuarioBean.perfil}" var="perfil"
+								itemLabel="#{perfil.descricao}" itemValue="#{perfil}" />
+						</h:selectOneMenu>
+
+						<h:panelGroup>
+							<br />
+						</h:panelGroup>
+						<h:panelGroup>
+							<script>
+								function configurarMoeda() {
+									$(".moeda").maskMoney({
+										decimal : ",",
+										thousands : ".",
+										allowZero : true
+									});
+								}
+								$(document).ready(function() {
+									configurarMoeda();
+								});
+							</script>
+							<br />
+						</h:panelGroup>
+						
+							Valor do Pagamento:				<p:inputText id="preco"
+							value="#{cadastroProdutoBean.produto.preco}"
+							styleClass="form-control moeda">
+							<f:convertNumber minFractionDigits="2" maxFractionDigits="2"
+								locale="pt_BR" />
+						</p:inputText>
+						<h:panelGroup>
+							<br />
+						</h:panelGroup>
+						<h:panelGroup>
+							<br />
+						</h:panelGroup>
+						
+						Descrição da despesa:				<p:inputTextarea
+							styleClass="form-control" rows="7"/>
+						<h:panelGroup>
+							<br />
+							<p:commandButton value="Cadastrar Despesa" ajax="false"
+								styleClass="btn btn-primary btn-lg btn-salvar"
 								action="#{relatorioCaixaBean.emitir}" />
 						</h:panelGroup>
 					</h:panelGrid>
