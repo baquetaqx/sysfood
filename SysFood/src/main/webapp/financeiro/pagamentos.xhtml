@@ -14,8 +14,8 @@
 				style="margin-right:5px;" />
 			<h5 style="text-align: justify">
 				Aqui é importante você ter em mente a <span>DATA</span> que você
-				gostaria de inserir seus pagamentos e despesas, Em seguida inserir o
-				tipo de dispesa(Ex.:Luz, ou Funcionário extra), Em seguida o valor
+				gostaria de inserir seus pagamentos e despesas. Em seguida inserir o
+				tipo de dispesa(Ex.:Luz, ou Funcionário extra). Em seguida o valor
 				que deverá entrar para despesa.
 			</h5>
 		</h:panelGrid>
@@ -39,7 +39,7 @@
 
 					<h:panelGrid width="800" columns="2">
 						 Data do Pagamento: <p:calendar id="popup"
-							value="#{relatorioCaixaBean.dataInicio}" size="10"
+							value="#{pagamentosBean.pagamento.dataDoPagamento}" size="10"
 							pattern="dd/MM/yyyy" />
 						<h:panelGroup>
 							<br />
@@ -49,10 +49,11 @@
 						</h:panelGroup>
 
 						Tipo de pagamento: 		<h:selectOneMenu id="tipoPagamento"
-							value="#{usuarioBean.usuario.perfilUsuario}" style="form-control">
+							value="#{pagamentosBean.pagamento.tipoDespesa}"
+							style="form-control">
 							<f:selectItem itemLabel="Selecione o tipo de Pagamento" />
-							<f:selectItems value="#{usuarioBean.perfil}" var="perfil"
-								itemLabel="#{perfil.descricao}" itemValue="#{perfil}" />
+							<f:selectItems value="#{pagamentosBean.tipoDespesa}" var="tipo"
+								itemLabel="#{tipo.descricao}" itemValue="#{tipo}" />
 						</h:selectOneMenu>
 
 						<h:panelGroup>
@@ -75,7 +76,7 @@
 						</h:panelGroup>
 						
 							Valor do Pagamento:				<p:inputText id="preco"
-							value="#{cadastroProdutoBean.produto.preco}"
+							value="#{pagamentosBean.pagamento.valorDoPagamento}"
 							styleClass="form-control moeda">
 							<f:convertNumber minFractionDigits="2" maxFractionDigits="2"
 								locale="pt_BR" />
@@ -88,12 +89,13 @@
 						</h:panelGroup>
 						
 						Descrição da despesa:				<p:inputTextarea
-							styleClass="form-control" rows="7"/>
+							styleClass="form-control" rows="7"
+							value="#{pagamentosBean.pagamento.descricao}" />
 						<h:panelGroup>
 							<br />
 							<p:commandButton value="Cadastrar Despesa" ajax="false"
 								styleClass="btn btn-primary btn-lg btn-salvar"
-								action="#{relatorioCaixaBean.emitir}" />
+								action="#{pagamentosBean.salvar}" />
 						</h:panelGroup>
 					</h:panelGrid>
 					<hr />

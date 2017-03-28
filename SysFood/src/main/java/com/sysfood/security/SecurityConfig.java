@@ -42,8 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable().headers().frameOptions().sameOrigin().and()
 
 				.authorizeRequests().antMatchers("/login.xhtml", "/Erro.xhtml", "/javax.faces.resource/**").permitAll()
-				.antMatchers("/index.xhtml", "/AcessoNegado.xhtml", "/caixa/**", "/pedido/**", "/produtos/**")
-				.authenticated().antMatchers("/usuario/**", "/empresa/**").hasRole("ADMINISTRADOR").and()
+				.antMatchers("/index.xhtml", "/AcessoNegado.xhtml", "/caixa/**", "/pedido/**", "/produtos/**", "/adicional/**")
+				.authenticated().antMatchers("/usuario/**", "/empresa/**", "/financeiro/**").hasRole("ADMINISTRADOR").and()
 
 				.formLogin().loginPage("/login.xhtml").failureUrl("/login.xhtml?invalid=true").and()
 
