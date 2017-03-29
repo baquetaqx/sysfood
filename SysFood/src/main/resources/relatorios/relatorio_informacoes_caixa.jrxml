@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-03-28T13:20:38 -->
+<!-- 2017-03-29T15:25:50 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_informacoes_caixa" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="128a9e78-8844-4bf1-b61e-48e25ebc6942">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySQL SysFood"/>
 	<parameter name="data_inicio" class="java.util.Date"/>
 	<parameter name="data_fim" class="java.util.Date"/>
 	<queryString language="SQL">
@@ -11,7 +11,6 @@
 	sys_food.caixa.data_de_abertura AS data_de_abertura,
 	sys_food.caixa.debito AS debito,
 	sys_food.caixa.dinheiro AS dinheiro,
-	sys_food.caixa.numero_de_pedidos AS numero_de_pedidos,
 	sys_food.caixa.total AS total
 FROM sys_food.caixa
 WHERE 
@@ -22,7 +21,6 @@ ORDER BY sys_food.caixa.data_de_abertura ASC]]>
 	<field name="data_de_abertura" class="java.sql.Date"/>
 	<field name="debito" class="java.math.BigDecimal"/>
 	<field name="dinheiro" class="java.math.BigDecimal"/>
-	<field name="numero_de_pedidos" class="java.lang.Integer"/>
 	<field name="total" class="java.math.BigDecimal"/>
 	<variable name="total_geral" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{total}]]></variableExpression>
@@ -73,13 +71,6 @@ ORDER BY sys_food.caixa.data_de_abertura ASC]]>
 				<text><![CDATA[Total]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="370" y="0" width="100" height="30" uuid="75406fc0-7b1b-423d-a2ac-893c40547157"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Número de pedidos]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="280" y="0" width="90" height="30" uuid="8953dfe8-2b05-4fe1-8924-7cf68852ef03"/>
 				<textElement>
 					<font isBold="true"/>
@@ -112,10 +103,6 @@ ORDER BY sys_food.caixa.data_de_abertura ASC]]>
 			<textField pattern="¤#,##0.00;¤-#,##0.00">
 				<reportElement x="280" y="0" width="90" height="20" uuid="a15522ff-1114-4dd3-9a06-4944930ba36f"/>
 				<textFieldExpression><![CDATA[$F{debito}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="370" y="1" width="100" height="20" uuid="3af3c242-6281-4113-b98d-40b0351c3743"/>
-				<textFieldExpression><![CDATA[$F{numero_de_pedidos}]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤#,##0.00;¤-#,##0.00">
 				<reportElement x="470" y="1" width="80" height="20" uuid="e18bbe99-a6c3-4238-ae74-59afd2685f93"/>
