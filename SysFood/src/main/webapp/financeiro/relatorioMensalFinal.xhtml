@@ -12,11 +12,8 @@
 	</ui:define>
 
 	<ui:define name="conteudo">
-		<f:metadata>
-			<f:viewAction />
-		</f:metadata>
 		<div class="row">
-			<h:form id="formRelatorioCaixa">
+			<h:form id="formRelatorioMensal">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
 						<div class="panel-heading">
@@ -30,7 +27,7 @@
 					<h:panelGrid width="450" columns="2">
 						 Escolha o Mês e Ano para ser gerado o relatorio: <h:panelGroup>
 							<p:calendar id="data" mode="inline" navigator="true"
-								pattern="MM/yyyy" />
+								pattern="MM/yyyy" value="#{relatorioMensalBean.data}" />
 							<script>
 								function setData() {
 									ano = $("#data .ui-datepicker-year").val();
@@ -54,11 +51,11 @@
 						<br />
 						<br />
 						<h:panelGroup>
-						<br />
-									<p:commandButton value="Gerar Relatório" ajax="false"
+							<br />
+							<p:commandButton value="Gerar Relatório" ajax="false"
 								icon="fa fa-check" styleClass="btnSearch"
-								action="#{relatorioCaixaBean.emitir}" />
-								</h:panelGroup>
+								action="#{relatorioMensalBean.emitir}" />
+						</h:panelGroup>
 					</h:panelGrid>
 				</div>
 			</h:form>

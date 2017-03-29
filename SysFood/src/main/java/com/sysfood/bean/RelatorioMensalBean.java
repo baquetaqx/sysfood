@@ -2,6 +2,7 @@ package com.sysfood.bean;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -20,12 +21,11 @@ import com.sysfood.util.report.ExecutorRelatorio;
 
 @Named
 @RequestScoped
-public class RelatorioCaixaBean implements Serializable {
+public class RelatorioMensalBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Date dataInicio;
-	private Date dataFim;
+	private Date data;
 
 	@Inject
 	private FacesContext facesContext;
@@ -34,14 +34,15 @@ public class RelatorioCaixaBean implements Serializable {
 	private HttpServletResponse response;
 
 	public void emitir() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(data);
 		Map<String, Object> parametros = new HashMap<>();
-		parametros.put("data_inicio", this.dataInicio);
-		parametros.put("data_fim", this.dataFim);
+		parametros.put("mes", calendar.get(Calendar.MONTH));
+		parametros.put("ano", calendar.get(Calendar.YEAR));
 		parametros.put("REPORT_LOCALE", new Locale("pt", "BR"));
 
-		ExecutorRelatorio executor = new ExecutorRelatorio("/relatorios/relatorio_informacoes_caixa.jasper",
-				this.response, parametros,
-				"Relatório Caixa - " + new SimpleDateFormat("dd/MM/yyyy").format(new Date()) + ".pdf");
+		ExecutorRelatorio executor = new ExecutorRelatorio("/relatorios/relatorio_mensal.jasper", this.response,
+				parametros, "Relatório Mensal - " + new SimpleDateFormat("dd/MM/yyyy").format(new Date()) + ".pdf");
 
 		ExecutarRelatorio.executar(executor);
 
@@ -53,21 +54,12 @@ public class RelatorioCaixaBean implements Serializable {
 	}
 
 	@NotNull
-	public Date getDataInicio() {
-		return dataInicio;
+	public Date getData() {
+		return data;
 	}
 
-	public void setDataInicio(Date dataInicio) {
-		this.dataInicio = dataInicio;
-	}
-
-	@NotNull
-	public Date getDataFim() {
-		return dataFim;
-	}
-
-	public void setDataFim(Date dataFim) {
-		this.dataFim = dataFim;
+	public void setData(Date data) {
+		this.data = data;
 	}
 
 }

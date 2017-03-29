@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-03-29T18:29:50 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_pagamento" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2903a25b-4793-4128-a592-639e4a52aad3">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySQL SysFood"/>
+	<parameter name="data_inicio" class="java.util.Date">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="data_fim" class="java.util.Date"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT sys_food.pagamento.data_do_pagamento AS data,
+	sys_food.pagamento.descricao AS descricao,
+	sys_food.pagamento.tipo_despesa AS tipo,
+	sys_food.pagamento.valor_do_pagamento AS valor
+FROM sys_food.pagamento
+WHERE
+	sys_food.pagamento.data_do_pagamento BETWEEN $P{data_inicio} AND $P{data_fim} 
+ORDER BY
+	data ASC]]>
+	</queryString>
+	<field name="data" class="java.sql.Date"/>
+	<field name="descricao" class="java.lang.String"/>
+	<field name="tipo" class="java.lang.String"/>
+	<field name="valor" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="9dc22672-012d-4fc3-bb76-d26adca035a2"/>
+				<textElement textAlignment="Left">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data do pagamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="1" width="100" height="20" uuid="ac219a36-b0eb-4ab0-ae89-c3cc9872e850"/>
+				<textElement textAlignment="Left">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de despesa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="2" width="100" height="20" uuid="eaef29cb-15c6-4bdf-8415-39a0baf34746"/>
+				<textElement textAlignment="Left">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor do pagamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="1" width="250" height="20" uuid="f73feda8-4274-4ef3-bf91-c15a457c9003"/>
+				<textElement textAlignment="Left">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="-1" width="100" height="20" uuid="52de2d94-2c9a-4202-a1bf-0e3e31297b91"/>
+				<textFieldExpression><![CDATA[$F{data}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="20" uuid="b905bdcc-babd-4ec4-96bb-919f7960ffa6"/>
+				<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="200" y="0" width="100" height="20" uuid="3b34e2b7-6dd1-4187-85a7-7c398c2d49f6"/>
+				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="250" height="20" uuid="23fc545a-a350-4cdc-aef0-1af6514dbf94"/>
+				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="400" y="0" width="150" height="20" uuid="89e92f59-2efe-48eb-839b-32ff1f3e1060"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+ $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

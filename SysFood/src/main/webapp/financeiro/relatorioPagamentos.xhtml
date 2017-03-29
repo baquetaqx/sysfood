@@ -12,9 +12,6 @@
 	</ui:define>
 
 	<ui:define name="conteudo">
-		<f:metadata>
-			<f:viewAction />
-		</f:metadata>
 		<div class="row">
 			<h:form id="formRelatorioCaixa">
 				<div class="col-lg-12">
@@ -29,13 +26,13 @@
 
 					<h:panelGrid width="350" columns="2">
 						<h:panelGroup> Data Inicio: <p:calendar id="popup"
-								value="#{relatorioCaixaBean.dataInicio}" size="10"
+								value="#{relatorioPagamentosBean.dataInicio}" size="10"
 								pattern="dd/MM/yyyy" />
 							<br />
 						</h:panelGroup>
 
 						<h:panelGroup> 
-						Data Final: <p:calendar value="#{relatorioCaixaBean.dataFim}"
+						Data Final: <p:calendar value="#{relatorioPagamentosBean.dataFim}"
 								size="10" pattern="dd/MM/yyyy" />
 							<br />
 						</h:panelGroup>
@@ -43,7 +40,7 @@
 							<br />
 							<p:commandButton value="Gerar Relatório" ajax="false"
 								icon="fa fa-check" styleClass="btnSearch"
-								action="#{relatorioCaixaBean.emitir}" />
+								action="#{relatorioPagamentosBean.emitir}" />
 						</h:panelGroup>
 					</h:panelGrid>
 					<hr />

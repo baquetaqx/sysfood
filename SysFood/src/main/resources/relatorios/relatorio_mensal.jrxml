@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-03-29T19:29:37 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_mensal" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="16be9bb3-47dc-4901-9cb8-3d4eb59d5adf">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySQL SysFood"/>
+	<parameter name="mes" class="java.lang.Integer"/>
+	<parameter name="ano" class="java.lang.Integer"/>
+	<queryString language="SQL">
+		<![CDATA[select 
+	sum(sys_food.caixa.total ) as receita,
+	sum( sys_food.pagamento.valor_do_pagamento ) as despesa
+from  
+	sys_food.caixa, sys_food.pagamento
+WHERE
+	MONTH( sys_food.caixa.data_de_abertura ) = $P{mes} 
+	AND 
+	YEAR( sys_food.caixa.data_de_abertura ) = $P{ano}]]>
+	</queryString>
+	<field name="receita" class="java.math.BigDecimal"/>
+	<field name="despesa" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="278" height="20" uuid="8cd6aaa5-a8c9-4055-acd4-fce46eab6c12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Receita]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="278" y="0" width="277" height="20" uuid="548f8030-7d86-4709-ac80-6b452e4f935c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Despesa]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="0" y="0" width="278" height="20" uuid="b98b966d-bfe3-405e-b704-e103011de7aa"/>
+				<textFieldExpression><![CDATA[$F{receita}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="278" y="0" width="277" height="20" uuid="e12e40cd-edde-4d2e-919b-3317a661480a"/>
+				<textFieldExpression><![CDATA[$F{despesa}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

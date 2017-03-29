@@ -20,7 +20,7 @@ import com.sysfood.util.report.ExecutorRelatorio;
 
 @Named
 @RequestScoped
-public class RelatorioCaixaBean implements Serializable {
+public class RelatorioPagamentosBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -39,9 +39,8 @@ public class RelatorioCaixaBean implements Serializable {
 		parametros.put("data_fim", this.dataFim);
 		parametros.put("REPORT_LOCALE", new Locale("pt", "BR"));
 
-		ExecutorRelatorio executor = new ExecutorRelatorio("/relatorios/relatorio_informacoes_caixa.jasper",
-				this.response, parametros,
-				"Relatório Caixa - " + new SimpleDateFormat("dd/MM/yyyy").format(new Date()) + ".pdf");
+		ExecutorRelatorio executor = new ExecutorRelatorio("/relatorios/relatorio_pagamento.jasper", this.response,
+				parametros, "Relatório Pagamentos - " + new SimpleDateFormat("dd/MM/yyyy").format(new Date()) + ".pdf");
 
 		ExecutarRelatorio.executar(executor);
 
