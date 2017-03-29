@@ -2,20 +2,28 @@
 
 .centralizar {
 	text-align: center !important;
-	margin:auto;
+	margin: auto;
 	margin-bottom: 4px;
 }
-.text-money{
+
+.text-money {
 	font-size: 13px !important;
 	text-decoration: none;
 }
-.texto-span{
+
+.texto-span {
 	font-size: 25px !important;
 }
-.texto-info{
+
+.texto-info {
 	font-weight: normal !important;
 	margin-right: 30px;
 }
+
+.ui-datepicker-inline .ui-datepicker-calendar {
+	display: none;
+}
+
 .menu-texto {
 	color: #c0c0c0;
 	padding-bottom: 3px;
@@ -24,17 +32,18 @@
 	width: 100%;
 	margin-top: 100%;
 }
-.btnSearch{
+
+.btnSearch {
 	background-color: #80ff00 !important;
-	text-shadow:none;
+	text-shadow: none;
 	height: 34px;
 }
 
-.oneRadioPagamento{
+.oneRadioPagamento {
 	margin: 10px !important;
 }
 
-.oneRadioPagamento label{
+.oneRadioPagamento label {
 	padding-left: 3px;
 	padding-right: 15px;
 }

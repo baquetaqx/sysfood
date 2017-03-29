@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/templates/layoutPrincipal.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">SysFood - Relatório Pagamentos</ui:define>
+	<ui:define name="page-header">
+		<h1 class="page-header">Relatório de Pagamentos e Despesas</h1>
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<f:metadata>
+			<f:viewAction />
+		</f:metadata>
+		<div class="row">
+			<h:form id="formRelatorioCaixa">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">
+								<i class="fa fa-fw fa-balance-scale"></i> Escolha os dias para
+								serem gerados os relatórios
+							</h3>
+						</div>
+					</div>
+
+					<h:panelGrid width="350" columns="2">
+						<h:panelGroup> Data Inicio: <p:calendar id="popup"
+								value="#{relatorioCaixaBean.dataInicio}" size="10"
+								pattern="dd/MM/yyyy" />
+							<br />
+						</h:panelGroup>
+
+						<h:panelGroup> 
+						Data Final: <p:calendar value="#{relatorioCaixaBean.dataFim}"
+								size="10" pattern="dd/MM/yyyy" />
+							<br />
+						</h:panelGroup>
+						<h:panelGroup>
+							<br />
+							<p:commandButton value="Gerar Relatório" ajax="false"
+								icon="fa fa-check" styleClass="btnSearch"
+								action="#{relatorioCaixaBean.emitir}" />
+						</h:panelGroup>
+					</h:panelGrid>
+					<hr />
+				</div>
+			</h:form>
+			<hr />
+		</div>
+	</ui:define>
+</ui:composition>

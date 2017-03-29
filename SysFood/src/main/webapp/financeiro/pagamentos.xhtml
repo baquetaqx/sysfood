@@ -36,6 +36,7 @@
 							</h3>
 						</div>
 					</div>
+					<p:messages id="msg"/>
 
 					<h:panelGrid width="800" columns="2">
 						 Data do Pagamento: <p:calendar id="popup"
@@ -95,7 +96,7 @@
 							<br />
 							<p:commandButton value="Cadastrar Despesa" ajax="false"
 								styleClass="btn btn-primary btn-lg btn-salvar"
-								action="#{pagamentosBean.salvar}" />
+								action="#{pagamentosBean.salvar}" update="@form"/>
 						</h:panelGroup>
 					</h:panelGrid>
 					<hr />
