@@ -44,7 +44,7 @@ public class PesquisaPedidoBean implements Serializable {
 	}
 
 	public void pesquisarInativos() {
-		pedidoFilterAtivo.setStatus(false);
+		pedidoFilterInativo.setStatus(false);
 		pedidosInativosFiltrados = pedidoBo.filtrados(pedidoFilterInativo);
 	}
 

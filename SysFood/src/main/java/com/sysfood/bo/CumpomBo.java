@@ -30,8 +30,8 @@ public class CumpomBo implements Serializable {
 		iRetornos.add(cupom.FormataTX("FORTALEZA - CE\r\n\n", 2, 0, 0, 0, 0));
 		iRetornos.add(cupom.FormataTX("Nome do Cliente: " + pedido.getCliente() + "\n", 2, 0, 0, 0, 0));
 		iRetornos.add(cupom.FormataTX(
-				"Data do pedido: " + new SimpleDateFormat("dd/MM/yyyy - HH:mm").format(pedido.getDataPedido()) + "\n", 2,
-				0, 0, 0, 0));
+				"Data do pedido: " + new SimpleDateFormat("dd/MM/yyyy - HH:mm").format(pedido.getDataPedido()) + "\n",
+				2, 0, 0, 0, 0));
 		iRetornos.add(cupom.FormataTX("=============================================\n", 2, 0, 0, 0, 0));
 		iRetornos.add(cupom.FormataTX("Descricao\tValor\tQtds\tTotal\n", 2, 0, 0, 0, 0));
 		iRetornos.add(cupom.FormataTX("=============================================\n", 2, 0, 0, 0, 0));
@@ -62,8 +62,8 @@ public class CumpomBo implements Serializable {
 
 		for (ItemPedido item : pedido.getItens()) {
 			iRetornos.add(cupom.FormataTX(
-					"Qtd = " + item.getQuantidade() + "/" + item.getProduto().getNome() + temAdicional(item)+"\n", 2, 0, 0,
-					0, 0));
+					"Qtd = " + item.getQuantidade() + "/" + item.getProduto().getNome() + temAdicional(item) + "\n", 2,
+					0, 0, 0, 0));
 		}
 
 		iRetornos.add(cupom.FormataTX("=============================================\n", 2, 0, 0, 0, 0));
@@ -81,7 +81,7 @@ public class CumpomBo implements Serializable {
 	}
 
 	private String temAdicional(ItemPedido item) {
-		if (item.getPastelComAdicionais()!=null && item.getPastelComAdicionais().get(item.getProduto()) != null) {
+		if (item.getPastelComAdicionais() != null && item.getPastelComAdicionais().get(item.getProduto()) != null) {
 			return "\n" + "Adicional(is): "
 					+ item.getPastelComAdicionais().get(item.getProduto()).toString().replaceAll("[\\[\\]]", "");
 		}
@@ -99,12 +99,13 @@ public class CumpomBo implements Serializable {
 		iRetornos.add(cupom.FormataTX("---------------------------------------------\n", 2, 0, 0, 0, 0));
 		iRetornos.add(cupom.FormataTX("Data de abertura:\t "
 				+ new SimpleDateFormat("dd/MM/yyy - HH:mm").format(caixa.getDataDeAbertura()) + "\n", 2, 0, 0, 0, 0));
-		iRetornos.add(cupom.FormataTX("Fundo de caixa:\t" + "R$ " +caixa.getFundoDeCaixa() + "\n", 2, 0, 0, 0, 0));
-		iRetornos.add(cupom.FormataTX("Débito:\t" + "R$ " +caixa.getDebito() + "\n", 2, 0, 0, 0, 0));
-		iRetornos.add(cupom.FormataTX("Crédito:\t" + "R$ " +caixa.getCredito() + "\n", 2, 0, 0, 0, 0));
-		iRetornos.add(cupom.FormataTX("Dinheiro:\t" + "R$ " +caixa.getDinheiro() + "\n", 2, 0, 0, 0, 0));
-		iRetornos.add(cupom.FormataTX("Número de pedidos: \t" +"R$ " +caixa.getNumeroDePedidos() + "\n", 2, 0, 0, 0, 0));
-		iRetornos.add(cupom.FormataTX("Total:\t" + "R$ " +caixa.getTotal() + "\n", 2, 0, 0, 0, 0));
+		iRetornos.add(cupom.FormataTX("Fundo de caixa:\t" + "R$ " + caixa.getFundoDeCaixa() + "\n", 2, 0, 0, 0, 0));
+		iRetornos.add(cupom.FormataTX("Débito:\t" + "R$ " + caixa.getDebito() + "\n", 2, 0, 0, 0, 0));
+		iRetornos.add(cupom.FormataTX("Crédito:\t" + "R$ " + caixa.getCredito() + "\n", 2, 0, 0, 0, 0));
+		iRetornos.add(cupom.FormataTX("Dinheiro:\t" + "R$ " + caixa.getDinheiro() + "\n", 2, 0, 0, 0, 0));
+		iRetornos.add(
+				cupom.FormataTX("Número de pedidos: \t" + "R$ " + caixa.getNumeroDePedidos() + "\n", 2, 0, 0, 0, 0));
+		iRetornos.add(cupom.FormataTX("Total:\t" + "R$ " + caixa.getTotal() + "\n", 2, 0, 0, 0, 0));
 		iRetornos.add(cupom.FormataTX("---------------------------------------------\n", 2, 0, 0, 0, 0));
 		iRetornos.add(cupom.AcionaGuilhotina(1));
 
@@ -116,7 +117,7 @@ public class CumpomBo implements Serializable {
 				throw new NegocioException("Erro de comunicação física.");
 			}
 		}
-		
+
 	}
 
 }

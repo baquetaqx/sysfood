@@ -89,18 +89,25 @@
 						class="#{view.viewId eq '/pedido/list-pedido.xhtml' ? 'active' : ''}"><p:link
 							href="/pedido/list-pedido.xhtml">
 							<i class="fa fa-fw fa-times-circle"></i> Cancelar pedidos</p:link></li>
+					<h:panelGroup rendered="#{seguranca.usuarioLogado.usuario.adm}">
+						<li
+							class="#{view.viewId eq 'financeiro/relatorioCaixa.xhtml' ? 'active' : ''}"><a
+							href="javascript:;" data-toggle="collapse"
+							data-target="#financeiro"><i class="fa fa-fw fa-money"></i>
+								Controle Financeiro</a>
+							<ul id="financeiro" class="collapse">
 
-					<li class="#{view.viewId eq 'financeiro/relatorioCaixa.xhtml' ? 'active' : ''}"><a
-						href="javascript:;" data-toggle="collapse" data-target="#financeiro"><i
-							class="fa fa-fw fa-money"></i> Controle Financeiro</a>
-						<ul id="financeiro" class="collapse">
-							
-							<li><p:link href="/financeiro/pagamentos.xhtml"><i class="fa fa-fw fa-balance-scale"></i>Despesas</p:link></li>
-							<li><p:link href="/financeiro/relatorioCaixa.xhtml"><i class="fa fa-fw fa-cart-plus"></i>Relatório Caixa</p:link></li>
-							<li><p:link href="/financeiro/relatorioPagamentos.xhtml"><i class="fa fa-fw fa-credit-card"></i>Relatório Despesas</p:link></li>
-							<li><p:link href="/financeiro/relatorioMensalFinal.xhtml"><i class="fa fa-fw fa-calendar"></i>Relatório Mensal</p:link></li>
+								<li><p:link href="/financeiro/pagamentos.xhtml">
+										<i class="fa fa-fw fa-balance-scale"></i>Despesas</p:link></li>
+								<li><p:link href="/financeiro/relatorioCaixa.xhtml">
+										<i class="fa fa-fw fa-cart-plus"></i>Relatório Caixa</p:link></li>
+								<li><p:link href="/financeiro/relatorioPagamentos.xhtml">
+										<i class="fa fa-fw fa-credit-card"></i>Relatório Despesas</p:link></li>
+								<li><p:link href="/financeiro/relatorioMensalFinal.xhtml">
+										<i class="fa fa-fw fa-calendar"></i>Relatório Mensal</p:link></li>
 
-						</ul></li>
+							</ul></li>
+					</h:panelGroup>
 					<p:separator></p:separator>
 					<li
 						class="#{view.viewId eq '/produtos/cad-produto.xhtml' ? 'active' : ''}"><a
@@ -108,17 +115,24 @@
 							class="fa fa-fw fa-arrows-v"></i> Pre-Cadastro<i
 							class="fa fa-fw fa-caret-down"></i></a>
 						<ul id="demo" class="collapse">
-							<li><p:link href="/produtos/list-produto.xhtml"><i class="fa fa-fw fa-truck"></i>Produtos</p:link></li>
-							<li><a href="/SysFood/usuario/list-usuario.xhtml"><i class="fa fa-fw fa-users"></i>Usuarios</a></li>
-							<li><a href="/SysFood/adicional/list-adicional.xhtml"><i class="fa fa-fw fa-cart-plus"></i>Adicional</a></li>
+							<li><p:link href="/produtos/list-produto.xhtml">
+									<i class="fa fa-fw fa-truck"></i>Produtos</p:link></li>
+							<h:panelGroup rendered="#{seguranca.usuarioLogado.usuario.adm}">
+								<li><a href="/SysFood/usuario/list-usuario.xhtml"><i
+										class="fa fa-fw fa-users"></i>Usuarios</a></li>
+							</h:panelGroup>
+							<li><a href="/SysFood/adicional/list-adicional.xhtml"><i
+									class="fa fa-fw fa-cart-plus"></i>Adicional</a></li>
 
 
 						</ul></li>
-					<p:separator></p:separator>
-					<li
-						class="#{view.viewId eq '/empresa/empresa.xhtml' ? 'active' : ''}"><a
-						href="/SysFood/empresa/empresa.xhtml"><i
-							class="fa fa-fw fa-cog"></i> Dados Empresa</a></li>
+					<p:separator rendered="#{seguranca.usuarioLogado.usuario.adm}" />
+					<h:panelGroup rendered="#{seguranca.usuarioLogado.usuario.adm}">
+						<li
+							class="#{view.viewId eq '/empresa/empresa.xhtml' ? 'active' : ''}"><a
+							href="/SysFood/empresa/empresa.xhtml"><i
+								class="fa fa-fw fa-cog"></i> Dados Empresa</a></li>
+					</h:panelGroup>
 				</ul>
 			</div>
 		</nav>

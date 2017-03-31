@@ -11,6 +11,7 @@ import com.sysfood.dao.CaixaDao;
 import com.sysfood.exception.NegocioException;
 import com.sysfood.model.Caixa;
 import com.sysfood.util.jpa.Transactional;
+import com.sysfood.util.jsf.FacesUtil;
 
 public class CaixaBo implements Serializable {
 
@@ -53,7 +54,11 @@ public class CaixaBo implements Serializable {
 		caixa.setNumeroDePedidos(quantidadePedidos);
 		caixa.setTotal(total);
 		caixa.setCaixaAberto(false);
-		cumpomBo.imprimirCaixa(caixa);
+		try {
+			cumpomBo.imprimirCaixa(caixa);
+		} catch (NegocioException e) {
+			FacesUtil.addErrorMessage(e.getMessage());
+		}
 		return caixaDao.guardar(caixa);
 
 	}

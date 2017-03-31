@@ -11,6 +11,7 @@ import com.sysfood.dao.filter.PedidoFilter;
 import com.sysfood.exception.NegocioException;
 import com.sysfood.model.Pedido;
 import com.sysfood.util.jpa.Transactional;
+import com.sysfood.util.jsf.FacesUtil;
 
 public class PedidoBo implements Serializable {
 
@@ -37,8 +38,11 @@ public class PedidoBo implements Serializable {
 			estoqueBo.baixarItensEstoque(pedido);
 			Pedido pedidoImprimir = pedido;
 			pedido = pedidoDao.guardar(pedido);
-
-			cumpomBo.imprimirCupom(pedidoImprimir);
+			try {
+				cumpomBo.imprimirCupom(pedidoImprimir);
+			} catch (NegocioException e) {
+				FacesUtil.addErrorMessage(e.getMessage());
+			}
 			return pedido;
 		}
 		estoqueBo.remontarItensEstoque(pedido);
