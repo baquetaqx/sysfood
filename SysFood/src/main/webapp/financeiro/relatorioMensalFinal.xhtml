@@ -23,38 +23,23 @@
 							</h3>
 						</div>
 					</div>
-
+					Escolha o Mês e Ano para ser gerado o relatorio
+					<br />
+					<br />
 					<h:panelGrid width="450" columns="2">
-						 Escolha o Mês e Ano para ser gerado o relatorio: <h:panelGroup>
-							<p:calendar id="data" mode="inline" navigator="true"
-								pattern="MM/yyyy" value="#{relatorioMensalBean.data}" />
-							<script>
-								function setData() {
-									ano = $("#data .ui-datepicker-year").val();
-									mes = $("#data .ui-datepicker-month").val();
-									$('#data_input').val(
-											('0' + (++mes)).slice(-2) + '/'
-													+ ano);
-								}
-
-								$("#data .ui-datepicker-month").change(
-										function() {
-											setData();
-										});
-
-								$("#daa .ui-datepicker-year").change(
-										function() {
-											setData();
-										});
-							</script>
+						<h:panelGroup> Data Inicio: <p:calendar id="popup"
+								size="10" pattern="dd/MM/yyyy" />
+							<br />
 						</h:panelGroup>
-						<br />
-						<br />
+
+						<h:panelGroup> 
+						Data Final: <p:calendar size="10" pattern="dd/MM/yyyy" />
+							<br />
+						</h:panelGroup>
 						<h:panelGroup>
 							<br />
 							<p:commandButton value="Gerar Relatório" ajax="false"
-								icon="fa fa-check" styleClass="btnSearch"
-								action="#{relatorioMensalBean.emitir}" />
+								icon="fa fa-search" styleClass="btnSearch" />
 						</h:panelGroup>
 					</h:panelGrid>
 				</div>
