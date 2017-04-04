@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-04-04T14:35:58 -->
+<!-- 2017-04-04T16:02:00 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_mensal" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="16be9bb3-47dc-4901-9cb8-3d4eb59d5adf">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySQL SysFood"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<parameter name="data_inicio" class="java.util.Date">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
@@ -15,7 +15,7 @@
 from  
 	sys_food.caixa, sys_food.pagamento
 WHERE
-	sys_food.caixa.data_de_abertura BETWEEN $P{data_inicio} AND $P{data_fim} ]]>
+	sys_food.caixa.data_de_abertura BETWEEN $P{data_inicio} AND $P{data_fim}]]>
 	</queryString>
 	<field name="receita" class="java.math.BigDecimal"/>
 	<field name="despesa" class="java.math.BigDecimal"/>
@@ -23,7 +23,15 @@ WHERE
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="180" y="0" width="200" height="79" uuid="09c5fc67-2f0c-4e90-a457-02cdb42dc314"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="25"/>
+				</textElement>
+				<text><![CDATA[Relatório Mensal]]></text>
+			</staticText>
+		</band>
 	</title>
 	<pageHeader>
 		<band height="35" splitType="Stretch"/>
@@ -62,7 +70,13 @@ WHERE
 		<band height="45" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="410" y="30" width="150" height="20" uuid="17d2afc2-dab8-47df-980c-afde420d79ba"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+ $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageFooter>
 	<summary>
 		<band height="42" splitType="Stretch"/>
