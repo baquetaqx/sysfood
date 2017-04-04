@@ -2,7 +2,6 @@ package com.sysfood.bean;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -25,7 +24,8 @@ public class RelatorioMensalBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Date data;
+	private Date dataInicio;
+	private Date dataFim;
 
 	@Inject
 	private FacesContext facesContext;
@@ -34,11 +34,9 @@ public class RelatorioMensalBean implements Serializable {
 	private HttpServletResponse response;
 
 	public void emitir() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(data);
 		Map<String, Object> parametros = new HashMap<>();
-		parametros.put("mes", calendar.get(Calendar.MONTH));
-		parametros.put("ano", calendar.get(Calendar.YEAR));
+		parametros.put("data_inicio", this.dataInicio);
+		parametros.put("data_fim", this.dataFim);
 		parametros.put("REPORT_LOCALE", new Locale("pt", "BR"));
 
 		ExecutorRelatorio executor = new ExecutorRelatorio("/relatorios/relatorio_mensal.jasper", this.response,
@@ -54,12 +52,21 @@ public class RelatorioMensalBean implements Serializable {
 	}
 
 	@NotNull
-	public Date getData() {
-		return data;
+	public Date getDataInicio() {
+		return dataInicio;
 	}
 
-	public void setData(Date data) {
-		this.data = data;
+	public void setDataInicio(Date dataInicio) {
+		this.dataInicio = dataInicio;
+	}
+
+	@NotNull
+	public Date getDataFim() {
+		return dataFim;
+	}
+
+	public void setDataFim(Date dataFim) {
+		this.dataFim = dataFim;
 	}
 
 }

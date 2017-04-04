@@ -23,23 +23,24 @@
 							</h3>
 						</div>
 					</div>
-					Escolha o Mês e Ano para ser gerado o relatorio
-					<br />
-					<br />
+					Escolha o Mês e Ano para ser gerado o relatorio <br /> <br />
 					<h:panelGrid width="450" columns="2">
 						<h:panelGroup> Data Inicio: <p:calendar id="popup"
-								size="10" pattern="dd/MM/yyyy" />
+								size="10" pattern="dd/MM/yyyy"
+								value="#{relatorioMensalBean.dataInicio}" />
 							<br />
 						</h:panelGroup>
 
 						<h:panelGroup> 
-						Data Final: <p:calendar size="10" pattern="dd/MM/yyyy" />
+						Data Final: <p:calendar size="10" pattern="dd/MM/yyyy"
+								value="#{relatorioMensalBean.dataFim}" />
 							<br />
 						</h:panelGroup>
 						<h:panelGroup>
 							<br />
 							<p:commandButton value="Gerar Relatório" ajax="false"
-								icon="fa fa-search" styleClass="btnSearch" />
+								icon="fa fa-search" styleClass="btnSearch"
+								action="#{relatorioMensalBean.emitir}" />
 						</h:panelGroup>
 					</h:panelGrid>
 				</div>
