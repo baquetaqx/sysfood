@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-04-04T16:02:00 -->
+<!-- 2017-04-05T11:24:50 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_mensal" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="16be9bb3-47dc-4901-9cb8-3d4eb59d5adf">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
@@ -9,13 +9,11 @@
 	</parameter>
 	<parameter name="data_fim" class="java.util.Date"/>
 	<queryString language="SQL">
-		<![CDATA[select 
-	sum(sys_food.caixa.total ) as receita,
-	sum( sys_food.pagamento.valor_do_pagamento ) as despesa
-from  
-	sys_food.caixa, sys_food.pagamento
-WHERE
-	sys_food.caixa.data_de_abertura BETWEEN $P{data_inicio} AND $P{data_fim}]]>
+		<![CDATA[SELECT sum( sys_food.caixa.total) AS receita,( SELECT sum( sys_food.pagamento.valor_do_pagamento) AS despesa
+		FROM sys_food.pagamento 
+        WHERE sys_food.pagamento.data_do_pagamento BETWEEN $P{data_inicio} AND $P{data_fim}) AS despesa
+			FROM sys_food.caixa 
+				WHERE sys_food.caixa.data_de_abertura BETWEEN $P{data_inicio} AND $P{data_fim}]]>
 	</queryString>
 	<field name="receita" class="java.math.BigDecimal"/>
 	<field name="despesa" class="java.math.BigDecimal"/>
