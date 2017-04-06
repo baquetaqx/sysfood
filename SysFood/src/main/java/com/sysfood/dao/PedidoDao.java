@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -15,6 +18,8 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
+import org.hibernate.Session;
 
 import com.sysfood.dao.filter.PedidoFilter;
 import com.sysfood.model.Pedido;
@@ -76,6 +81,36 @@ public class PedidoDao {
 		}
 
 		return query.getResultList();
+	}
+
+	
+	public Map<Date, Integer> valoresTotaisPorData(Integer numeroDeDias){
+		
+		Session session = (Session) Persistence.createEntityManagerFactory("SysFoodPU").createEntityManager();
+		
+		numeroDeDias -=1;
+		Calendar dataInicial=Calendar.getInstance();
+		dataInicial = DateUtils.truncate(dataInicial, Calendar.DAY_OF_MONTH);
+		dataInicial.add(Calendar.DAY_OF_MONTH, numeroDeDias*-1);
+		
+		Map<Date, Integer> resultado = criarMapaVazio(numeroDeDias, dataInicial);
+		
+		CriteriaBuilder builder = manager.getCriteriaBuilder();
+		CriteriaQuery<Pedido> criteriaQuery = builder.createQuery(Pedido.class);
+		
+		return resultado;
+	}
+	
+	public Map<Date, Integer> criarMapaVazio(Integer numeroDeDias, Calendar dataInicial){
+		dataInicial = (Calendar) dataInicial.clone();
+		Map<Date, Integer> mapaInicial = new TreeMap<>();
+		
+		for (int i = 0; i <= numeroDeDias; i++) {
+			mapaInicial.put(dataInicial.getTime(), 0);
+			dataInicial.add(Calendar.DAY_OF_MONTH, 1);
+		}
+		
+		return mapaInicial;
 	}
 
 }
