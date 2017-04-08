@@ -6,7 +6,6 @@ import javax.inject.Named;
 import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
 
-import com.sysfood.model.PerfilUsuario;
 import com.sysfood.model.SecaoProduto;
 
 @Named
@@ -17,6 +16,7 @@ public class GraficoPedidosBean {
 
 	public void preRender(){
 		this.model = new LineChartModel();
+		
 		adicionarSerie(SecaoProduto.PASTEIS);
 		adicionarSerie(SecaoProduto.MINI_PASTEIS);
 		adicionarSerie(SecaoProduto.REFRIGERANTES);

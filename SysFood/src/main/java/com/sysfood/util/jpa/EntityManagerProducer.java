@@ -19,26 +19,25 @@ public class EntityManagerProducer {
 		factory = Persistence.createEntityManagerFactory("SysFoodPU");
 	}
 
-//	@Produces
-//	@RequestScoped
-//	public EntityManager createEntityManager() {
-//		return factory.createEntityManager();
-//	}
-	
-//	public void closeEntityManager(@Disposes EntityManager manager) {
-//		manager.close();
-//	}
-	
 	@Produces
 	@RequestScoped
-	public Session createEntityManager(){
-		return (Session) this.factory.createEntityManager();
+	public EntityManager createEntityManager() {
+		return factory.createEntityManager();
 	}
-	
-	public void closeEntityManager(@Disposes Session manager) {
+
+	public void closeEntityManager(@Disposes EntityManager manager) {
 		manager.close();
 	}
 
-	
+	@Produces
+	@RequestScoped
+	@SessionProducer
+	public Session createSession() {
+		return (Session) factory.createEntityManager();
+	}
+
+	public void closeSession(@Disposes @SessionProducer Session session) {
+		session.close();
+	}
 
 }

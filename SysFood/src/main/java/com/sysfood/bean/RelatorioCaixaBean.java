@@ -14,8 +14,10 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.Session;
+
+import com.sysfood.util.jpa.SessionProducer;
 import com.sysfood.util.jsf.FacesUtil;
-import com.sysfood.util.report.ExecutarRelatorio;
 import com.sysfood.util.report.ExecutorRelatorio;
 
 @Named
@@ -33,6 +35,10 @@ public class RelatorioCaixaBean implements Serializable {
 	@Inject
 	private HttpServletResponse response;
 
+	@Inject
+	@SessionProducer
+	private Session session;
+
 	public void emitir() {
 		Map<String, Object> parametros = new HashMap<>();
 		parametros.put("data_inicio", this.dataInicio);
@@ -43,7 +49,7 @@ public class RelatorioCaixaBean implements Serializable {
 				this.response, parametros,
 				"Relatório Caixa - " + new SimpleDateFormat("dd/MM/yyyy").format(new Date()) + ".pdf");
 
-		ExecutarRelatorio.executar(executor);
+		session.doWork(executor);
 
 		if (executor.isRelatorioGerado()) {
 			facesContext.responseComplete();
