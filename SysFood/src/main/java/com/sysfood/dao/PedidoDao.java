@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
@@ -20,7 +21,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
 import com.sysfood.dao.filter.PedidoFilter;
+import com.sysfood.model.ItemPedido;
 import com.sysfood.model.Pedido;
+import com.sysfood.model.Produto;
+import com.sysfood.model.SecaoProduto;
 
 public class PedidoDao {
 
@@ -80,34 +84,42 @@ public class PedidoDao {
 
 		return query.getResultList();
 	}
+
 	/*
-	select 
-		sum(i.quantidade) as quantidade
-	    , p.data_pedido as data
-	from item_pedido i inner join pedido p
-		on i.pedido_id = p.id inner join produto pro on i.produto_id = pro.id
-	where 
-		p.data_pedido > '2017-02-25' 
-	and 
-		p.status = 'T' 
-	and
-		pro.secao_produto = 'REFRIGERANTES'
-	group by p.data_pedido
+	 * select sum(i.quantidade) as quantidade , p.data_pedido as data from
+	 * item_pedido i inner join pedido p on i.pedido_id = p.id inner join
+	 * produto pro on i.produto_id = pro.id where p.data_pedido > '2017-02-25'
+	 * and p.status = 'T' and pro.secao_produto = 'REFRIGERANTES' group by
+	 * p.data_pedido
 	 */
-	public Map<Date, Integer> quantidadeDeProdutosPorData(Integer numeroDeDias) {
-		numeroDeDias-=1;
+	public Map<Date, Integer> quantidadeDeProdutosPorData(Integer numeroDeDias, SecaoProduto secaoProduto) {
+		numeroDeDias -= 1;
 		Calendar dataInicial = Calendar.getInstance();
 		dataInicial = DateUtils.truncate(dataInicial, Calendar.DAY_OF_MONTH);
 		dataInicial.add(Calendar.DAY_OF_MONTH, numeroDeDias * -1);
 
 		Map<Date, Integer> resultado = criarMapaVazio(numeroDeDias, dataInicial);
-		
+
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
-		CriteriaQuery<Pedido> criteriaQuery = builder.createQuery(Pedido.class);
+		CriteriaQuery<Object[]> criteriaQuery = builder.createQuery(Object[].class);
 
-		Root<Pedido> pedido = criteriaQuery.from(Pedido.class);
+		Root<ItemPedido> itemPedido = criteriaQuery.from(ItemPedido.class);
+		Join<ItemPedido, Pedido> pedido = (Join) itemPedido.join("pedido");
+		Join<ItemPedido, Produto> produto = (Join) itemPedido.join("produto");
 
-		criteriaQuery.select(pedido.get(""));
+		criteriaQuery.multiselect(builder.sum(itemPedido.get("quantidade")), pedido.get("dataPedido"));
+
+		criteriaQuery.where(builder.and(builder.between(pedido.get("dataPedido"), dataInicial.getTime(), new Date())),
+				builder.equal(pedido.get("status"), true), builder.equal(produto.get("secao"), secaoProduto));
+
+		criteriaQuery.groupBy(pedido.get("dataPedido"));
+
+		TypedQuery<Object[]> query = manager.createQuery(criteriaQuery);
+		List<Object[]> res = query.getResultList();
+
+		for (Object[] valores : res) {
+			resultado.put((Date) valores[1], Integer.valueOf(valores[0].toString()));
+		}
 
 		return resultado;
 	}

@@ -7,16 +7,17 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import com.sysfood.dao.PedidoDao;
+import com.sysfood.model.SecaoProduto;
 
-public class GraficoPedidosBo implements Serializable{
+public class GraficoPedidosBo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Inject
 	private PedidoDao pedidoDao;
-	
-	public Map<Date, Integer> quantidadeDeProdutosPorData(Integer numeroDeDias) {
-		return null;
+
+	public Map<Date, Integer> quantidadeDeProdutosPorData(Integer numeroDeDias, SecaoProduto secaoProduto) {
+		return pedidoDao.quantidadeDeProdutosPorData(numeroDeDias, secaoProduto);
 	}
 
 }
